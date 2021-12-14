@@ -14,13 +14,4 @@ public class Halbling extends PlayerClass{
         super(5);
     }
 
-    /**
-     * Defines the power effect of the halbling class.
-     * @param c The player which the player must
-     * discard to use his/her power.
-     */
-    @Override
-    public void classPower(Card c){
-
-    }
 }

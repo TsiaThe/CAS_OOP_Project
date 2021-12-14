@@ -15,22 +15,28 @@ public abstract class PlayerClass {
 
     // Number of cards a player can carry
     private List<Card> handCards;
+    private final int maxHandCards;
+
 
     /**
      * Constructor.
      * The number of cards depends on the
      * specific race.
      */
-    public PlayerClass(int numberOfCards) {
-        this.handCards = new ArrayList<>(numberOfCards);
+    public PlayerClass(int maxHandCards) {
+        this.handCards = new ArrayList<>();
+        this.maxHandCards = maxHandCards;
     }
 
-    /**
-     * Defines the power effect of a specific player class.
-     * @param c The player which the player must
-     * discard to use his/her power.
-     */
-    public void classPower(Card c){
+    public int getMaxHandCards() {
+        return maxHandCards;
+    }
 
+    public List<Card> getHandCards() {
+        return handCards;
+    }
+
+    public void setHandCards(List<Card> handCards) {
+        this.handCards = handCards;
     }
 }
