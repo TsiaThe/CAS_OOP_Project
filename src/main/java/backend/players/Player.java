@@ -28,6 +28,7 @@ public class Player {
     public Player(String name,PlayerClass  playerClass,PlayerRace  playerRace) {
         this.name = name;
         this.level = 1;
+        this.fightStrength = 1;
         this.items = null;
         this.boots = null;
         this.headgear = null;

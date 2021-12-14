@@ -4,7 +4,7 @@ import backend.players.Player;
 
 public interface MonsterEffects {
 
-    void monsterSpecialPower(Monster m,Player p);
+    void monsterExtraStrength(Monster m,Player p);
 
-    void monsterWinsFight(Monster m, Player p);
+    String monsterWinsFight(Monster m, Player p);
 }

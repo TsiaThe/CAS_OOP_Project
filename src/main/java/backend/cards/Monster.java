@@ -31,12 +31,12 @@ public class Monster extends DoorCard {
         this.treasureValue = treasureValue;
     }
 
-    public void useSpecialPower(Player p) {
-        monsterEffects.monsterSpecialPower(this, p);
+    public void monsterExtraStrength(Player p) {
+        monsterEffects.monsterExtraStrength(this, p);
     }
 
-    public void monsterWin(Player p) {
-        monsterEffects.monsterWinsFight(this, p);
+    public String monsterWinsFight(Player p) {
+        return monsterEffects.monsterWinsFight(this, p);
     }
 
 }

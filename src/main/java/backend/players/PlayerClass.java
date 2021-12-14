@@ -16,7 +16,6 @@ public abstract class PlayerClass {
     // Number of cards a player can carry
     private List<Card> handCards;
 
-
     /**
      * Constructor.
      * The number of cards depends on the

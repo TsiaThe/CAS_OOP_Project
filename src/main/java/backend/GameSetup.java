@@ -4,6 +4,7 @@ import backend.cards.*;
 import backend.players.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -53,6 +54,9 @@ public class GameSetup {
             PlayerRace newPlayerRace = (PlayerRace) cons.newInstance();
 
             Player newPlayer = new Player(PlayerName, newPlayerClass, newPlayerRace);
+
+            // If class="Human" the fight strength has by default +1 (class property).
+            if(newPlayer.getPlayerClass() instanceof Human) newPlayer.setFightStrength(2);
 
             return newPlayer;
         }
@@ -247,85 +251,424 @@ public class GameSetup {
 
     public List<Card> generateMonsterCards(List<Card> gameCards){
 
+        String standardMessage = "Du hast den Kampf verloren und konntest nicht weglaufen. ";
+
         gameCards.add(new Monster("Grosses Wuettendes Huhn",
                 "Schlimme Dinge: Schmerzhaftes Hacken. Verliere eine Stufe.", 2, 1,
                 new MonsterEffects() {
-                    public void monsterSpecialPower(Monster m, Player p) {
+                    public void monsterExtraStrength(Monster m, Player p) {
                         // No special power on this card.
                     }
-                    public void monsterWinsFight(Monster m, Player p) {
-                        System.out.println("Du hast den Kampf verloren. Du verlierst eine Stufe!");
+                    public String monsterWinsFight(Monster m, Player p) {
                         p.setLevel(p.getLevel()-1);
+                        return standardMessage+"Du verlierst eine Stufe!";
                     }
                 }));
 
         gameCards.add(new Monster("Pavilion",
-                "Niemand kann dir helfen. Schlimme Dinge: Verliere drei Stufen.", 2, 1,
+                "Schlimme Dinge: Verliere eine Stufe.", 2, 1,
                 new MonsterEffects() {
-                    public void monsterSpecialPower(Monster m, Player p) {
+                    public void monsterExtraStrength(Monster m, Player p) {
                         // No special power on this card.
                     }
-                    public void monsterWinsFight(Monster m, Player p) {
-                        System.out.println("Du hast den Kampf verloren. Du verlierst drei Stufen!");
-                        p.setLevel(p.getLevel()-3);
+                    public String monsterWinsFight(Monster m, Player p) {
+                        p.setLevel(p.getLevel()-1);
+                        return standardMessage+"Du verlierst eine Stufe!";
                     }
                 }));
 
         gameCards.add(new Monster("Gesichtssauger",
-                "+6 gegen Elfs. Schlimme Dinge: Dein Gesicht wird rutergesaugt und deine " +
-                        "Kopfbedeckung geht verloren. Du verlierst auch eine Stufe dazu.", 8, 2,
+                "+1 gegen Diebe. Schlimme Dinge: Dein Gesicht wird rutergesaugt und deine " +
+                        "Kopfbedeckung geht verloren. Du verlierst auch zwei Stufen dazu.", 5, 2,
                 new MonsterEffects() {
-                    public void monsterSpecialPower(Monster m, Player p) {
-                        if (p.getPlayerClass() instanceof Elf){m.setLevelValue(m.getLevelValue()+6);}
+                    public void monsterExtraStrength(Monster m, Player p) {
+                        if (p.getPlayerRace() instanceof Thief){m.setLevelValue(m.getLevelValue()+1);}
                     }
-                    public void monsterWinsFight(Monster m, Player p) {
-                        System.out.println("Du hast den Kampf verloren. Du verlierst deine Kopfbedeckung und eine Stufe!");
+                    public String monsterWinsFight(Monster m, Player p) {
                         if (p.getHeadgear()!=null){p.setHeadgear(null);}
-                        p.setLevel(p.getLevel()-1);
+                        p.setLevel(p.getLevel()-2);
+                        return standardMessage+"Du verlierst deine Kopfbedeckung und zwei Stufen!";
                     }
                 }));
 
         gameCards.add(new Monster("Pikotzu",
-                "Du erhälst eine Extrastufe, wenn du es ohne Hilfe besiegst." +
-                        "Schlimme Dinge: Kotzestrahl-Angriff. Lege deine ganze Hand ab!.", 6, 2,
+                "Schlimme Dinge: Kotzestrahl-Angriff. Lege deine ganze Hand ab!.", 6, 3,
                 new MonsterEffects() {
-                    public void monsterSpecialPower(Monster m, Player p) {
+                    public void monsterExtraStrength(Monster m, Player p) {
                         // No special power on this card.
                     }
-                    public void monsterWinsFight(Monster m, Player p) {
-                        System.out.println("Du hast den Kampf verloren. Du verlierst alle Handkarten!");
+                    public String monsterWinsFight(Monster m, Player p) {
                         p.setHeadgear(null);
                         p.setArmour(null);
                         p.setBoots(null);
                         p.getItems().clear();
+                        return standardMessage+"Du verlierst alle Handkarten!";
                     }
                 }));
 
         gameCards.add(new Monster("Entikore",
-                "Wiedersteht Magie: +6 gegen Zauberer. Schlimme Dinge: " +
-                        "Schlimme Dinge: Lege deine ganze Hand ab!. ", 6, 2,
+                "+1 gegen Krieger. Schlimme Dinge: " +
+                        "Schlimme Dinge: Lege deine ganze Hand ab!. ", 6, 3,
                 new MonsterEffects() {
-                    public void monsterSpecialPower(Monster m, Player p) {
-                        if (p.getPlayerRace() instanceof Wizard){m.setLevelValue(m.getLevelValue()+6);}
+                    public void monsterExtraStrength(Monster m, Player p) {
+                        if (p.getPlayerRace() instanceof Warrior){m.setLevelValue(m.getLevelValue()+1);}
                     }
-                    public void monsterWinsFight(Monster m, Player p) {
-                        System.out.println("Du hast den Kampf verloren. Du verlierst alle Handkarten!");
+                    public String monsterWinsFight(Monster m, Player p) {
                         p.setHeadgear(null);
                         p.setArmour(null);
                         p.setBoots(null);
                         p.getItems().clear();
+                        return standardMessage+"Du verlierst alle Handkarten!";
                     }
                 }));
 
         gameCards.add(new Monster("Untotes Pferd",
-                "+6 gegen Zwerge. Schlimme Dinge:  Tritt, beisst und riecht fruchtbar. Verliere 2 Stufen", 4, 2,
+                "+1 gegen Priester. Schlimme Dinge:  Tritt, beisst und riecht fruchtbar. Verliere 2 Stufen", 5, 2,
                 new MonsterEffects() {
-                    public void monsterSpecialPower(Monster m, Player p) {
-                        if (p.getPlayerClass() instanceof Dwarf){m.setLevelValue(m.getLevelValue()+6);}
+                    public void monsterExtraStrength(Monster m, Player p) {
+                        if (p.getPlayerRace() instanceof Priest){m.setLevelValue(m.getLevelValue()+1);}
                     }
-                    public void monsterWinsFight(Monster m, Player p) {
-                        System.out.println("Du hast den Kampf verloren. Du verlierst zwei Stufen!");
+                    public String monsterWinsFight(Monster m, Player p) {
                         p.setLevel(p.getLevel()-2);
+                        return standardMessage+"Du verlierst zwei Stufen!";
+                    }
+                }));
+
+        gameCards.add(new Monster("Sabbernder Schleim",
+                "+1 gegen Zauberer. Schlimme Dinge:  Lege das Schuhwerk, das du trägst, ab. Verliere 1 Stufe " +
+                        ", wenn du keins hast!", 5, 2,
+                new MonsterEffects() {
+                    public void monsterExtraStrength(Monster m, Player p) {
+                        if (p.getPlayerRace() instanceof Wizard){
+                            m.setLevelValue(m.getLevelValue()+1);
+                        }
+                    }
+                    public String monsterWinsFight(Monster m, Player p) {
+                        if (p.getBoots()!=null){
+                            p.setBoots(null);
+                            return standardMessage+"Du verlierst dein Schuhwerk!";
+                        }
+                        else
+                        {
+                            p.setLevel(p.getLevel()-1);
+                            return standardMessage+"Du verlierst eine Stufe (kein Schuhwerk)!";
+                        }
+                    }
+                }));
+
+        gameCards.add(new Monster("Topfpflanze",
+                "Schlimme Dinge:  Keine", 1, 1,
+                new MonsterEffects() {
+                    public void monsterExtraStrength(Monster m, Player p) {
+                        // No special power on this card.
+                    }
+                    public String monsterWinsFight(Monster m, Player p) {
+                        return "Ok du hast verloren, aber es passiert nichts!";
+                    }
+                }));
+
+        gameCards.add(new Monster("Plutoniumdrache",
+                "+2 gegen Diebe. Schlimme Dinge: Du wirst zerstampft und gemampft. Drachen sind besonderes" +
+                        "aggresiv gegen Zauberer. Wenn du einer bist, dann stirbst du. Wenn du eine andere " +
+                        "Rasse hast, dann verlierst du nur eine Stufe.", 7, 3,
+                new MonsterEffects() {
+                    public void monsterExtraStrength(Monster m, Player p) {
+                        if (p.getPlayerRace() instanceof Thief){
+                            m.setLevelValue(m.getLevelValue()+2);
+                        }
+                    }
+                    public String monsterWinsFight(Monster m, Player p) {
+                        if(p.getPlayerRace() instanceof Wizard){
+                            spielerTod(p);
+                            return standardMessage+"Du bist leider ein Zauberer, deshalb du stirbst!";
+                        }
+                        else{
+                            p.setLevel(p.getLevel()-1);
+                        }
+                        return standardMessage+"Du bist zum Gluck kein Zauberer. " +
+                                "Du verlierst nur eine Stufe!";
+                    }
+                }));
+
+        gameCards.add(new Monster("Bekiffter Golem",
+                "+2 gegen Krieger. Schlimme Dinge: Unaussprechlicher Tod für alle Rassen ausser Zauberer. " +
+                        "Ein Zauberer verliert einfach eine Stufe.", 7, 3,
+                new MonsterEffects() {
+                    public void monsterExtraStrength(Monster m, Player p) {
+                        if (p.getPlayerRace() instanceof Warrior){
+                            m.setLevelValue(m.getLevelValue()+2);
+                        }
+                    }
+                    public String monsterWinsFight(Monster m, Player p) {
+                        if(p.getPlayerRace() instanceof Wizard){
+                            p.setLevel(p.getLevel()-1);
+                        }
+                        else{
+                            spielerTod(p);
+                            return standardMessage+"Weil du kein Zauberer bist, stirbst du!";
+                        }
+
+                        return standardMessage+"Du bist zum Gluck ein Zauberer. " +
+                                "Du verlierst nur eine Stufe!";
+                    }
+                }));
+
+        gameCards.add(new Monster("Bullrog",
+                "Schlimme Dinge: Du bist zu Tode gepeitscht", 11, 4,
+                new MonsterEffects() {
+                    public void monsterExtraStrength(Monster m, Player p) {
+                        // No special power on this card.
+                    }
+                    public String monsterWinsFight(Monster m, Player p) {
+                        spielerTod(p);
+                        return standardMessage+"Du bist gestorben!";
+                    }
+                }));
+
+        gameCards.add(new Monster("Gruftige Gebrüder",
+                "Schlimme Dinge:  Du wirst auf Stuffe eins reduziert!", 1, 1,
+                new MonsterEffects() {
+                    public void monsterExtraStrength(Monster m, Player p) {
+                        // No special power on this card.
+                    }
+                    public String monsterWinsFight(Monster m, Player p) {
+                        p.setLevel(1);
+                        if (p.getPlayerClass() instanceof Human){
+                            p.setFightStrength(2);
+                        }
+                        else{
+                            p.setFightStrength(1);
+                        }
+                        return standardMessage+"Du bist auf Stufe eins reduziert!";
+                    }
+                }));
+
+        gameCards.add(new Monster("Lahmer Gobling",
+                "Schlimme Dinge:  Er verhaut dich mit seiner Krücke. Verliere eine Stufe!", 1, 1,
+                new MonsterEffects() {
+                    public void monsterExtraStrength(Monster m, Player p) {
+                        // No special power on this card.
+                    }
+                    public String monsterWinsFight(Monster m, Player p) {
+                        p.setLevel(p.getLevel()-1);
+                        return standardMessage+"Du verlierst eine Stufe!";
+                    }
+                }));
+
+        gameCards.add(new Monster("Filzläuse",
+                "Schlimme Dinge: Du verlierst eine Stufe!", 1, 1,
+                new MonsterEffects() {
+                    public void monsterExtraStrength(Monster m, Player p) {
+                        // No special power on this card.
+                    }
+                    public String monsterWinsFight(Monster m, Player p) {
+                        p.setLevel(p.getLevel()-1);
+                        return standardMessage+"Du verlierst eine Stufe!";
+                    }
+                }));
+
+        gameCards.add(new Monster("Kreischender Depp",
+                "+3 gegen Priester. Schlimme Dinge: Lege deine Rüstung und Schuwerk ab! Du verlierst auch eine Stufe dazu!", 3, 2,
+                new MonsterEffects() {
+                    public void monsterExtraStrength(Monster m, Player p) {
+                        if (p.getPlayerRace() instanceof Priest){
+                            m.setLevelValue(m.getLevelValue()+3);
+                        }
+                    }
+                    public String monsterWinsFight(Monster m, Player p) {
+                        p.setLevel(p.getLevel()-1);
+                        p.setArmour(null);
+                        p.setBoots(null);
+                        return standardMessage+"Du verlierst deine Rüstung, Schuwerk und eine Stufe!";
+                    }
+                }));
+
+        gameCards.add(new Monster("Hammer-Ratte",
+                "Schlimme: Sie verhaut dich- Verliere eine Stufe!", 1, 1,
+                new MonsterEffects() {
+                    public void monsterExtraStrength(Monster m, Player p) {
+                        // No special power on this card.
+                    }
+                    public String monsterWinsFight(Monster m, Player p) {
+                        p.setLevel(p.getLevel()-1);
+                        return standardMessage+"Du verlierst eine Stufe!";
+                    }
+                }));
+
+        gameCards.add(new Monster("Fliegende Frösche",
+                "Schlimme: Sie beissen. Verliere zwei Stufen!", 2, 1,
+                new MonsterEffects() {
+                    public void monsterExtraStrength(Monster m, Player p) {
+                        // No special power on this card.
+                    }
+                    public String monsterWinsFight(Monster m, Player p) {
+                        p.setLevel(p.getLevel()-2);
+                        return standardMessage+"Du verlierst zwei Stufen!";
+                    }
+                }));
+
+        gameCards.add(new Monster("Leprachaun",
+                "Schlimme Dinge: Er nimmt zwei von deinen Gegenständen!", 4, 2,
+                new MonsterEffects() {
+                    public void monsterExtraStrength(Monster m, Player p) {
+                        // No special power on this card.
+                    }
+                    public String monsterWinsFight(Monster m, Player p) {
+                        for (int i=0;i<2;i++){
+                            if (p.getItems().size()>0){
+                                p.getItems().remove(0);
+                            }
+                        }
+                        return standardMessage+"Du verlierst zwei Gegenstände!";
+                    }
+                }));
+
+        gameCards.add(new Monster("Harfien",
+                "Sie wiederstehen Magie +3 gegen Zauberer. Schlimme Dinge: " +
+                        "Ihre Musik  ist wirklich, wirklich schlecht. Verliere zwei Stufen!", 3, 2,
+                new MonsterEffects() {
+                    public void monsterExtraStrength(Monster m, Player p) {
+                        if (p.getPlayerRace() instanceof Wizard){
+                            m.setLevelValue(m.getLevelValue()+3);
+                        }
+                    }
+                    public String monsterWinsFight(Monster m, Player p) {
+                        p.setLevel(p.getLevel()-2);
+                        return standardMessage+"Du verlierst zwei Stufen!";
+                    }
+                }));
+
+        gameCards.add(new Monster("Zungedämon",
+                "+2 gegen Diebe. Schlimme Dinge: " +
+                        "Ein wirklich ekliger Kuss kostet dich 2 Stufen (3 für Elfen)!", 8, 3,
+                new MonsterEffects() {
+                    public void monsterExtraStrength(Monster m, Player p) {
+                        if (p.getPlayerRace() instanceof Thief){
+                            m.setLevelValue(m.getLevelValue()+2);
+                        }
+                    }
+                    public String monsterWinsFight(Monster m, Player p) {
+                        p.setLevel(p.getLevel()-2);
+                        if (p.getPlayerClass() instanceof Elf)
+                        {
+                            p.setLevel(p.getLevel()-1);
+                            return "Du hast den Kampf verloren und du bist ein Elf!" +
+                                    "Du verlierst drei Stufen!";
+                        }
+                        return standardMessage+"Du verlierst zwei Stufen!";
+                    }
+                }));
+
+        gameCards.add(new Monster("Gallert-Oktaeder",
+                "Schlimme Dinge: Lasse alle deine grosse Gegenstaende fallen.", 2, 1,
+                new MonsterEffects() {
+                    public void monsterExtraStrength(Monster m, Player p) {
+                        // No special power on this card.
+                    }
+                    public String monsterWinsFight(Monster m, Player p) {
+                        for (Item it:p.getItems()){
+                            if (it.isSmallItem()) it=null;
+                        }
+                        return standardMessage+"Du verlierst alle deine grosse Gegenstaende!";
+                    }
+                }));
+
+        gameCards.add(new Monster("Mr Bones",
+                "Schlimme Dinge: Seine knochige Berührung kostet dich 2 Stufen.", 2, 1,
+                new MonsterEffects() {
+                    public void monsterExtraStrength(Monster m, Player p) {
+                        // No special power on this card.
+                    }
+                    public String monsterWinsFight(Monster m, Player p) {
+                       p.setLevel(p.getLevel()-2);
+                        return standardMessage+"Du verlierst zwei Stufen!";
+                    }
+                }));
+
+        gameCards.add(new Monster("BigFoot",
+                "Schlimme Dinge: Quetscht dich flach und frisst deinen Hut." +
+                        " Du verlierst deine Kopfbedeckung.", 4, 3,
+                new MonsterEffects() {
+                    public void monsterExtraStrength(Monster m, Player p) {
+                        // No special power on this card.
+                    }
+                    public String monsterWinsFight(Monster m, Player p) {
+                        p.setHeadgear(null);
+                        return standardMessage+"Du verlierst deine Kopfbedeckung!";
+                    }
+                }));
+
+        gameCards.add(new Monster("3.872 Orks",
+                "Schlimme Dinge: Du verlierst von 1-4 Stufen! Es wird " +
+                        "zufällig entschieden, wie viele...", 4, 3,
+                new MonsterEffects() {
+                    public void monsterExtraStrength(Monster m, Player p) {
+                        // No special power on this card.
+                    }
+                    public String monsterWinsFight(Monster m, Player p) {
+                        Random rand = new Random();
+                        int lostLevels = rand.nextInt(4)+1;
+                        p.setLevel(p.getLevel()-lostLevels);
+                        String stufen = "Stufen";
+                        if (lostLevels == 1) stufen = "Stufe";
+                        return standardMessage+"Du verlierst "+lostLevels+" "+stufen+" !";
+                    }
+                }));
+
+        gameCards.add(new Monster("Unglaublicher unaussprechlicher Schrecken",
+                "+2 gegen Krieger. Schlimme Dinge: Du verlierst zwei Stufen. " +
+                        "Ein Zwerg verliert noch eine dazu.", 8, 3,
+                new MonsterEffects() {
+                    public void monsterExtraStrength(Monster m, Player p) {
+                        if (p.getPlayerRace() instanceof Warrior){
+                            m.setLevelValue(m.getLevelValue()+2);
+                        }
+                    }
+                    public String monsterWinsFight(Monster m, Player p) {
+                        p.setLevel(p.getLevel()-2);
+                        if(p.getPlayerClass() instanceof Dwarf){
+                            p.setLevel(p.getLevel()-1);
+                            return standardMessage+"Du bust ein Zwerg, also verlierst du drei Stufgen!";
+                        }
+                        return standardMessage+"Du bist zum Gluck kein Zwerg. Du verlierst nur zwei Stufen";
+                    }
+                }));
+
+        gameCards.add(new Monster("Hippogreif",
+                "+2 gegen Priester. Schlimme Dinge: Du verlierst zwei Stufen. " +
+                        "Ein Halbling verliert noch eine dazu.", 8, 3,
+                new MonsterEffects() {
+                    public void monsterExtraStrength(Monster m, Player p) {
+                        if (p.getPlayerRace() instanceof Priest){
+                            m.setLevelValue(m.getLevelValue()+2);
+                        }
+                    }
+                    public String monsterWinsFight(Monster m, Player p) {
+                        p.setLevel(p.getLevel()-2);
+                        if(p.getPlayerClass() instanceof Halbling){
+                            p.setLevel(p.getLevel()-1);
+                            return standardMessage+"Du bust ein Halbling, also verlierst du drei Stufgen!";
+                        }
+                        return standardMessage+"Du bist zum Gluck kein Halbling. Du verlierst nur zwei Stufen";
+                    }
+                }));
+
+        gameCards.add(new Monster("Netz-troll",
+                "+2 gegen Zauberer. Schlimme Dinge: Du verlierst zwei Stufen. " +
+                        "Ein Mensch verliert noch eine dazu.", 8, 3,
+                new MonsterEffects() {
+                    public void monsterExtraStrength(Monster m, Player p) {
+                        if (p.getPlayerRace() instanceof Wizard) {
+                            m.setLevelValue(m.getLevelValue() + 2);
+                        }
+                    }
+                    public String monsterWinsFight(Monster m, Player p) {
+                        p.setLevel(p.getLevel()-2);
+                        if(p.getPlayerClass() instanceof Human){
+                            p.setLevel(p.getLevel()-1);
+                            return standardMessage+"Du bust ein Mensch, also verlierst du drei Stufgen!";
+                        }
+                        return standardMessage+"Du bist zum Gluck kein Mensch. Du verlierst nur zwei Stufen";
                     }
                 }));
 
@@ -426,6 +769,21 @@ public class GameSetup {
     }
 
 
+    public void spielerTod(Player p){
+        p.setLevel(1);
+        p.setBoots(null);
+        p.setArmour(null);
+        p.setHeadgear(null);
+        List<Item> emptyList = new ArrayList<>();
+        p.setItems(emptyList);
+        if (p.getPlayerClass() instanceof Human){
+            p.setFightStrength(2);
+        }
+        else{
+            p.setFightStrength(1);
+        }
+
+    }
 
 
 
