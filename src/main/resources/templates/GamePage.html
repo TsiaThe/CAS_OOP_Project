@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <style>
+        .button {
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .button1 {background-color: #4CAF50;} /* Green */
+        .button2 {background-color: #AA0000;} /* Blue */
+    </style>
+</head>
+
+<body>
+<!--
+<form action="#" th:action="@{/action/${userID}}" th:object="${currentUser}" method="get">
+-->
+<table>
+    <tr>
+
+        <th><h2 style="color: blue;">
+            <input type="text" th:object="${currentUser}" th:field="*{name}" value="Norway" disabled>
+        </h2></th>
+
+        <th><h2 style="color: blue;">Klasse Krieger / </h2></th>
+        <th><h2 style="color: blue;">Rasse Elf / </h2></th>
+        <th><h2 style="color: blue;">Level X / </h2></th>
+        <th><h2 style="color: blue;">Staerke XXX</h2></th>
+    </tr>
+</table>
+
+<div class="logo_html_generator">
+    <img alt="Avatar" src="MunchkinPicture.png" height="200px"/>
+</div>
+
+<button class="button button2">Kaempfen</button>
+<button class="button button1">Weglaufen</button>
+<button class="button button1">Zauber</button>
+<button class="button button2">Verkaufen</button>
+
+<h1>Eigenschaften</h1>
+
+<table>
+    <tr>
+        <th>Kopfbedeckung</th>
+    </tr>
+    <tr>
+        <td>Name</td>
+    </tr>
+    <tr>
+        <td>Kraft</td>
+    </tr>
+    <tr>
+        <td>Werk</td>
+    </tr>
+    <tr>
+        <td>Tickbox</td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th>Ruestung</th>
+    </tr>
+    <tr>
+        <td>Name</td>
+    </tr>
+    <tr>
+        <td>Kraft</td>
+    </tr>
+    <tr>
+        <td>Werk</td>
+    </tr>
+    <tr>
+        <td>Tickbox</td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th>Schuhe</th>
+    </tr>
+    <tr>
+        <td>Name</td>
+    </tr>
+    <tr>
+        <td>Kraft</td>
+    </tr>
+    <tr>
+        <td>Werk</td>
+    </tr>
+    <td>Tickbox</td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th>Gegenstaende</th>
+    </tr>
+    <tr>
+        <td>Name</td>
+    </tr>
+    <tr>
+        <td>Kraft</td>
+    </tr>
+    <tr>
+        <td>Werk</td>
+    </tr>
+    <td>Tickbox</td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <div>
+            <input type="checkbox" id="MB1" name="MB1"
+                   checked>
+            <label for="MB1">MonsterBooster 1</label>
+        </div>
+    </tr>
+
+    <tr>
+        <div>
+            <input type="checkbox" id="MB2" name="MB2">
+            <label for="MB2">MonsterBooster 2</label>
+        </div>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <div>
+            <input type="checkbox" id="FS1" name="FS1"
+                   checked>
+            <label for="FS1">FS1</label>
+        </div>
+    </tr>
+
+    <tr>
+        <div>
+            <input type="checkbox" id="FS2" name="FS2">
+            <label for="FS2">FS2</label>
+        </div>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <div>
+            <input type="checkbox" id="OBJ1" name="OBJ1"
+                   checked>
+            <label for="OBJ1">Object 1</label>
+        </div>
+    </tr>
+
+    <tr>
+        <div>
+            <input type="checkbox" id="OBJ2" name="OBJ2">
+            <label for="OBJ2">Object 2</label>
+        </div>
+    </tr>
+</table>
+<!--
+ </form>
+ -->
+<footer th:insert="fragments/common.html :: footer"></footer>
+</body>
+</html>

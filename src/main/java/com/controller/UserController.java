@@ -43,15 +43,18 @@ public class UserController {
         for (User u:userRepository.findAll()){
          if (u.getName().equals(user.getName())) return "AddUser";
         }
-        userRepository.save(user);
+        User newUser = userRepository.save(user);
         model.addAttribute("users", userRepository.findAll());
-        return "WaitPage";
+        model.addAttribute("userID", newUser.getId());
+        return "redirect:/action/"+newUser.getId();
     }
 
-    @GetMapping("/adduser")
-    public String Wait(Model model) {
+    @GetMapping("/action/{id}")
+    public String Wait(@PathVariable("id") long id, Model model) {
+        model.addAttribute("currentUser", userRepository.findById(id));
+        model.addAttribute("userID", id);
         if (userRepository.count()==4){
-            return "Player1";
+            return "GamePage";
         }
         model.addAttribute("users", userRepository.findAll());
         return "WaitPage";
