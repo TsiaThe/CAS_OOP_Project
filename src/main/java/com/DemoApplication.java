@@ -30,7 +30,7 @@ public class DemoApplication {
     public void afterInit() {
         userRepository.save(new User("Fanis"));
         userRepository.save(new User("Thomas"));
+        userRepository.save(new User("Mathieu"));
       //  model.addAttribute("users", userRepository.findAll());
-
     }
 }
