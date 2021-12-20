@@ -2,36 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <link rel="stylesheet" type="text/css" href="/css/index.css">
-    <style>
-        .button {
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-        }
-
-        .button1 {background-color: #4CAF50;} /* Green */
-        .button2 {background-color: #AA0000;} /* Blue */
-    </style>
+    <link th:href="@{/css/index.css}" rel="stylesheet" />
 </head>
 
 <body>
-<!--
-<form action="#" th:action="@{/action/${userID}}" th:object="${currentUser}" method="get">
--->
 <table>
     <tr>
-
         <th><h2 style="color: blue;">
             <input type="text" th:object="${currentUser}" th:field="*{name}" value="Norway" disabled>
         </h2></th>
-
         <th><h2 style="color: blue;">Klasse Krieger / </h2></th>
         <th><h2 style="color: blue;">Rasse Elf / </h2></th>
         <th><h2 style="color: blue;">Level X / </h2></th>
@@ -170,9 +149,16 @@
         </div>
     </tr>
 </table>
-<!--
- </form>
- -->
+
+<table>
+    <tc>
+        <textarea type="text" id="chathistory" wrap="hard" class="md-textarea" disabled></textarea>
+    </tc>
+    <tc>
+        <textarea type="text" id="chat" wrap="hard" placeholder="Enter your message" class="md-textarea"></textarea>
+    </tc>
+</table>
+
 <footer th:insert="fragments/common.html :: footer"></footer>
 </body>
 </html>
