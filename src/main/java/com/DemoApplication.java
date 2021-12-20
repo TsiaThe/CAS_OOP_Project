@@ -28,10 +28,8 @@ public class DemoApplication {
 
     @PostConstruct
     public void afterInit() {
-        User u1 =  new User("Fanis");
-        User u2 =  new User("Thomas");
-        userRepository.save(u1);
-        userRepository.save(u2);
+        userRepository.save(new User("Fanis"));
+        userRepository.save(new User("Thomas"));
       //  model.addAttribute("users", userRepository.findAll());
 
     }
