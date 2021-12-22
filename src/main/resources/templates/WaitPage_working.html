@@ -16,7 +16,7 @@
     <div th:switch="${users}" class="container my-5">
         <div class="row">
             <div class="col-md-9">
-                <form action="#" th:action="@{/action/${currentUser.id}}" method="get">
+                <form action="#" th:action="@{/action/${userID}}" method="get">
                     <h2 th:case="null">No users yet!</h2>
                     <div th:case="*">
                         <p class="lead">Existing players (waiting...)</p>

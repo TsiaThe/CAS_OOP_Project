@@ -3,6 +3,7 @@
       xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <link th:href="@{/css/index.css}" rel="stylesheet" />
+    <meta http-equiv="refresh" content="5">
 </head>
 
 <body>
@@ -152,13 +153,27 @@
 
 <table>
     <tc>
-        <textarea type="text" id="chathistory" wrap="hard" class="md-textarea" disabled></textarea>
+        <tr th:each="message : ${messages}">
+           <td th:text="${message.messageText}"></td>
+        </tr>
     </tc>
-    <tc>
-        <textarea type="text" id="chat" wrap="hard" placeholder="Enter your message" class="md-textarea"></textarea>
-    </tc>
+
+
+
+      <tc>
+          <form action="#" th:action="@{${#httpServletRequest.requestURI}}" object="${newMessaga}" newMessaga="message" method="post">
+              <!--<textarea type="text" field="*{fieldName}" fieldName="message" id="chat" wrap="hard" placeholder="Enter your message" class="md-textarea"></textarea> -->
+              <input type="text" field="*{name}" name="messageText" class="form-control" id="name" placeholder="Name">
+
+                   <div class="row">
+                       <div class="col-md-6 mt-5">
+                           <input type="submit" class="btn btn-primary" value="Send">
+                       </div>
+                   </div>
+          </form>
+      </tc>
 </table>
 
-<footer th:insert="fragments/common.html :: footer"></footer>
-</body>
-</html>
+       <footer th:insert="fragments/common.html :: footer"></footer>
+       </body>
+       </html>

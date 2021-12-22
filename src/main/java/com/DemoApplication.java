@@ -1,6 +1,11 @@
 package com;
 
+import antlr.debug.MessageAdapter;
+import com.backend.GameSetup;
+import com.backend.players.Player;
+import com.repository.MessageRepository;
 import com.repository.UserRepository;
+import com.web.Message;
 import com.web.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -30,7 +35,11 @@ public class DemoApplication {
     public void afterInit() {
         userRepository.save(new User("Fanis"));
         userRepository.save(new User("Thomas"));
-        userRepository.save(new User("Mathieu"));
+        //userRepository.save(new User("Mathieu"));
+
+        Player testPlayer = (new GameSetup()).generatePlayer("A Player");
+        userRepository.save(new User(testPlayer.getName()));
+
       //  model.addAttribute("users", userRepository.findAll());
     }
 }

@@ -1,5 +1,7 @@
 package com.web;
 
+import com.backend.GameSetup;
+import com.backend.players.Player;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

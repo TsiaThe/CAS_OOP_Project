@@ -1,3 +1,17 @@
+h2{
+    font: 80px sans-serif;
+    color: #4CAF50;
+}
+
+.myBox {
+    border: none;
+    padding: 5px;
+    font: 24px/36px sans-serif;
+    width: 200px;
+    height: 200px;
+    overflow: scroll;
+}
+
 .button {
     border: none;
     color: white;
@@ -12,4 +26,3 @@
 
 .button1 {background-color: #4CAF50;} /* Green */
 .button2 {background-color: #AA0000;} /* Blue */
-
