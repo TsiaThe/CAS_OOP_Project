@@ -771,7 +771,6 @@ public class GameSetup {
          return gameCards;
     }
 
-
     public void spielerTod(Player p){
         p.setLevel(1);
         p.setBoots(null);
@@ -787,7 +786,5 @@ public class GameSetup {
         }
 
     }
-
-
 
 }

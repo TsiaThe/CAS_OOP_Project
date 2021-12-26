@@ -35,10 +35,7 @@ public class DemoApplication {
     public void afterInit() {
         userRepository.save(new User("Fanis"));
         userRepository.save(new User("Thomas"));
-        //userRepository.save(new User("Mathieu"));
-
-        Player testPlayer = (new GameSetup()).generatePlayer("A Player");
-        userRepository.save(new User(testPlayer.getName()));
+        userRepository.save(new User("Mathieu"));
 
       //  model.addAttribute("users", userRepository.findAll());
     }

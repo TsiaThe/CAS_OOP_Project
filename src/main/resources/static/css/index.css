@@ -13,3 +13,12 @@
 .button1 {background-color: #4CAF50;} /* Green */
 .button2 {background-color: #AA0000;} /* Blue */
 
+/* class for scroll box */
+.myBox {
+    background-color: lightblue;
+    width: 250px;
+    height: 110px;
+    overflow: scroll;
+}
+
+

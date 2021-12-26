@@ -55,25 +55,13 @@ public class UserController {
         return "redirect:/action/"+newUser.getId();
     }
 
-    @GetMapping("/action/working/{id}")
-    public String Wait_(@PathVariable("id") long id, Model model) {
-        model.addAttribute("currentUser", userRepository.findById(id));
-        model.addAttribute("userID", id);
-        model.addAttribute("users", userRepository.findAll());
-        model.addAttribute("messages", messageRepository.findAll());
-        if (userRepository.count()==4){
-            return "GamePage";
-        }
-        return "WaitPage";
-    }
-
     @GetMapping("/action/{id}")
-    public String Wait(@PathVariable("id") long id, Map<String, Object> model) {
+    public String ActionPage(@PathVariable("id") long id, Map<String, Object> model) {
         model.put("currentUser", userRepository.findById(id));
-       // model.addAttribute("userID", id);
+
         model.put("users", userRepository.findAll());
        if (messageRepository.count()==0){
-           messageRepository.save(new Message("Chat history:"));
+           messageRepository.save(new Message("Chat history"));
        }
         model.put("messages", messageRepository.findAll());
         if (userRepository.count()==4){
@@ -91,60 +79,16 @@ public class UserController {
             sender = pageUser.get().getName();
         }
         if(message.getMessageText() != null){
-            message.setMessageText(sender+message.getMessageText());
+            message.setMessageText(sender+": "+message.getMessageText());
             messageRepository.save(message);
         }
        model.put("messages", messageRepository.findAll());
         return "GamePage";
     }
 
-    @PostMapping("/action/test/{id}")
-    public String ChatMessage_(@Valid Message message, @PathVariable("id") long id, Model model) {
-        String sender = "";
-        if (userRepository.findById(id).isPresent()){
-            Optional<User> pageUser = userRepository.findById(id);
-            model.addAttribute("currentUser", pageUser);
-            sender = pageUser.get().getName();
-        }
-        if(message.getMessageText() != null){
-            message.setMessageText(sender+message.getMessageText());
-            messageRepository.save(message);
-        }
-        model.addAttribute("messages", messageRepository.findAll());
-
-        return "GamePage";
-    }
 
 
 
 
 
-
-    @GetMapping("/edit/{id}")
-    public String showUpdateForm(@PathVariable("id") long id, Model model) {
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-        model.addAttribute("user", user);
-
-        return "update-user";
-    }
-
-    @PostMapping("/update/{id}")
-    public String updateUser(@PathVariable("id") long id, @Valid User user, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            user.setId(id);
-            return "update-user";
-        }
-
-        userRepository.save(user);
-
-        return "redirect:/users/list";
-    }
-
-    @GetMapping("/delete/{id}")
-    public String deleteUser(@PathVariable("id") long id, Model model) {
-        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
-        userRepository.delete(user);
-
-        return "redirect:/users/list";
-    }
 }

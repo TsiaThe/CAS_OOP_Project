@@ -151,29 +151,25 @@
     </tr>
 </table>
 
-<table>
-    <tc>
+<div class="myBox">
+    <table >
         <tr th:each="message : ${messages}">
-           <td th:text="${message.messageText}"></td>
+            <td th:text="${message.messageText}"></td>
         </tr>
-    </tc>
-
-
-
-      <tc>
+    </table>
+</div>
+<table>
           <form action="#" th:action="@{${#httpServletRequest.requestURI}}" object="${newMessaga}" newMessaga="message" method="post">
-              <!--<textarea type="text" field="*{fieldName}" fieldName="message" id="chat" wrap="hard" placeholder="Enter your message" class="md-textarea"></textarea> -->
-              <input type="text" field="*{name}" name="messageText" class="form-control" id="name" placeholder="Name">
-
-                   <div class="row">
-                       <div class="col-md-6 mt-5">
-                           <input type="submit" class="btn btn-primary" value="Send">
-                       </div>
-                   </div>
+              <input type="text" field="*{name}" name="messageText" class="form-control" id="name" required="" pattern="^\S.*$" placeholder="Name">
+                     <div class="row">
+                         <div class="col-md-6 mt-5">
+                             <input type="submit" class="btn btn-primary" value="Send">
+                         </div>
+                     </div>
           </form>
-      </tc>
+    </tc>
 </table>
 
-       <footer th:insert="fragments/common.html :: footer"></footer>
-       </body>
-       </html>
+<footer th:insert="fragments/common.html :: footer"></footer>
+</body>
+</html>
