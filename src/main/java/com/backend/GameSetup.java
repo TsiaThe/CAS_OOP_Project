@@ -56,7 +56,7 @@ public class GameSetup {
             cons = c.getConstructor();
             PlayerRace newPlayerRace = (PlayerRace) cons.newInstance();
 
-            Player newPlayer = new Player(PlayerName, newPlayerClass, newPlayerRace);
+            Player newPlayer = new Player(newPlayerClass, newPlayerRace);
 
             // If class="Human" the fight strength has by default +1 (class property).
             if(newPlayer.getPlayerClass() instanceof Human) newPlayer.setFightStrength(2);

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <link th:href="@{/css/index.css}" rel="stylesheet" />
+    <meta http-equiv="refresh" content="5">
+</head>
+
+<body>
+<table>
+    <tr>
+
+        <th><h2 style="color: blue;">
+            <input style="color: blue;" type="text" th:object="${currentUser}" th:field="*{name}" disabled>
+        </h2></th>
+        <th><h2 style="color: blue;" th:text="${playerClass}"></h2></th>
+        <th><h2 style="color: blue;"th:text="${playerRace}"></h2></th>
+        <th><h2 style="color: blue;"th:text="${playerLevel}"></h2></th>
+        <th><h2 style="color: blue;"th:text="${playerStrength}"></h2></th>
+    </tr>
+</table>
+
+<div class="logo_html_generator">
+    <img alt="Avatar" src="MunchkinPicture.png" height="200px"/>
+</div>
+
+<button class="button button2">Kaempfen</button>
+<button class="button button1">Weglaufen</button>
+<button class="button button1">Zauber</button>
+<button class="button button2">Verkaufen</button>
+
+<h1>Eigenschaften</h1>
+
+<table>
+    <tr>
+        <th>Kopfbedeckung</th>
+    </tr>
+    <tr>
+        <td>Name</td>
+    </tr>
+    <tr>
+        <td>Kraft</td>
+    </tr>
+    <tr>
+        <td>Werk</td>
+    </tr>
+    <tr>
+        <td>Tickbox</td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th>Ruestung</th>
+    </tr>
+    <tr>
+        <td>Name</td>
+    </tr>
+    <tr>
+        <td>Kraft</td>
+    </tr>
+    <tr>
+        <td>Werk</td>
+    </tr>
+    <tr>
+        <td>Tickbox</td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th>Schuhe</th>
+    </tr>
+    <tr>
+        <td>Name</td>
+    </tr>
+    <tr>
+        <td>Kraft</td>
+    </tr>
+    <tr>
+        <td>Werk</td>
+    </tr>
+    <td>Tickbox</td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th>Gegenstaende</th>
+    </tr>
+    <tr>
+        <td>Name</td>
+    </tr>
+    <tr>
+        <td>Kraft</td>
+    </tr>
+    <tr>
+        <td>Werk</td>
+    </tr>
+    <td>Tickbox</td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <div>
+            <input type="checkbox" id="MB1" name="MB1"
+                   checked>
+            <label for="MB1">MonsterBooster 1</label>
+        </div>
+    </tr>
+
+    <tr>
+        <div>
+            <input type="checkbox" id="MB2" name="MB2">
+            <label for="MB2">MonsterBooster 2</label>
+        </div>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <div>
+            <input type="checkbox" id="FS1" name="FS1"
+                   checked>
+            <label for="FS1">FS1</label>
+        </div>
+    </tr>
+
+    <tr>
+        <div>
+            <input type="checkbox" id="FS2" name="FS2">
+            <label for="FS2">FS2</label>
+        </div>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <div>
+            <input type="checkbox" id="OBJ1" name="OBJ1"
+                   checked>
+            <label for="OBJ1">Object 1</label>
+        </div>
+    </tr>
+
+    <tr>
+        <div>
+            <input type="checkbox" id="OBJ2" name="OBJ2">
+            <label for="OBJ2">Object 2</label>
+        </div>
+    </tr>
+</table>
+
+<div class="myBox">
+    <table >
+        <tr th:each="message : ${messages}">
+            <td th:text="${message.messageText}"></td>
+        </tr>
+    </table>
+</div>
+<table>
+          <form action="#" th:action="@{${#httpServletRequest.requestURI}}" object="${newMessaga}" newMessaga="message" method="post">
+              <input type="text" field="*{name}" name="messageText" class="form-control" id="name" required="" pattern="^\S.*$" placeholder="Name">
+                     <div class="row">
+                         <div class="col-md-6 mt-5">
+                             <input type="submit" class="btn btn-primary" value="Send">
+                         </div>
+                     </div>
+          </form>
+    </tc>
+</table>
+
+<footer th:insert="fragments/common.html :: footer"></footer>
+</body>
+</html>

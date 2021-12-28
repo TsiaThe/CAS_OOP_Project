@@ -45,7 +45,6 @@ public class Starter {
         // Test players
         for (int nPlayers = 0; nPlayers < numPlayers; nPlayers++) {
             System.out.println("Number of players: " + nPlayers);
-            System.out.println("Player "+nPlayers+" name: " + players.get(nPlayers).getName());
             System.out.println("Player "+nPlayers+" class: " + players.get(nPlayers).getPlayerClass());
             System.out.println("Player "+nPlayers+" race: " + players.get(nPlayers).getPlayerRace());
         }

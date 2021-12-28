@@ -25,8 +25,8 @@ import javax.annotation.PostConstruct;
 @SpringBootApplication
 public class DemoApplication {
 
-    @Autowired
-    private UserRepository userRepository;
+   @Autowired
+   private UserRepository userRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
@@ -34,9 +34,9 @@ public class DemoApplication {
 
     @PostConstruct
     public void afterInit() {
-        userRepository.save(new User("Fanis"));
-        userRepository.save(new User("Thomas"));
-        userRepository.save(new User("Mathieu"));
+       userRepository.save(new User("Fanis"));
+       userRepository.save(new User("Thomas"));
+       userRepository.save(new User("Mathieu"));
 
       //  model.addAttribute("users", userRepository.findAll());
     }

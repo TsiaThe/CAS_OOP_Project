@@ -18,30 +18,39 @@ public class GameState {
 
     private final Starter gameStarter;
     private List<Player> gamePlayers;
+    Player mainPlayer;
+    List<Player> secondaryPlayers = new ArrayList<>(3);
 
     @Autowired
     public GameState(Starter gameStarter) {
         this.gameStarter = gameStarter;
         this.gamePlayers = gameStarter.getPlayers();
+        mainPlayer = gamePlayers.get(0);
+        for (Player p:gamePlayers){
+            if (!p.equals(mainPlayer)) secondaryPlayers.add(p);
+        }
     }
 
+    public void assignPlayerId(long id){
+        for (Player p:gamePlayers){
+            if (p.getId()==0){
+                p.setId(id);
+                break;
+            }
+        }
+    }
 
     public List<Player> getAllPlayers(){
         return gamePlayers;
     }
 
-
+    public Player getMainPlayer(){
+        return mainPlayer;
+    }
 
 
 
     /*
-    Player mainPlayer;
-    List<Player> secondaryPlayers = new ArrayList<>(3);
-
-    Player p1 = (new GameSetup().generatePlayer("Player 1"));
-    Player p2 = (new GameSetup().generatePlayer("Player 2"));
-    Player p3 = (new GameSetup().generatePlayer("Player 3"));
-    Player p4 = (new GameSetup().generatePlayer("Player 4"));
 
     @Bean(name="secondaryPlayers")
     public List<Player> getSecondaryPlayers() {

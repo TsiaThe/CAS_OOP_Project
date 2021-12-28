@@ -20,7 +20,6 @@ import java.util.List;
  */
 public class Player {
 
-    private String name;
     private int level;
     private List<Item> items;
     private Boots boots;
@@ -29,11 +28,9 @@ public class Player {
     private PlayerClass playerClass;
     private PlayerRace playerRace;
     private int fightStrength;
-    private long id;
-    private static long cumulativeId = 0;
+    private long id = 0;
 
-    public Player(String name,PlayerClass  playerClass,PlayerRace  playerRace) {
-        this.name = name;
+    public Player(PlayerClass  playerClass,PlayerRace  playerRace) {
         this.level = 1;
         this.fightStrength = 1;
         this.items = null;
@@ -42,8 +39,6 @@ public class Player {
         this.armour = null;
         this.playerClass = playerClass;
         this.playerRace = playerRace;
-        this.id = cumulativeId+1;
-        cumulativeId++;
     }
 
     public int getFightStrength() {
@@ -52,14 +47,6 @@ public class Player {
 
     public void setFightStrength(int fightStrength) {
         this.fightStrength = fightStrength;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public int getLevel() {
@@ -111,4 +98,6 @@ public class Player {
     }
 
     public long getId(){return id;}
+
+    public void setId(long id){this.id = id;}
 }

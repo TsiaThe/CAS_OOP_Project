@@ -19,6 +19,7 @@ public class PhaseOneController {
     // Cards in the GUI (hiden and shown)
     private List<Card> activeGameCards = new ArrayList<>();
 
+    /*
     @Autowired
     @Qualifier("mainPlayer")
     Player mainPlayer;
@@ -27,7 +28,7 @@ public class PhaseOneController {
     @Qualifier("secondaryPlayers")
     List<Player> secondaryPlayers = new ArrayList<>(3);
 
-    /*
+
     List<Card> monsterLvLincreaseTickedCards = new ArrayList<>();
     List<Card> playerLvLincreaseTickedCards = new ArrayList<>();
 
@@ -38,7 +39,6 @@ public class PhaseOneController {
     List<TreasureCard> treasureCards = new ArrayList<>();
     Random randomGenerator = new Random();
     int fightTreasures;
-     */
 
     @GetMapping("/")
     public String getPlayers() {
@@ -53,6 +53,7 @@ public class PhaseOneController {
     public String testMethod(){
      return "This is a test method";
     }
+
 
 
 

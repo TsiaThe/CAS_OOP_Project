@@ -1,66 +1,46 @@
 package com.controller;
 
 import com.backend.Starter;
+import com.backend.players.*;
 import com.dto.GameState;
 import com.repository.MessageRepository;
 import com.repository.UserRepository;
+import com.web.Message;
 import com.web.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Controller
-@RequestMapping
-public class UserController {
+@RequestMapping // (path="/users")
+public class ActionController {
 
     private final UserRepository userRepository;
+    private final MessageRepository messageRepository;
     private final GameState gameState;
 
     @Autowired
-    public UserController(UserRepository userRepository, MessageRepository messageRepository, Starter gameStarter, GameState gameState) {
+    public ActionController(UserRepository userRepository, MessageRepository messageRepository, Starter gameStarter, GameState gameState) {
         this.userRepository = userRepository;
+        this.messageRepository = messageRepository;
         this.gameState= gameState;
     }
 
-    @GetMapping("/")
-    public String loginPage(Model model) {
-        if (userRepository.count()==4) return "SupportPage";
-        model.addAttribute("users", userRepository.findAll());
-        return "LoginPage";
-    }
-
-    @GetMapping("/signup")
-    public String showSignUpForm() {
-        return "AddUser";
-    }
-
-    @PostMapping("/adduser")
-    public String addUser(@Valid User user, BindingResult result, Model model) {
-        for (User u:userRepository.findAll()){
-         if (u.getName().equals(user.getName())) return "AddUser";
-        }
-        if (userRepository.count()==4){
-            return "SupportPage";
-        }
-        User newUser = userRepository.save(user);
-        gameState.assignPlayerId(user.getId());
-        model.addAttribute("users", userRepository.findAll());
-        return "redirect:/action/"+newUser.getId(); // +"/"+gameState.getMainPlayer().getId();
-    }
-
-
-
-    /*
-    @GetMapping("/action/{id}")
-    public String ActionPage(@PathVariable("id") long id, Map<String, Object> model) {
-        model.put("currentUser", userRepository.findById(id));
+    @GetMapping("/action/{currentPlayerId}")
+    public String ActionPage(@PathVariable("currentPlayerId") long cpID,
+                              Map<String, Object> model) {
+        model.put("currentUser", userRepository.findById(cpID));
         model.put("users", userRepository.findAll());
 
         // Add player information bar (name, class, race, level, fighting strength)
-        playerModel(id, model);
+        playerModel(cpID, model);
 
         if (messageRepository.count()==0){
            messageRepository.save(new Message("Chat history"));
@@ -72,11 +52,12 @@ public class UserController {
         return "WaitPage";
     }
 
-    @PostMapping("/action/{id}")
-    public String ChatMessage(@Valid Message message, @PathVariable("id") long id, Map<String, Object> model) {
+    @PostMapping("/action/{currentPlayerId}")
+    public String ChatMessage(@Valid Message message, @PathVariable("currentPlayerId") long cpID,
+                               Map<String, Object> model) {
             String sender = "";
-        if (userRepository.findById(id).isPresent()){
-            Optional<User> pageUser = userRepository.findById(id);
+        if (userRepository.findById(cpID).isPresent()){
+            Optional<User> pageUser = userRepository.findById(cpID);
             model.put("currentUser", pageUser);
             sender = pageUser.get().getName();
         }
@@ -86,7 +67,7 @@ public class UserController {
         }
 
         // Add player information bar (name, class, race, level, fighting strength)
-        playerModel(id, model);
+        playerModel(cpID, model);
 
         model.put("messages", messageRepository.findAll());
         return "GamePage";
@@ -99,9 +80,9 @@ public class UserController {
 
     // Method which populates the current model view with player information
     // (class, race, level, fighting strength).
-    private Map<String, Object> playerModel(long id, Map<String, Object> currentModel){
+    private Map<String, Object> playerModel(long cpID, Map<String, Object> currentModel){
 
-        Player currentPlayer = findPlayerbyID(id, gameState.getAllPlayers());
+        Player currentPlayer = findPlayerbyID(cpID, gameState.getAllPlayers());
         currentModel.put("playerClass", getPlayerClass(currentPlayer.getPlayerClass()));
         currentModel.put("playerRace", getPlayerRace(currentPlayer.getPlayerRace()));
         currentModel.put("playerLevel", currentPlayer.getLevel()+" /");
@@ -158,6 +139,5 @@ public class UserController {
         }
         return out;
     }
-     */
 
 }
