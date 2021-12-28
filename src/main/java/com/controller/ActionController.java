@@ -33,31 +33,33 @@ public class ActionController {
         this.gameState= gameState;
     }
 
-    @GetMapping("/action/{currentPlayerId}")
-    public String ActionPage(@PathVariable("currentPlayerId") long cpID,
+    @GetMapping("/action/{currentUserId}/{mainPlayerId}")
+    public String ActionPage(@PathVariable("currentUserId") long cuID,
+                             @PathVariable("mainPlayerId") long mpID,
                               Map<String, Object> model) {
-        model.put("currentUser", userRepository.findById(cpID));
+        model.put("currentUser", userRepository.findById(cuID));
         model.put("users", userRepository.findAll());
 
         // Add player information bar (name, class, race, level, fighting strength)
-        playerModel(cpID, model);
+        playerModel(cuID, model);
 
         if (messageRepository.count()==0){
            messageRepository.save(new Message("Chat history"));
        }
         model.put("messages", messageRepository.findAll());
         if (userRepository.count()==4){
-            return "GamePage";
+            return "ActionPage";
        }
         return "WaitPage";
     }
 
-    @PostMapping("/action/{currentPlayerId}")
-    public String ChatMessage(@Valid Message message, @PathVariable("currentPlayerId") long cpID,
-                               Map<String, Object> model) {
+    @PostMapping("/action/{currentUserId}/{mainPlayerId}")
+    public String ChatMessage(@Valid Message message, @PathVariable("currentUserId") long cuID,
+                              @PathVariable("mainPlayerId") long mpID,
+                              Map<String, Object> model) {
             String sender = "";
-        if (userRepository.findById(cpID).isPresent()){
-            Optional<User> pageUser = userRepository.findById(cpID);
+        if (userRepository.findById(cuID).isPresent()){
+            Optional<User> pageUser = userRepository.findById(cuID);
             model.put("currentUser", pageUser);
             sender = pageUser.get().getName();
         }
@@ -67,10 +69,10 @@ public class ActionController {
         }
 
         // Add player information bar (name, class, race, level, fighting strength)
-        playerModel(cpID, model);
+        playerModel(cuID, model);
 
         model.put("messages", messageRepository.findAll());
-        return "GamePage";
+        return "ActionPage";
     }
 
 
@@ -80,9 +82,9 @@ public class ActionController {
 
     // Method which populates the current model view with player information
     // (class, race, level, fighting strength).
-    private Map<String, Object> playerModel(long cpID, Map<String, Object> currentModel){
+    private Map<String, Object> playerModel(long cuID, Map<String, Object> currentModel){
 
-        Player currentPlayer = findPlayerbyID(cpID, gameState.getAllPlayers());
+        Player currentPlayer = findPlayerbyID(cuID, gameState.getAllPlayers());
         currentModel.put("playerClass", getPlayerClass(currentPlayer.getPlayerClass()));
         currentModel.put("playerRace", getPlayerRace(currentPlayer.getPlayerRace()));
         currentModel.put("playerLevel", currentPlayer.getLevel()+" /");
