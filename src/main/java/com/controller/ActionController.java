@@ -43,6 +43,13 @@ public class ActionController {
         // Add player information bar (name, class, race, level, fighting strength)
         playerModel(cuID, model);
 
+        /*
+        // ------------------------------------------------
+        // Testing monster doors
+        model.put("door","Curse");
+        // ------------------------------------------------
+         */
+
         if (messageRepository.count()==0){
            messageRepository.save(new Message("Chat history"));
        }
@@ -70,6 +77,13 @@ public class ActionController {
 
         // Add player information bar (name, class, race, level, fighting strength)
         playerModel(cuID, model);
+
+        /*
+        // ------------------------------------------------
+        // Testing monster doors
+        model.put("door","Curse");
+        // ------------------------------------------------
+         */
 
         model.put("messages", messageRepository.findAll());
         return "ActionPage";

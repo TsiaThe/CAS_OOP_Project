@@ -21,7 +21,8 @@
 </table>
 
 <div class="logo_html_generator">
-    <img alt="Avatar" src="MunchkinPicture.png" height="200px"/>
+    <img th:src="@{/images/GenericMunchkinPicture.png}" height="200px"/>
+    <img th:src="@{${'/images/' + door + '.png'}}" width="120"/>
 </div>
 
 <button class="button button2">Kaempfen</button>
@@ -161,7 +162,7 @@
 </div>
 <table>
           <form action="#" th:action="@{${#httpServletRequest.requestURI}}" object="${newMessaga}" newMessaga="message" method="post">
-              <input type="text" field="*{name}" name="messageText" class="form-control" id="name" required="" pattern="^\S.*$" placeholder="Name">
+              <input type="text" field="*{name}" name="messageText" class="form-control" id="name" required="" pattern="^\S.*$" placeholder="Chat message">
                      <div class="row">
                          <div class="col-md-6 mt-5">
                              <input type="submit" class="btn btn-primary" value="Send">
