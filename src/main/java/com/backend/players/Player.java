@@ -29,6 +29,8 @@ public class Player {
     private PlayerClass playerClass;
     private PlayerRace playerRace;
     private int fightStrength;
+    private long id;
+    private static long cumulativeId = 0;
 
     public Player(String name,PlayerClass  playerClass,PlayerRace  playerRace) {
         this.name = name;
@@ -40,6 +42,8 @@ public class Player {
         this.armour = null;
         this.playerClass = playerClass;
         this.playerRace = playerRace;
+        this.id = cumulativeId+1;
+        cumulativeId++;
     }
 
     public int getFightStrength() {
@@ -102,15 +106,9 @@ public class Player {
         return playerClass;
     }
 
-    public void setPlayerClass(PlayerClass playerClass) {
-        this.playerClass = playerClass;
-    }
-
     public PlayerRace getPlayerRace() {
         return playerRace;
     }
 
-    public void setPlayerRace(PlayerRace playerRace) {
-        this.playerRace = playerRace;
-    }
+    public long getId(){return id;}
 }

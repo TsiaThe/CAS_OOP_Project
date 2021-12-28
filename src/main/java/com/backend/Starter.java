@@ -2,10 +2,12 @@ package com.backend;
 
 import com.backend.cards.*;
 import com.backend.players.Player;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class Starter {
 
     private static int numPlayers = 4;
@@ -106,15 +108,15 @@ public class Starter {
         }
     }
 
-    public static List<Player> getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 
-    public static List<Card> getGameDoorCards() {
+    public List<Card> getGameDoorCards() {
         return gameDoorCards;
     }
 
-    public static List<Card> getGameTreasureCards() {
+    public List<Card> getGameTreasureCards() {
         return gameTreasureCards;
     }
 

@@ -9,13 +9,14 @@
 <body>
 <table>
     <tr>
+
         <th><h2 style="color: blue;">
-            <input type="text" th:object="${currentUser}" th:field="*{name}" value="Norway" disabled>
+            <input style="color: blue;" type="text" th:object="${currentUser}" th:field="*{name}" value="Norway" disabled>
         </h2></th>
-        <th><h2 style="color: blue;">Klasse Krieger / </h2></th>
-        <th><h2 style="color: blue;">Rasse Elf / </h2></th>
-        <th><h2 style="color: blue;">Level X / </h2></th>
-        <th><h2 style="color: blue;">Staerke XXX</h2></th>
+        <th><h2 style="color: blue;" th:text="${playerClass}"></h2></th>
+        <th><h2 style="color: blue;"th:text="${playerRace}"></h2></th>
+        <th><h2 style="color: blue;"th:text="${playerLevel}"></h2></th>
+        <th><h2 style="color: blue;"th:text="${playerStrength}"></h2></th>
     </tr>
 </table>
 
