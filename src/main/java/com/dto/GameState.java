@@ -1,8 +1,12 @@
 package com.dto;
 
 import com.backend.GameSetup;
+import com.backend.Starter;
 import com.backend.cards.*;
 import com.backend.players.Player;
+import com.repository.MessageRepository;
+import com.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +16,25 @@ import java.util.List;
 @Component
 public class GameState {
 
+    private final Starter gameStarter;
+    private List<Player> gamePlayers;
 
+    @Autowired
+    public GameState(Starter gameStarter) {
+        this.gameStarter = gameStarter;
+        this.gamePlayers = gameStarter.getPlayers();
+    }
+
+
+    public List<Player> getAllPlayers(){
+        return gamePlayers;
+    }
+
+
+
+
+
+    /*
     Player mainPlayer;
     List<Player> secondaryPlayers = new ArrayList<>(3);
 
@@ -20,7 +42,6 @@ public class GameState {
     Player p2 = (new GameSetup().generatePlayer("Player 2"));
     Player p3 = (new GameSetup().generatePlayer("Player 3"));
     Player p4 = (new GameSetup().generatePlayer("Player 4"));
-
 
     @Bean(name="secondaryPlayers")
     public List<Player> getSecondaryPlayers() {
@@ -32,9 +53,6 @@ public class GameState {
         return p4; //mainPlayer;
     }
 
-
-
-    /*
     // Cards in the GUI (hiden and shown)
     private List<Card> activeGameCards = new ArrayList<>();
 

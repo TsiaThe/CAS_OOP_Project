@@ -2,6 +2,7 @@ package com.controller;
 
 import com.backend.Starter;
 import com.backend.players.*;
+import com.dto.GameState;
 import com.repository.MessageRepository;
 import com.repository.UserRepository;
 import com.web.Message;
@@ -11,12 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
 
 @Controller
 @RequestMapping //(path="/users")
@@ -24,14 +23,16 @@ public class UserController {
 
     private final UserRepository userRepository;
     private final MessageRepository messageRepository;
-    private final Starter gameStarter;
+    //private final Starter gameStarter;
+    private final GameState gameState;
     private boolean gameStarted = false;
 
     @Autowired
-    public UserController(UserRepository userRepository, MessageRepository messageRepository, Starter gameStarter) {
+    public UserController(UserRepository userRepository, MessageRepository messageRepository, Starter gameStarter, GameState gameState) {
         this.userRepository = userRepository;
         this.messageRepository = messageRepository;
-        this.gameStarter = gameStarter;
+        //this.gameStarter = gameStarter;
+        this.gameState= gameState;
     }
 
     @GetMapping("/")
@@ -99,9 +100,15 @@ public class UserController {
     }
 
 
+    // ----------------------------------------------------------------------------------------
+    //      -------------------------- SUPPORTING METHODS -------------------------------
+    // ----------------------------------------------------------------------------------------
+
+    // Method which populates the current model view with player information
+    // (class, race, level, fighting strength).
     private Map<String, Object> playerModel(long id, Map<String, Object> currentModel){
 
-        Player currentPlayer = findPlayerbyID(id, gameStarter.getPlayers());
+        Player currentPlayer = findPlayerbyID(id, gameState.getAllPlayers());
         currentModel.put("playerClass", getPlayerClass(currentPlayer.getPlayerClass()));
         currentModel.put("playerRace", getPlayerRace(currentPlayer.getPlayerRace()));
         currentModel.put("playerLevel", currentPlayer.getLevel()+" /");
@@ -110,7 +117,8 @@ public class UserController {
         return currentModel;
     }
 
-
+    // Method which returns a player object from the player list
+    // based on the player id.
     private Player findPlayerbyID(long playerID, List<Player> players){
         for (Player p:players) {
             if (p.getId() == playerID) {
@@ -120,6 +128,8 @@ public class UserController {
         return null;
     }
 
+    // Method which returns a player class name (in german)
+    // based on the player class type.
     private String getPlayerClass(PlayerClass pC){
         String out = "Klasse: N/A";
         if (pC instanceof Dwarf){
@@ -137,6 +147,8 @@ public class UserController {
         return out;
     }
 
+    // Method which returns a player race name (in german)
+    // based on the player race type.
     private String getPlayerRace(PlayerRace pR){
         String out = "Rasse: N/A";
         if (pR instanceof Priest){
