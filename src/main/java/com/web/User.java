@@ -1,7 +1,5 @@
 package com.web;
 
-import com.backend.GameSetup;
-import com.backend.players.Player;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,6 +7,12 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
 
+/**
+ * User entity. It represents one of the four game users.
+ * Contains only id and name.
+ * @author Theofanis Tsiantas
+ * @version  2021.12.03 - version 1
+ */
 @Entity
 public class User {
 

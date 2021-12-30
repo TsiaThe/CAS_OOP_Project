@@ -6,6 +6,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
+/**
+ * User entity. It represents one of the four game users.
+ * Contains only id and the message itself.
+ * @author Theofanis Tsiantas
+ * @version  2021.12.10 - version 1
+ */
 @Entity
 public class Message {
 

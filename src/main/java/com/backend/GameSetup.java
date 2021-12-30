@@ -2,9 +2,6 @@ package com.backend;
 
 import com.backend.cards.*;
 import com.backend.players.*;
-import com.backend.cards.*;
-import com.backend.players.*;
-
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -12,13 +9,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * This class can create a full-setup for a game:
+ * 1. A player can be generated in a random combination of class and race.
+ * 2. Different methods are available for generating different card types.
+ * @author Theofanis Tsiantas
+ * @version  2021.11.15 - version 1
+ */
 public class GameSetup {
 
+    // The game supports for the moment four
+    // different classes and races.
     private final int NUMBER_OF_CLASSES=4;
     private final int NUMBER_OF_RACES=4;
 
+    // A HashMap which associates a class type
+    // (Dwarf, Elf, Halbling, Human) with an integer.
     private HashMap<Integer, Class<?>> gameClasses;
+    // A HashMap which associates a race type
+    // (Priest, Thief, Warrior, Wizzard) with an integer.
     private HashMap<Integer, Class<?>> gameRaces;
+    // Random generator.
     private Random randomInteger = new Random();
 
     public GameSetup(){
@@ -26,6 +37,7 @@ public class GameSetup {
         gameRaces = generateRaces(NUMBER_OF_RACES);
     }
 
+    // Method which populates the HashMap with the game classes.
     private HashMap<Integer, Class<?>> generateClasses(int numberOfClasses){
         HashMap<Integer, Class<?>> myGameClasses = new HashMap<>(numberOfClasses);
         myGameClasses.put(0, Human.class);
@@ -36,6 +48,7 @@ public class GameSetup {
         return myGameClasses;
     }
 
+    // Method which populates the HashMap with the game races.
     private HashMap<Integer, Class<?>> generateRaces(int numberOfRaces){
         HashMap<Integer, Class<?>> myGameRaces = new HashMap<>(numberOfRaces);
         myGameRaces.put(0, Priest.class);
@@ -46,7 +59,8 @@ public class GameSetup {
         return myGameRaces;
     }
 
-    public Player generatePlayer(String PlayerName) {
+    // Method which generates a player with a random class and race.
+    public Player generatePlayer() {
         try {
             Class<?> c = gameClasses.get(randomInteger.nextInt(NUMBER_OF_CLASSES));
             Constructor<?> cons = c.getConstructor();
@@ -70,12 +84,14 @@ public class GameSetup {
         }
     }
 
+    // Method which generates a list of cards for "Boots" object.
     public List<Card> generateBootsCards(List<Card> gameCards){
         gameCards.add(new Boots("Arschtritt Stiefel", "", 400, 2));
         gameCards.add(new Armour("Stiefel zum schnellen davonlaufen", "", 200, 1));
         return gameCards;
     }
 
+    // Method which generates a list of cards for "Armour" object.
     public List<Card> generateArmourCards(List<Card> gameCards){
         gameCards.add(new Armour("Flammende Ruestung", "", 400, 2));
         gameCards.add(new Armour("Lederruestung", "", 200, 1));
@@ -85,6 +101,7 @@ public class GameSetup {
         return gameCards;
     }
 
+    // Method which generates a list of cards for "Headgear" object.
     public List<Card> generateHeadgearCards(List<Card> gameCards){
         gameCards.add(new Boots("Helf der Tapferkeit", "", 200, 1));
         gameCards.add(new Armour("Geiler Helm", "", 600, 3));
@@ -92,6 +109,7 @@ public class GameSetup {
         return gameCards;
     }
 
+    // Method which generates a list of cards for different "Item" objects.
     public List<Card> generateItemCards(List<Card> gameCards){
 
         gameCards.add(new Item("Ganzkoerper Schild.","Nur von Kriegern nutzbar.",600,4,
@@ -214,6 +232,7 @@ public class GameSetup {
         return gameCards;
     }
 
+    // Method which generates a list of monster booster cards.
     public List<Card> generateMonsterBoosterCards(List<Card> gameCards){
         gameCards.add(new MonsterBooster("Gigantisch", "+10 for a monster",
                 10, 2));
@@ -228,6 +247,7 @@ public class GameSetup {
         return gameCards;
     }
 
+    // Method which generates a list of fight spell cards.
     public List<Card> generateFightSpellCards(List<Card> gameCards){
         gameCards.add(new FightSpell("Ekliger Sportdrink", "+2 for one side",2));
         gameCards.add(new FightSpell("Gefrierender Explosivtrank", "+3 for one side",3));
@@ -242,6 +262,7 @@ public class GameSetup {
         return gameCards;
     }
 
+    // Method which generates a list of level up cards.
     public List<Card> generateLevelSpellCards(List<Card> gameCards){
         gameCards.add(new LevelSpell("Ameisenhuegel aufkochen","Level up!"));
         gameCards.add(new LevelSpell("Gelegen kommender Anddistionsfehler","Level up!"));
@@ -252,6 +273,7 @@ public class GameSetup {
         return gameCards;
     }
 
+    // Method which generates a list of monster cards.
     public List<Card> generateMonsterCards(List<Card> gameCards){
 
         String standardMessage = "Du hast den Kampf verloren und konntest nicht weglaufen. ";
@@ -692,6 +714,7 @@ public class GameSetup {
         return gameCards;
     }
 
+    // Method which generates a list of curse cards.
     public List<Card> generateCurseCards(List<Card> gameCards){
 
         gameCards.add(new Curse("FLUCH! Ente des Schreckens.",
@@ -771,6 +794,7 @@ public class GameSetup {
          return gameCards;
     }
 
+    // Method which resets the attributes of a player after it dies.
     public void spielerTod(Player p){
         p.setLevel(1);
         p.setBoots(null);
@@ -784,7 +808,5 @@ public class GameSetup {
         else{
             p.setFightStrength(1);
         }
-
     }
-
 }

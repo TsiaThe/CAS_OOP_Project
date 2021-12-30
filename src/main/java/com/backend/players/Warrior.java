@@ -18,6 +18,5 @@ public class Warrior implements PlayerRace{
      * discard to use his/her power.
      */
     public void racePower(Card c){
-
     }
 }

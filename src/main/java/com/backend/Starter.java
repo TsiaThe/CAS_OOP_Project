@@ -3,23 +3,35 @@ package com.backend;
 import com.backend.cards.*;
 import com.backend.players.Player;
 import org.springframework.stereotype.Component;
-
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class creates an instance of the class "GameSetup"
+ * which contains all cards and can randomly generate players
+ * (of random class and race).  It contains lists with all
+ * door and treasure cards as well as with the players.
+ * @author Theofanis Tsiantas
+ * @version  2021.11.23 - version 1
+ */
 @Component
 public class Starter {
 
+    // Number of game players (simple version=4).
     private static int numPlayers = 4;
+    // List of randomly generated players.
     private static List<Player> players = new ArrayList<>(numPlayers);
+    // List of all door cards.
     private static List<Card> gameDoorCards = new ArrayList<>();
+    // List of all treasure cards.
     private static List<Card> gameTreasureCards = new ArrayList<>();
+    // gameSetup object at which all card types and players are generated.
     private static GameSetup gameSetup = new GameSetup();
 
     public Starter(){
         // Generate players
         for (int nPlayers = 1; nPlayers < numPlayers+1; nPlayers++) {
-            players.add(gameSetup.generatePlayer("Dummy player" + nPlayers));
+            players.add(gameSetup.generatePlayer());
         }
         // Generate armour cards
         gameTreasureCards = gameSetup.generateArmourCards(gameTreasureCards);
@@ -41,6 +53,7 @@ public class Starter {
         gameDoorCards = gameSetup.generateCurseCards(gameDoorCards);
     }
 
+    // Method for testing all generated cards and players.
     public void testing(){
         // Test players
         for (int nPlayers = 0; nPlayers < numPlayers; nPlayers++) {
@@ -107,16 +120,18 @@ public class Starter {
         }
     }
 
+    // Method which returns the four randomly generated players.
     public List<Player> getPlayers() {
         return players;
     }
 
+    // Method which returns all door cards.
     public List<Card> getGameDoorCards() {
         return gameDoorCards;
     }
 
+    // Method which returns all treasure cards.
     public List<Card> getGameTreasureCards() {
         return gameTreasureCards;
     }
-
 }

@@ -18,12 +18,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+/**
+ * This controller is responsible for:
+ * 1.
+ * @author Theofanis Tsiantas
+ * @version  2021.12.27 - version 1
+ */
 @Controller
 @RequestMapping // (path="/users")
 public class ActionController {
 
+    // Repo with all signed up users.
     private final UserRepository userRepository;
+    // Repo with all communicated messages.
     private final MessageRepository messageRepository;
+    // DTO which holds the actual game state.
     private final GameState gameState;
 
     @Autowired
@@ -33,6 +42,7 @@ public class ActionController {
         this.gameState= gameState;
     }
 
+    //
     @GetMapping("/action/{currentUserId}/{mainPlayerId}")
     public String ActionPage(@PathVariable("currentUserId") long cuID,
                              @PathVariable("mainPlayerId") long mpID,
@@ -60,6 +70,7 @@ public class ActionController {
         return "WaitPage";
     }
 
+    //
     @PostMapping("/action/{currentUserId}/{mainPlayerId}")
     public String ChatMessage(@Valid Message message, @PathVariable("currentUserId") long cuID,
                               @PathVariable("mainPlayerId") long mpID,
