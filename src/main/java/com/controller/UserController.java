@@ -40,7 +40,7 @@ public class UserController {
         for (User u:userRepository.findAll()){
          if (u.getName().equals(user.getName())) return "AddUser";
         }
-        if (user.getName()=="") return  "AddUser";
+        if (user.getName()=="" || user.getName().charAt(0)==' ') return  "AddUser";
         if (userRepository.count()==4){
             return "SupportPage";
         }
