@@ -30,6 +30,12 @@
 <button class="button button1">Zauber</button>
 <button class="button button2">Verkaufen</button>
 
+<form action="#" th:action="@{${#httpServletRequest.requestURI+'/fight'}}" method="post">
+    <div>
+        <input type="submit" th:value="${fightingButton}">
+    </div>
+</form>
+
 <h1>Eigenschaften</h1>
 
 <table>

@@ -9,10 +9,8 @@ import com.web.Message;
 import com.web.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
 import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
@@ -53,10 +51,9 @@ public class ActionController {
         // Add player information bar (name, class, race, level, fighting strength)
         playerModel(cuID, model);
 
-
         // ------------------------------------------------
         // Testing monster doors
-        model.put("door","Monster");
+        model.put("door","Curse");
         // ------------------------------------------------
 
 
@@ -89,10 +86,9 @@ public class ActionController {
         // Add player information bar (name, class, race, level, fighting strength)
         playerModel(cuID, model);
 
-
         // ------------------------------------------------
         // Testing monster doors
-        model.put("door","Monster");
+        model.put("door","Curse");
         // ------------------------------------------------
 
 
@@ -100,13 +96,36 @@ public class ActionController {
         return "ActionPage";
     }
 
+    // Post method which sets the fifghting state of a player appropriately.
+    @PostMapping("/action/{currentUserId}/{mainPlayerId}/fight")
+    public String fightHelp(@PathVariable("currentUserId") long cuID,
+                            @PathVariable("mainPlayerId") long mpID,
+                            Map<String, Object> model){
+        fightState(cuID);
+        return "redirect:/action/"+ cuID +"/"+mpID;
+    }
+
+
 
     // ----------------------------------------------------------------------------------------
     //      -------------------------- SUPPORTING METHODS -------------------------------
     // ----------------------------------------------------------------------------------------
 
+    // Method which sets the "fights" attribute of a player to true/false based on
+    // whether the player wants to participate in the fight or not.
+    private void fightState(long cuID){
+        Player currentPlayer = findPlayerbyID(cuID, gameState.getAllPlayers());
+        // Change the button name and the player attribute accordingly
+        if (currentPlayer.getFights()==true){
+            currentPlayer.setFights(false);
+        }
+        else{
+            currentPlayer.setFights(true);
+        }
+    }
+
     // Method which populates the current model view with player information
-    // (class, race, level, fighting strength).
+    // (class, race, level, fighting strength, fight participation, etc...).
     private Map<String, Object> playerModel(long cuID, Map<String, Object> currentModel){
 
         Player currentPlayer = findPlayerbyID(cuID, gameState.getAllPlayers());
@@ -114,6 +133,15 @@ public class ActionController {
         currentModel.put("playerRace", getPlayerRace(currentPlayer.getPlayerRace()));
         currentModel.put("playerLevel", currentPlayer.getLevel()+" /");
         currentModel.put("playerStrength", String.valueOf(currentPlayer.getFightStrength()));
+
+        // Changes the name of the fight button to be the opposite of the
+        // player fighting state.
+        if (currentPlayer.getFights()==true){
+            currentModel.put("fightingButton","Nicht kaempfen!");
+        }
+        else{
+            currentModel.put("fightingButton","Kaempfen!");
+        }
 
         return currentModel;
     }

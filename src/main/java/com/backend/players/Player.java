@@ -29,6 +29,7 @@ public class Player {
     private PlayerRace playerRace;
     private int fightStrength;
     private long id = 0;
+    private boolean fights = false;
 
     public Player(PlayerClass  playerClass,PlayerRace  playerRace) {
         this.level = 1;
@@ -100,4 +101,12 @@ public class Player {
     public long getId(){return id;}
 
     public void setId(long id){this.id = id;}
+
+    public boolean getFights() {
+        return fights;
+    }
+
+    public void setFights(boolean fights) {
+        this.fights = fights;
+    }
 }
