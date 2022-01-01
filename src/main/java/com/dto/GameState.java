@@ -66,19 +66,19 @@ public class GameState {
         Boots testBoots = null;
         Armour testArmour = null;
         Headgear testHeadgear = null;
-        List<Item> testItem =  new ArrayList<>();
+        List<Item> testItems =  new ArrayList<>();
         for (Card c:gameTreasureCards){
             if (c instanceof Boots) testBoots = (Boots)c;
             if (c instanceof Armour) testArmour = (Armour)c;
             if (c instanceof Headgear) testHeadgear = (Headgear)c;
-            if (c instanceof Item) testItem.add((Item)c);
-            if (testBoots!=null && testArmour!=null && testHeadgear!=null && testItem!=null) break;
+            if (c instanceof Item) testItems.add((Item)c);
+            if (testBoots!=null && testArmour!=null && testHeadgear!=null && testItems!=null) break;
         }
         for (Player p:gamePlayers){
-            p.setHeadgear(null);
+            p.setHeadgear(testHeadgear);
             p.setArmour(testArmour);
             p.setBoots(testBoots);
-            p.setItems(testItem);
+            p.setItems(testItems);
         }
         // Testing equipment
 

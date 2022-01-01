@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.backend.Starter;
+import com.backend.cards.Item;
 import com.backend.players.*;
 import com.dto.GameState;
 import com.repository.MessageRepository;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -128,9 +130,9 @@ public class ActionController {
         if (currentPlayer.getItems().size()>0){
             currentModel.put("items", currentPlayer.getItems());
         }
-       // else{
-       //     currentModel.put("items", " ");
-       // }
+        else{
+            currentModel.put("Noitem", "Kein Gegenstand");
+        }
         return currentModel;
     }
 
