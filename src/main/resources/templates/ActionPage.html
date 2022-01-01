@@ -48,11 +48,11 @@
     </tr>
     <tr>
         <th>Bonus: </th>
-        <td th:text="${headgearBonus}"></td>
+        <td th:if="${headgearBonus}" th:text="${headgearBonus}"></td>
     </tr>
     <tr>
         <th>Wert: </th>
-        <td th:text="${headgearValue}"></td>
+        <td th:if="${headgearValue}" th:text="${headgearValue}"></td>
     </tr>
 </table>
 
@@ -66,11 +66,11 @@
     </tr>
     <tr>
         <th>Bonus: </th>
-        <td th:text="${armourBonus}"></td>
+        <td th:if="${armourBonus}" th:text="${armourBonus}"></td>
     </tr>
     <tr>
-        <th>Value: </th>
-        <td th:text="${armourValue}"></td>
+        <th>Wert: </th>
+        <td th:if="${armourValue}" th:text="${armourValue}"></td>
     </tr>
 </table>
 
@@ -84,11 +84,11 @@
     </tr>
     <tr>
         <th>Bonus: </th>
-        <td th:text="${bootsBonus}"></td>
+        <td th:if="${bootsBonus}" th:text="${bootsBonus}"></td>
     </tr>
     <tr>
-        <th>Value: </th>
-        <td th:text="${bootsValue}"></td>
+        <th>Wert: </th>
+        <td th:if="${bootsValue}" th:text="${bootsValue}"></td>
     </tr>
 </table>
 
@@ -96,69 +96,18 @@
     <tr>
         <th>Gegenstaende</th>
     </tr>
-    <tr>
-        <td>Name</td>
-    </tr>
-    <tr>
-        <td>Kraft</td>
-    </tr>
-    <tr>
-        <td>Werk</td>
-    </tr>
-    <td>Tickbox</td>
-    </tr>
-</table>
-
-<table>
-    <tr>
-        <div>
-            <input type="checkbox" id="MB1" name="MB1"
-                   checked>
-            <label for="MB1">MonsterBooster 1</label>
-        </div>
-    </tr>
-
-    <tr>
-        <div>
-            <input type="checkbox" id="MB2" name="MB2">
-            <label for="MB2">MonsterBooster 2</label>
-        </div>
+    <tr th:each="item : ${items}">
+        <th>Name: </th>
+        <td th:text="${item.name}"></td>
+        <th>Beschreibung: </th>
+        <td th:text="${item.description}"></td>
+        <th>Bonus: </th>
+        <td th:text="${item.bonus}"></td>
+        <th>Wert: </th>
+        <td th:text="${item.value}"></td>
     </tr>
 </table>
 
-<table>
-    <tr>
-        <div>
-            <input type="checkbox" id="FS1" name="FS1"
-                   checked>
-            <label for="FS1">FS1</label>
-        </div>
-    </tr>
-
-    <tr>
-        <div>
-            <input type="checkbox" id="FS2" name="FS2">
-            <label for="FS2">FS2</label>
-        </div>
-    </tr>
-</table>
-
-<table>
-    <tr>
-        <div>
-            <input type="checkbox" id="OBJ1" name="OBJ1"
-                   checked>
-            <label for="OBJ1">Object 1</label>
-        </div>
-    </tr>
-
-    <tr>
-        <div>
-            <input type="checkbox" id="OBJ2" name="OBJ2">
-            <label for="OBJ2">Object 2</label>
-        </div>
-    </tr>
-</table>
 
 <div class="myBox">
     <table >

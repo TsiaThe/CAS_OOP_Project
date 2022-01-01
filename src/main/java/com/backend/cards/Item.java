@@ -21,9 +21,8 @@ public class Item extends Equipment{
     private ItemPower itemPower;
 
     public Item(String name, String description, int value, int bonus,
-                int handNumber, Class<?> applicableClass, boolean smallItem, ItemPower itemPower) {
+                Class<?> applicableClass, boolean smallItem, ItemPower itemPower) {
         super(name, description, value, bonus);
-        this.handNumber = handNumber;
         this.applicableClass = applicableClass;
         this.smallItem = smallItem;
         this.itemPower = itemPower;

@@ -75,7 +75,7 @@ public class GameState {
             if (testBoots!=null && testArmour!=null && testHeadgear!=null && testItem!=null) break;
         }
         for (Player p:gamePlayers){
-            p.setHeadgear(testHeadgear);
+            p.setHeadgear(null);
             p.setArmour(testArmour);
             p.setBoots(testBoots);
             p.setItems(testItem);

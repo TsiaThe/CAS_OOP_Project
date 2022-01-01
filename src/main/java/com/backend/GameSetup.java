@@ -113,119 +113,119 @@ public class GameSetup {
     public List<Card> generateItemCards(List<Card> gameCards){
 
         gameCards.add(new Item("Ganzkoerper Schild.","Nur von Kriegern nutzbar.",600,4,
-                1,Warrior.class,false, p -> {
+                Warrior.class,false, p -> {
                    if (p.getPlayerRace() instanceof Warrior){
                        p.setFightStrength(p.getFightStrength()+4);
                    }
                 }));
 
         gameCards.add(new Item("Singendes und tanzendes Schwert.","Nur von Dieben nutzbar.",400,2 ,
-                1,null,true, p -> {
+                null,true, p -> {
             if (p.getPlayerRace() instanceof Thief){
                 p.setFightStrength(p.getFightStrength()+2);
             }
         }));
 
         gameCards.add(new Item("Stange 11-Fuss.","",200,1 ,
-                2,null,true, p -> {
+                null,true, p -> {
                 p.setFightStrength(p.getFightStrength()+2);}));
 
         gameCards.add(new Item("Hinterhaeltiges bastard-Schwert.","",400,2 ,
-                1,null,true, p -> {
+                null,true, p -> {
                 p.setFightStrength(p.getFightStrength()+2);}));
 
         gameCards.add(new Item("Kettensäge der blutigen Zerstuckelung.","",600,3 ,
-                2,null,false, p -> {
+                null,false, p -> {
                 p.setFightStrength(p.getFightStrength()+2);}));
 
         gameCards.add(new Item("Riesige Fells.","",0,3 ,
-                2,null,false, p -> {
+                null,false, p -> {
                 p.setFightStrength(p.getFightStrength()+3);}));
 
         gameCards.add(new Item("Flotter Buckler.","",400,2 ,
-                1,null,true, p -> {
+                null,true, p -> {
                 p.setFightStrength(p.getFightStrength()+2);}));
 
         gameCards.add(new Item("Spiessige Knie.","",200,1 ,
-                0,null,true, p -> {
+                null,true, p -> {
                 p.setFightStrength(p.getFightStrength()+1);}));
 
         gameCards.add(new Item("Gentleman Keule.","",400,3 ,
-                1,null,true, p -> {
+                null,true, p -> {
                 p.setFightStrength(p.getFightStrength()+3);}));
 
         gameCards.add(new Item("Bogen mit bunten Baendern.","Nur von Elfen nutzbar.",800,4 ,
-                2,Elf.class,true, p -> {
+                Elf.class,true, p -> {
             if (p.getPlayerClass() instanceof Elf){
                 p.setFightStrength(p.getFightStrength()+4);
             }}));
 
         gameCards.add(new Item("Unfaires Rapier.","Nur von Elfen nutzbar.",600,3 ,
-                1,Elf.class,true, p -> {
+                Elf.class,true, p -> {
             if (p.getPlayerClass() instanceof Elf){
                 p.setFightStrength(p.getFightStrength()+3);
             }}));
 
         gameCards.add(new Item("Trittleiter.","Nur von Halblingen nutzbar.",400,3 ,
-                0,Halbling.class,false, p -> {
+                Halbling.class,false, p -> {
             if (p.getPlayerClass() instanceof Halbling){
                 p.setFightStrength(p.getFightStrength()+3);
             }}));
 
         gameCards.add(new Item("Braut-Breitschwert.","",400,3 ,
-                1,null,true, p -> {
+                null,true, p -> {
                 p.setFightStrength(p.getFightStrength()+3);}));
 
         gameCards.add(new Item("Strumpfhose der Riesenstaerke.","Nur von Kriegern nutzbar.",600,3 ,
-                0,Warrior.class,true, p -> {
+                Warrior.class,true, p -> {
             if (p.getPlayerRace() instanceof Warrior){
                 p.setFightStrength(p.getFightStrength()+3);
             }}));
 
         gameCards.add(new Item("Scharfer Streitkolben.","Nur von Priestern nutzbar.",600,4 ,
-                1,Priest.class,true, p -> {
+                Priest.class,true, p -> {
             if (p.getPlayerRace() instanceof Priest){
                 p.setFightStrength(p.getFightStrength()+4);
             }}));
 
         gameCards.add(new Item("Kaesereibe des Friedens.","Nur von Priestern nutzbar.",400,3 ,
-                1,Priest.class,true, p -> {
+                Priest.class,true, p -> {
             if (p.getPlayerRace() instanceof Priest){
                 p.setFightStrength(p.getFightStrength()+3);
             }}));
 
         gameCards.add(new Item("Limburger und Sardellen Sandwich.","Nur von Halblingen nutzbar.",400,3 ,
-                0,null,true, p -> {
+                null,true, p -> {
             if (p.getPlayerClass() instanceof Halbling){
                 p.setFightStrength(p.getFightStrength()+3);
             }}));
 
         gameCards.add(new Item("Kniescheiben zertruemmernder Hammer.","Nur von Zwergen nutzbar.",600,4 ,
-                1,Dwarf.class,true, p -> {
+                Dwarf.class,true, p -> {
             if (p.getPlayerClass() instanceof Dwarf){
                 p.setFightStrength(p.getFightStrength()+4);
             }}));
 
         gameCards.add(new Item("Verkleidungsumhang.","Nur von Dieben nutzbar.",600,4,
-                0,Thief.class,true, p -> {
+                Thief.class,true, p -> {
             if (p.getPlayerRace() instanceof Thief){
                 p.setFightStrength(p.getFightStrength()+4);
             }}));
 
         gameCards.add(new Item("Napalmstab.","Nur von Zauberern nutzbar.",800,5 ,
-                1,Wizard.class,true, p -> {
+                Wizard.class,true, p -> {
             if (p.getPlayerRace() instanceof Wizard){
                 p.setFightStrength(p.getFightStrength()+5);
             }}));
 
         gameCards.add(new Item("Schweizer Armeehellbarde.","Nur von Menschen nutzbar.",600,4 ,
-                2,Human.class,false, p -> {
+                Human.class,false, p -> {
             if (p.getPlayerClass() instanceof Human){
                 p.setFightStrength(p.getFightStrength()+4);
             }}));
 
         gameCards.add(new Item("Dolch des Verrats.","Nur von Dieben nutzbar.",400,3 ,
-                1,Thief.class,true, p -> {
+                Thief.class,true, p -> {
             if (p.getPlayerRace() instanceof Thief){
                 p.setFightStrength(p.getFightStrength()+3);
             }}));
@@ -780,7 +780,7 @@ public class GameSetup {
         gameCards.add(new Curse("FLUCH!",
                 "Wirklich beschiessener Fluch! Du verlierst dein kleines Gegenstand mit dem groestem Bonus.",
                 p -> {
-                    Item lostItem = new Item("Dummy","",0,0,0,null,true,null);
+                    Item lostItem = new Item("Dummy","",0,0,null,true,null);
                     for (Item it:p.getItems()){
                         if (it.getBonus()>lostItem.getBonus()){
                             lostItem = it;

@@ -54,6 +54,7 @@ public class ActionController {
         bootsModel(cuID, model);
         armourModel(cuID, model);
         headgearModel(cuID, model);
+        itemsModel(cuID, model);
 
         // ------------------------------------------------
         // Testing monster doors
@@ -93,6 +94,7 @@ public class ActionController {
         bootsModel(cuID, model);
         armourModel(cuID, model);
         headgearModel(cuID, model);
+        itemsModel(cuID, model);
 
 
         // ------------------------------------------------
@@ -105,7 +107,7 @@ public class ActionController {
         return "ActionPage";
     }
 
-    // Post method which sets the fifghting state of a player appropriately.
+    // Post method which sets the fighting state of a player appropriately.
     @PostMapping("/action/{currentUserId}/{mainPlayerId}/fight")
     public String fightHelp(@PathVariable("currentUserId") long cuID,
                             @PathVariable("mainPlayerId") long mpID,
@@ -121,6 +123,18 @@ public class ActionController {
     // ----------------------------------------------------------------------------------------
 
     // Method which populates the current model view with the boots information.
+    private Map<String, Object> itemsModel(long cuID, Map<String, Object> currentModel){
+        Player currentPlayer = findPlayerbyID(cuID, gameState.getAllPlayers());
+        if (currentPlayer.getItems().size()>0){
+            currentModel.put("items", currentPlayer.getItems());
+        }
+       // else{
+       //     currentModel.put("items", " ");
+       // }
+        return currentModel;
+    }
+
+    // Method which populates the current model view with the boots information.
     private Map<String, Object> bootsModel(long cuID, Map<String, Object> currentModel){
         Player currentPlayer = findPlayerbyID(cuID, gameState.getAllPlayers());
         if (currentPlayer.getBoots()!=null){
@@ -130,8 +144,6 @@ public class ActionController {
         }
         else{
             currentModel.put("bootsName", "Keine Schuhe");
-            currentModel.put("bootsBonus", " ");
-            currentModel.put("bootsValue", "");
         }
         return currentModel;
     }
@@ -146,8 +158,6 @@ public class ActionController {
         }
         else{
             currentModel.put("armourName", "Keine Ruestung");
-            currentModel.put("armourBonus", " ");
-            currentModel.put("armourValue", "");
         }
         return currentModel;
     }
@@ -161,9 +171,7 @@ public class ActionController {
             currentModel.put("headgearValue", currentPlayer.getHeadgear().getValue()+" Goldstuecke");
         }
         else{
-            currentModel.put("headgearName", "Kein Kopfbedeckung");
-            currentModel.put("headgearBonus", " ");
-            currentModel.put("headgearValue", "");
+            currentModel.put("headgearName", "Keine Kopfbedeckung");
         }
         return currentModel;
     }
