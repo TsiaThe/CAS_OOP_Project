@@ -43,80 +43,89 @@
         <th>Kopfbedeckung</th>
     </tr>
     <tr>
-        <th>Name: </th>
+        <td>Name: </td>
         <td th:text="${headgearName}"></td>
     </tr>
     <tr>
-        <th>Bonus: </th>
+        <td>Bonus: </td>
         <td th:if="${headgearBonus}" th:text="${headgearBonus}"></td>
     </tr>
     <tr>
-        <th>Wert: </th>
+        <td>Wert: </td>
         <td th:if="${headgearValue}" th:text="${headgearValue}"></td>
+        <td>
+        <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellHeadgear'}}" method="post">
+            <input th:if="${headgearValue}" type="submit" th:value="Verkauf">
+        </form>
+        </td>
     </tr>
 </table>
-<form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellHeadgear'}}" method="post">
-    <input th:if="${headgearValue}" type="submit" th:value="Verkauf">
-</form>
+
 
 <table>
     <tr>
         <th>Ruestung</th>
     </tr>
     <tr>
-        <th>Name: </th>
+        <td>Name: </td>
         <td th:text="${armourName}"></td>
     </tr>
     <tr>
-        <th>Bonus: </th>
+        <td>Bonus: </td>
         <td th:if="${armourBonus}" th:text="${armourBonus}"></td>
     </tr>
     <tr>
-        <th>Wert: </th>
+        <td>Wert: </td>
         <td th:if="${armourValue}" th:text="${armourValue}"></td>
+        <td>
+            <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellArmour'}}" method="post">
+                <input th:if="${armourValue}" type="submit" th:value="Verkauf">
+            </form>
+        </td>
     </tr>
 </table>
-<form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellArmour'}}" method="post">
-    <input th:if="${armourValue}" type="submit" th:value="Verkauf">
-</form>
 
 <table>
     <tr>
         <th>Schuhe</th>
     </tr>
     <tr>
-        <th>Name: </th>
+        <td>Name: </td>
         <td th:text="${bootsName}"></td>
     </tr>
     <tr>
-        <th>Bonus: </th>
+        <td>Bonus: </td>
         <td th:if="${bootsBonus}" th:text="${bootsBonus}"></td>
     </tr>
     <tr>
-        <th>Wert: </th>
+        <td>Wert: </td>
         <td th:if="${bootsValue}" th:text="${bootsValue}"></td>
+        <td>
+            <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellBoots'}}" method="post">
+                <input th:if="${bootsValue}" type="submit" th:value="Verkauf">
+            </form>
+        </td>
     </tr>
 </table>
-<form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellBoots'}}" method="post">
-    <input th:if="${bootsValue}" type="submit" th:value="Verkauf">
-</form>
 
 <table>
     <tr>
         <th>Gegenstaende</th>
     </tr>
     <tr th:each="item : ${items}">
-        <th>Name: </th>
+        <td>Name: </td>
         <td th:text="${item.name}"></td>
-        <th>Beschreibung: </th>
+        <td>Beschreibung: </td>
         <td th:text="${item.description}"></td>
-        <th>Bonus: </th>
+        <td>Bonus: </td>
         <td th:text="${item.bonus}"></td>
-        <th>Wert: </th>
+        <td>Wert: </td>
         <td th:text="${item.value}"></td>
-        <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellItem'}}" method="post">
-            <input type="submit" th:value="Verkauf">
-        </form>
+        <td>
+            <form action="#" th:action="@{${#httpServletRequest.requestURI}+'/'+${item.name}}" method="post">
+                <input type="submit" th:value="Verkauf">
+            </form>
+        </td>
     </tr>
     <td th:if="${Noitem}" th:text="${Noitem}"></td>
 </table>
