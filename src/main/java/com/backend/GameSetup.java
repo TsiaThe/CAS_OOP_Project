@@ -87,7 +87,7 @@ public class GameSetup {
     // Method which generates a list of cards for "Boots" object.
     public List<Card> generateBootsCards(List<Card> gameCards){
         gameCards.add(new Boots("Arschtritt Stiefel", "", 400, 2));
-        gameCards.add(new Armour("Stiefel zum schnellen davonlaufen", "", 200, 1));
+        gameCards.add(new Boots("Stiefel zum schnellen davonlaufen", "", 200, 1));
         return gameCards;
     }
 
@@ -103,9 +103,9 @@ public class GameSetup {
 
     // Method which generates a list of cards for "Headgear" object.
     public List<Card> generateHeadgearCards(List<Card> gameCards){
-        gameCards.add(new Boots("Helf der Tapferkeit", "", 200, 1));
-        gameCards.add(new Armour("Geiler Helm", "", 600, 3));
-        gameCards.add(new Armour("Cooles Tuch fuer harte Kerle", "", 400, 2));
+        gameCards.add(new Headgear("Helf der Tapferkeit", "", 200, 1));
+        gameCards.add(new Headgear("Geiler Helm", "", 600, 3));
+        gameCards.add(new Headgear("Cooles Tuch fuer harte Kerle", "", 400, 2));
         return gameCards;
     }
 

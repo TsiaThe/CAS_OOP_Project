@@ -15,6 +15,7 @@ public abstract class Equipment extends TreasureCard{
 
     private int value;
     private int bonus;
+    private boolean sell = false;
 
     public Equipment(String name, String description, int value, int bonus) {
         super(name, description);
@@ -36,5 +37,13 @@ public abstract class Equipment extends TreasureCard{
 
     public void setBonus(int bonus) {
         this.bonus = bonus;
+    }
+
+    public void setSell(boolean sell) {
+        this.sell = sell;
+    }
+
+    public boolean getSell(){
+        return this.sell;
     }
 }

@@ -50,6 +50,10 @@ public class ActionController {
 
         // Add player information bar (name, class, race, level, fighting strength)
         playerModel(cuID, model);
+        //
+        bootsModel(cuID, model);
+        armourModel(cuID, model);
+        headgearModel(cuID, model);
 
         // ------------------------------------------------
         // Testing monster doors
@@ -85,6 +89,11 @@ public class ActionController {
 
         // Add player information bar (name, class, race, level, fighting strength)
         playerModel(cuID, model);
+        //
+        bootsModel(cuID, model);
+        armourModel(cuID, model);
+        headgearModel(cuID, model);
+
 
         // ------------------------------------------------
         // Testing monster doors
@@ -110,6 +119,54 @@ public class ActionController {
     // ----------------------------------------------------------------------------------------
     //      -------------------------- SUPPORTING METHODS -------------------------------
     // ----------------------------------------------------------------------------------------
+
+    // Method which populates the current model view with the boots information.
+    private Map<String, Object> bootsModel(long cuID, Map<String, Object> currentModel){
+        Player currentPlayer = findPlayerbyID(cuID, gameState.getAllPlayers());
+        if (currentPlayer.getBoots()!=null){
+            currentModel.put("bootsName", currentPlayer.getBoots().getName());
+            currentModel.put("bootsBonus", currentPlayer.getBoots().getBonus());
+            currentModel.put("bootsValue", currentPlayer.getBoots().getValue()+" Goldstuecke");
+        }
+        else{
+            currentModel.put("bootsName", "Keine Schuhe");
+            currentModel.put("bootsBonus", " ");
+            currentModel.put("bootsValue", "");
+        }
+        return currentModel;
+    }
+
+    // Method which populates the current model view with the armour information.
+    private Map<String, Object> armourModel(long cuID, Map<String, Object> currentModel){
+        Player currentPlayer = findPlayerbyID(cuID, gameState.getAllPlayers());
+        if (currentPlayer.getArmour()!=null){
+            currentModel.put("armourName", currentPlayer.getArmour().getName());
+            currentModel.put("armourBonus", currentPlayer.getArmour().getBonus());
+            currentModel.put("armourValue", currentPlayer.getArmour().getValue()+" Goldstuecke");
+        }
+        else{
+            currentModel.put("armourName", "Keine Ruestung");
+            currentModel.put("armourBonus", " ");
+            currentModel.put("armourValue", "");
+        }
+        return currentModel;
+    }
+
+    // Method which populates the current model view with the headgear information.
+    private Map<String, Object> headgearModel(long cuID, Map<String, Object> currentModel){
+        Player currentPlayer = findPlayerbyID(cuID, gameState.getAllPlayers());
+        if (currentPlayer.getHeadgear()!=null){
+            currentModel.put("headgearName", currentPlayer.getHeadgear().getName());
+            currentModel.put("headgearBonus", currentPlayer.getHeadgear().getBonus());
+            currentModel.put("headgearValue", currentPlayer.getHeadgear().getValue()+" Goldstuecke");
+        }
+        else{
+            currentModel.put("headgearName", "Kein Kopfbedeckung");
+            currentModel.put("headgearBonus", " ");
+            currentModel.put("headgearValue", "");
+        }
+        return currentModel;
+    }
 
     // Method which sets the "fights" attribute of a player to true/false based on
     // whether the player wants to participate in the fight or not.
