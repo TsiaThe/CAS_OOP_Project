@@ -55,6 +55,9 @@
         <td th:if="${headgearValue}" th:text="${headgearValue}"></td>
     </tr>
 </table>
+<form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellHeadgear'}}" method="post">
+    <input th:if="${headgearValue}" type="submit" th:value="Verkauf">
+</form>
 
 <table>
     <tr>
@@ -73,6 +76,9 @@
         <td th:if="${armourValue}" th:text="${armourValue}"></td>
     </tr>
 </table>
+<form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellArmour'}}" method="post">
+    <input th:if="${armourValue}" type="submit" th:value="Verkauf">
+</form>
 
 <table>
     <tr>
@@ -91,6 +97,9 @@
         <td th:if="${bootsValue}" th:text="${bootsValue}"></td>
     </tr>
 </table>
+<form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellBoots'}}" method="post">
+    <input th:if="${bootsValue}" type="submit" th:value="Verkauf">
+</form>
 
 <table>
     <tr>
@@ -105,6 +114,9 @@
         <td th:text="${item.bonus}"></td>
         <th>Wert: </th>
         <td th:text="${item.value}"></td>
+        <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellItem'}}" method="post">
+            <input type="submit" th:value="Verkauf">
+        </form>
     </tr>
     <td th:if="${Noitem}" th:text="${Noitem}"></td>
 </table>
@@ -118,15 +130,14 @@
     </table>
 </div>
 <table>
-          <form action="#" th:action="@{${#httpServletRequest.requestURI}}" object="${newMessaga}" newMessaga="message" method="post">
-              <input type="text" field="*{name}" name="messageText" class="form-control" id="name" required="" pattern="^\S.*$" placeholder="Chat message">
-                     <div class="row">
-                         <div class="col-md-6 mt-5">
-                             <input type="submit" class="btn btn-primary" value="Send">
-                         </div>
-                     </div>
-          </form>
-    </tc>
+    <form action="#" th:action="@{${#httpServletRequest.requestURI}}" object="${newMessaga}" newMessaga="message" method="post">
+        <input type="text" field="*{name}" name="messageText" class="form-control" id="name" required="" pattern="^\S.*$" placeholder="Chat message">
+        <div class="row">
+            <div class="col-md-6 mt-5">
+                <input type="submit" class="btn btn-primary" value="Send">
+            </div>
+        </div>
+    </form>
 </table>
 
 <footer th:insert="fragments/common.html :: footer"></footer>
