@@ -61,6 +61,8 @@ public class ActionController {
         headgearModel(cuID, model);
         itemsModel(cuID, model);
 
+        model.put("gamePhase","fight");
+
         // ------------------------------------------------
         // Testing monster doors
         model.put("door","Curse");
@@ -101,6 +103,7 @@ public class ActionController {
         headgearModel(cuID, model);
         itemsModel(cuID, model);
 
+        model.put("gamePhase","Curse");
 
         // ------------------------------------------------
         // Testing monster doors

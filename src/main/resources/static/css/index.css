@@ -11,7 +11,9 @@
 }
 
 .button1 {background-color: #4CAF50;} /* Green */
-.button2 {background-color: #AA0000;} /* Blue */
+.button2 {background-color: #AA0000;} /* Red */
+.button3 {background-color: #af744c;} /* Orange */
+.button4 {background-color: #0044aa;} /* Blue */
 
 /* class for scroll box */
 .myBox {

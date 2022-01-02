@@ -25,10 +25,26 @@
     <img th:src="@{${'/images/' + door + '.png'}}" width="120"/>
 </div>
 
-<button class="button button2">Kaempfen</button>
-<button class="button button1">Weglaufen</button>
-<button class="button button1">Zauber</button>
-<button class="button button2">Verkaufen</button>
+
+<div th:if="${gamePhase=='fight'}">
+    <form action="#" th:action="@{${#httpServletRequest.requestURI+'/FightPage'}}" method="post">
+        <input type="submit" th:value="Kaempfen">
+        <input type="submit" th:value="Weglaufen">
+        <input type="submit" th:value="Verkaufen" disabled>
+        <input type="submit" th:value="Rundenabschluss" disabled>
+    </form>
+    <!--  <input th:case="'fight'" type="submit" th:value="Kaempfen" disabled>
+      <input th:case="'fight'" type="submit" th:value="Weglaufen" disabled>
+      <input th:case="'fight'" type="submit" th:value="Verkaufen" >
+      <input th:case="'fight'" type="submit" th:value="RundeBeenden" > -->
+</div>
+
+<!--
+<button class="button button1">Kaempfen</button>
+<button class="button button2">Weglaufen</button>
+<button class="button button3">Verkaufen</button>
+<button class="button button4">Runde Abschliessen</button>
+ -->
 
 <form action="#" th:action="@{${#httpServletRequest.requestURI+'/fight'}}" method="post">
     <div>
