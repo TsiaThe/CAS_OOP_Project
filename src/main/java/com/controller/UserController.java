@@ -57,7 +57,7 @@ public class UserController {
     // 2. The user tries to login with an empty name.
     // 3. The user tries to login with a name starting with a space.
     @PostMapping("/adduser")
-    public String addUser(@Valid User user, BindingResult result, Model model) {
+    public String addUser(@Valid User user, Model model) {
         for (User u:userRepository.findAll()){
          if (u.getName().equals(user.getName())) return "AddUser";
         }

@@ -52,28 +52,14 @@ public class ActionController {
         model.put("currentUser", userRepository.findById(cuID));
         model.put("users", userRepository.findAll());
 
-        // Show monster/curse icon and activate coresponding
+        // Show monster/curse icon and activate corresponding
         // buttons by door opening.
         if (cuID==mpID && gameState.getNewRound()){
             gameState.setNewRound(false);
-            if (gameState.doorOpen() instanceof Monster) {
-                model.put("door","monster");
-                model.put("gamePhase","fight");
-            }
-            else{
-                model.put("door","curse");
-                model.put("gamePhase","nofight");
-            }
+            doorModel((DoorCard)gameState.doorOpen(), model);
         }
         else{
-            if (gameState.getCurrentDoorCard() instanceof Monster) {
-                model.put("door","monster");
-                model.put("gamePhase","fight");
-            }
-            else{
-                model.put("door","monster");
-                model.put("gamePhase","nofight");
-            }
+            doorModel((DoorCard)gameState.getCurrentDoorCard(), model);
         }
 
         // Add player information bar
@@ -91,7 +77,7 @@ public class ActionController {
         // Communication handling
         if (messageRepository.count()==0){
            messageRepository.save(new Message("Chat history"));
-       }
+        }
         model.put("messages", messageRepository.findAll());
         if (userRepository.count()==4){
             return "ActionPage";
@@ -104,21 +90,7 @@ public class ActionController {
     public String ChatMessage(@Valid Message message, @PathVariable("currentUserId") long cuID,
                               @PathVariable("mainPlayerId") long mpID,
                               Map<String, Object> model) {
-/*
-        // Add player information bar
-        // (name, class, race, level, fighting strength)
-        playerModel(cuID, model);
-        // Add boots information, if any...
-        bootsModel(cuID, model);
-        // Add armour information, if any...
-        armourModel(cuID, model);
-        // Add headgear information, if any...
-        headgearModel(cuID, model);
-        // Add items information, if any...
-        itemsModel(cuID, model);
-*/
-
-        // Communication handling
+        // Add new message to repository and redirect to ActionPage.
             String sender = "";
         if (userRepository.findById(cuID).isPresent()){
             Optional<User> pageUser = userRepository.findById(cuID);
@@ -129,9 +101,7 @@ public class ActionController {
             message.setMessageText(sender+": "+message.getMessageText());
             messageRepository.save(message);
         }
-        model.put("messages", messageRepository.findAll());
-
-        return "ActionPage";
+        return "redirect:/action/"+ cuID +"/"+mpID;
     }
 
     //
@@ -206,6 +176,20 @@ public class ActionController {
     // ----------------------------------------------------------------------------------------
     //      -------------------------- SUPPORTING METHODS -------------------------------
     // ----------------------------------------------------------------------------------------
+
+    // Method which populates the current model view with the open door information
+    // (and the corresponding available buttons).
+    private Map<String, Object> doorModel(DoorCard dc, Map<String, Object> currentModel){
+        if (dc instanceof Monster) {
+            currentModel.put("door","monster");
+            currentModel.put("gamePhase","fight");
+        }
+        else{
+            currentModel.put("door","monster");
+            currentModel.put("gamePhase","nofight");
+        }
+        return currentModel;
+    }
 
     // Method which sets the "sell" attribute of an equipment to true/false based on
     // whether the player wants to sell it or not.
