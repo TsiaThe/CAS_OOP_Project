@@ -1,6 +1,5 @@
 package com.controller;
 
-import com.backend.Starter;
 import com.backend.cards.*;
 import com.backend.players.*;
 import com.dto.GameState;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -36,13 +34,15 @@ public class ActionController {
     private final GameState gameState;
 
     @Autowired
-    public ActionController(UserRepository userRepository, MessageRepository messageRepository, Starter gameStarter, GameState gameState) {
+    public ActionController(UserRepository userRepository,
+                            MessageRepository messageRepository,
+                            GameState gameState) {
         this.userRepository = userRepository;
         this.messageRepository = messageRepository;
         this.gameState= gameState;
     }
 
-    //
+    // ................
     @GetMapping("/action/{currentUserId}/{mainPlayerId}")
     public String ActionPage(@PathVariable("currentUserId") long cuID,
                              @PathVariable("mainPlayerId") long mpID,
@@ -74,7 +74,7 @@ public class ActionController {
         // Add items information, if any...
         itemsModel(cuID, model);
 
-        // Communication handling
+        // Communication handling (show messaging history)
         if (messageRepository.count()==0){
            messageRepository.save(new Message("Chat history"));
         }
@@ -185,7 +185,7 @@ public class ActionController {
             currentModel.put("gamePhase","fight");
         }
         else{
-            currentModel.put("door","monster");
+            currentModel.put("door","curse");
             currentModel.put("gamePhase","nofight");
         }
         return currentModel;

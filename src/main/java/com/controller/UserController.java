@@ -56,8 +56,10 @@ public class UserController {
     // 1. The user tries to login with the same name as another user.
     // 2. The user tries to login with an empty name.
     // 3. The user tries to login with a name starting with a space.
+    // ATTENTION:The BindingResult parameter is not used but it is necessary
+    // otherwise the blank input check does not work!!!
     @PostMapping("/adduser")
-    public String addUser(@Valid User user, Model model) {
+    public String addUser(@Valid User user, BindingResult result, Model model) {
         for (User u:userRepository.findAll()){
          if (u.getName().equals(user.getName())) return "AddUser";
         }
