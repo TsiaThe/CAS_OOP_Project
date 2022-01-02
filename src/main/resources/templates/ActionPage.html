@@ -55,7 +55,10 @@
         <td th:if="${headgearValue}" th:text="${headgearValue}"></td>
         <td>
         <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellHeadgear'}}" method="post">
-            <input th:if="${headgearValue}" type="submit" th:value="Verkauf">
+            <div th:switch="${headgearSell}">
+                <input th:case="false" type="submit" th:value="Verkaufen">
+                <input th:case="true" type="submit" th:value="Behalten">
+            </div>
         </form>
         </td>
     </tr>
@@ -79,7 +82,10 @@
         <td th:if="${armourValue}" th:text="${armourValue}"></td>
         <td>
             <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellArmour'}}" method="post">
-                <input th:if="${armourValue}" type="submit" th:value="Verkauf">
+                <div th:switch="${armourSell}">
+                    <input th:case="false" type="submit" th:value="Verkaufen">
+                    <input th:case="true" type="submit" th:value="Behalten">
+                </div>
             </form>
         </td>
     </tr>
@@ -102,7 +108,10 @@
         <td th:if="${bootsValue}" th:text="${bootsValue}"></td>
         <td>
             <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellBoots'}}" method="post">
-                <input th:if="${bootsValue}" type="submit" th:value="Verkauf">
+                <div th:switch="${bootsSell}">
+                    <input th:case="false" type="submit" th:value="Verkaufen">
+                    <input th:case="true" type="submit" th:value="Behalten">
+                </div>
             </form>
         </td>
     </tr>

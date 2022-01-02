@@ -1,7 +1,10 @@
 package com.controller;
 
 import com.backend.Starter;
+import com.backend.cards.Boots;
+import com.backend.cards.Equipment;
 import com.backend.cards.Item;
+import com.backend.cards.TreasureCard;
 import com.backend.players.*;
 import com.dto.GameState;
 import com.repository.MessageRepository;
@@ -118,11 +121,46 @@ public class ActionController {
         return "redirect:/action/"+ cuID +"/"+mpID;
     }
 
+    // Post method which sets the sell attribute of Headgear.
+    @PostMapping("/action/{currentUserId}/{mainPlayerId}/sellHeadgear")
+    public String sellHeadgear(@PathVariable("currentUserId") long cuID,
+                             @PathVariable("mainPlayerId") long mpID){
+
+        Player currentPlayer = findPlayerbyID(cuID, gameState.getAllPlayers());
+        sellState(currentPlayer.getHeadgear());
+        return "redirect:/action/"+ cuID +"/"+mpID;
+    }
+
+    // Post method which sets the sell attribute of an Armour.
+    @PostMapping("/action/{currentUserId}/{mainPlayerId}/sellArmour")
+    public String sellArmour(@PathVariable("currentUserId") long cuID,
+                            @PathVariable("mainPlayerId") long mpID){
+
+        Player currentPlayer = findPlayerbyID(cuID, gameState.getAllPlayers());
+        sellState(currentPlayer.getArmour());
+        return "redirect:/action/"+ cuID +"/"+mpID;
+    }
+
+    // Post method which sets the sell attribute of Boots.
+    @PostMapping("/action/{currentUserId}/{mainPlayerId}/sellBoots")
+    public String sellBoots(@PathVariable("currentUserId") long cuID,
+                               @PathVariable("mainPlayerId") long mpID){
+
+        Player currentPlayer = findPlayerbyID(cuID, gameState.getAllPlayers());
+        sellState(currentPlayer.getBoots());
+        return "redirect:/action/"+ cuID +"/"+mpID;
+    }
 
 
     // ----------------------------------------------------------------------------------------
     //      -------------------------- SUPPORTING METHODS -------------------------------
     // ----------------------------------------------------------------------------------------
+
+    // Method which sets the "sell" attribute of an equipment to true/false based on
+    // whether the player wants to sell it or not.
+    private void sellState(Equipment equipment){
+        equipment.setSell(!equipment.getSell());
+    }
 
     // Method which populates the current model view with the boots information.
     private Map<String, Object> itemsModel(long cuID, Map<String, Object> currentModel){
@@ -143,6 +181,7 @@ public class ActionController {
             currentModel.put("bootsName", currentPlayer.getBoots().getName());
             currentModel.put("bootsBonus", currentPlayer.getBoots().getBonus());
             currentModel.put("bootsValue", currentPlayer.getBoots().getValue()+" Goldstuecke");
+            currentModel.put("bootsSell", currentPlayer.getBoots().getSell());
         }
         else{
             currentModel.put("bootsName", "Keine Schuhe");
@@ -157,6 +196,7 @@ public class ActionController {
             currentModel.put("armourName", currentPlayer.getArmour().getName());
             currentModel.put("armourBonus", currentPlayer.getArmour().getBonus());
             currentModel.put("armourValue", currentPlayer.getArmour().getValue()+" Goldstuecke");
+            currentModel.put("armourSell", currentPlayer.getArmour().getSell());
         }
         else{
             currentModel.put("armourName", "Keine Ruestung");
@@ -171,6 +211,7 @@ public class ActionController {
             currentModel.put("headgearName", currentPlayer.getHeadgear().getName());
             currentModel.put("headgearBonus", currentPlayer.getHeadgear().getBonus());
             currentModel.put("headgearValue", currentPlayer.getHeadgear().getValue()+" Goldstuecke");
+            currentModel.put("headgearSell", currentPlayer.getHeadgear().getSell());
         }
         else{
             currentModel.put("headgearName", "Keine Kopfbedeckung");
