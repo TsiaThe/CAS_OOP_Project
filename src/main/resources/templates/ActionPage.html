@@ -132,7 +132,10 @@
         <td th:text="${item.value}"></td>
         <td>
             <form action="#" th:action="@{${#httpServletRequest.requestURI}+'/'+${item.name}}" method="post">
-                <input type="submit" th:value="Verkauf">
+                <div th:switch="${item.sell}">
+                    <input th:case="false" type="submit" th:value="Verkaufen">
+                    <input th:case="true" type="submit" th:value="Behalten">
+                </div>
             </form>
         </td>
     </tr>

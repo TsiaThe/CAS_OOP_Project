@@ -151,6 +151,22 @@ public class ActionController {
         return "redirect:/action/"+ cuID +"/"+mpID;
     }
 
+    // Post method which sets the sell attribute of an item.
+    @PostMapping("/action/{currentUserId}/{mainPlayerId}/{itemName}")
+    public String sellItem(@PathVariable("currentUserId") long cuID,
+                            @PathVariable("mainPlayerId") long mpID,
+                            @PathVariable("itemName") String itemName){
+
+        Player currentPlayer = findPlayerbyID(cuID, gameState.getAllPlayers());
+        for (Item i:currentPlayer.getItems()){
+            if (i.getName().equals(itemName)){
+                sellState(i);
+                break;
+            }
+        }
+        return "redirect:/action/"+ cuID +"/"+mpID;
+    }
+
 
     // ----------------------------------------------------------------------------------------
     //      -------------------------- SUPPORTING METHODS -------------------------------
