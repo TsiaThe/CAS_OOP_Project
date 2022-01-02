@@ -25,28 +25,39 @@
     <img th:src="@{${'/images/' + door + '.png'}}" width="120"/>
 </div>
 
+<!-------------------------------------------------------------->
+<!--------------------- GAME PHASE BUTTONS --------------------->
 
+<form action="#" th:action="@{${#httpServletRequest.requestURI+'/test'}}" method="post">
+    <input type="submit" th:value="test">
+</form>
+
+<div th:if="${gamePhase=='nofight'}">
+    <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sell'}}" method="post">
+        <input th:value="Kaempfen" disabled>
+        <input th:value="Weglaufen" disabled>
+        <input type="submit" th:value="Verkaufen">
+    </form>
+    <form action="#" th:action="@{${#httpServletRequest.requestURI+'/newRound'}}" method="post">
+        <input type="submit" th:value="Rundenabschluss">
+    </form>
+</div>
 <div th:if="${gamePhase=='fight'}">
-    <form action="#" th:action="@{${#httpServletRequest.requestURI+'/FightPage'}}" method="post">
+    <form action="#" th:action="@{${#httpServletRequest.requestURI+'/fight'}}" method="post">
         <input type="submit" th:value="Kaempfen">
-        <input type="submit" th:value="Weglaufen">
         <input type="submit" th:value="Verkaufen" disabled>
         <input type="submit" th:value="Rundenabschluss" disabled>
     </form>
-    <!--  <input th:case="'fight'" type="submit" th:value="Kaempfen" disabled>
-      <input th:case="'fight'" type="submit" th:value="Weglaufen" disabled>
-      <input th:case="'fight'" type="submit" th:value="Verkaufen" >
-      <input th:case="'fight'" type="submit" th:value="RundeBeenden" > -->
+    <form action="#" th:action="@{${#httpServletRequest.requestURI+'/run'}}" method="post">
+        <input type="submit" th:value="Weglaufen">
+    </form>
 </div>
+<!-------------------------------------------------------------->
 
-<!--
-<button class="button button1">Kaempfen</button>
-<button class="button button2">Weglaufen</button>
-<button class="button button3">Verkaufen</button>
-<button class="button button4">Runde Abschliessen</button>
- -->
 
-<form action="#" th:action="@{${#httpServletRequest.requestURI+'/fight'}}" method="post">
+
+
+<form action="#" th:action="@{${#httpServletRequest.requestURI+'/fightState'}}" method="post">
     <div>
         <input type="submit" th:value="${fightingButton}">
     </div>

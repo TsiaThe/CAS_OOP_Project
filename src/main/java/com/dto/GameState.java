@@ -38,8 +38,15 @@ public class GameState {
     List<Player> secondaryPlayers = new ArrayList<>(3);
     // List of all door cards (randomly mixed from Starter).
     private static List<Card> gameDoorCards = new ArrayList<>();
+    // Current element of game door card.
+    private static int currentGameDoorCardElement=0;
+    // Current game door card.
+    private static Card currentGameDoorCard;
     // List of all treasure cards (randomly mixed from Starter).
     private static List<Card> gameTreasureCards = new ArrayList<>();
+
+    private static int round = 0;
+    private static boolean newRound=true;
 
     @Autowired
     public GameState(Starter gameStarter) {
@@ -59,6 +66,9 @@ public class GameState {
         // (from the Starter instance).
         Collections.shuffle(gameStarter.getGameTreasureCards());
         gameTreasureCards = gameStarter.getGameTreasureCards();
+
+
+
 
 
 
@@ -84,6 +94,29 @@ public class GameState {
 
 
 
+    }
+
+
+    public void nextRound(){
+        // Change the main player
+        secondaryPlayers.add(mainPlayer);
+        mainPlayer = secondaryPlayers.remove(0);
+        round++;
+        //phase = "Door open";
+    }
+
+    // This method opens a new door. If the door cards have finished,
+    // it opens them from the beginning again after reshuffling.
+    public Card doorOpen(){
+        if (currentGameDoorCardElement<gameDoorCards.size()){
+            currentGameDoorCardElement++;
+        }
+        else{
+            Collections.shuffle(gameDoorCards);
+            currentGameDoorCardElement = 1;
+        }
+        currentGameDoorCard = gameDoorCards.get(currentGameDoorCardElement-1);
+        return currentGameDoorCard;
     }
 
     // This method assigns the id of an existing user to the
@@ -119,39 +152,15 @@ public class GameState {
         return gameTreasureCards;
     }
 
-// -----------------------------------------------------------------
-    // -----------------------------------------------------------------
-    // OLD methods and staff.....
-    /*
-
-    @Bean(name="secondaryPlayers")
-    public List<Player> getSecondaryPlayers() {
-        return secondaryPlayers;
+    public void setNewRound(boolean newRound){
+        this.newRound = newRound;
     }
 
-    @Bean(name="mainPlayer")
-    public Player getMainPlayer() {
-        return p4; //mainPlayer;
+    public boolean getNewRound(){
+        return newRound;
     }
 
-    // Cards in the GUI (hiden and shown)
-    private List<Card> activeGameCards = new ArrayList<>();
-
-    static int roundNumber = 0;
-    Player mainPlayer;
-    List<Player> secondaryPlayers = new ArrayList<>(3);
-
-    DoorCard activeDoorCard;
-    List<TreasureCard> treasureCards = new ArrayList<>();
-
-    public GameState(Player mainPlayer, List<Player> secondaryPlayers, DoorCard activeDoorCard,
-                     List<TreasureCard> treasureCards){
-        roundNumber++;
-        this.mainPlayer = mainPlayer;
-        this.secondaryPlayers = secondaryPlayers;
-        this.secondaryPlayers.remove(mainPlayer);
-        this.activeDoorCard = activeDoorCard;
-        this.treasureCards = treasureCards;
+    public Card getCurrentDoorCard(){
+        return currentGameDoorCard;
     }
-     */
 }

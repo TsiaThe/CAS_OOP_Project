@@ -1,10 +1,7 @@
 package com.controller;
 
 import com.backend.Starter;
-import com.backend.cards.Boots;
-import com.backend.cards.Equipment;
-import com.backend.cards.Item;
-import com.backend.cards.TreasureCard;
+import com.backend.cards.*;
 import com.backend.players.*;
 import com.dto.GameState;
 import com.repository.MessageRepository;
@@ -50,25 +47,48 @@ public class ActionController {
     public String ActionPage(@PathVariable("currentUserId") long cuID,
                              @PathVariable("mainPlayerId") long mpID,
                               Map<String, Object> model) {
+
+        // User-specific information for URL
         model.put("currentUser", userRepository.findById(cuID));
         model.put("users", userRepository.findAll());
 
-        // Add player information bar (name, class, race, level, fighting strength)
+        // Show monster/curse icon and activate coresponding
+        // buttons by door opening.
+        if (cuID==mpID && gameState.getNewRound()){
+            gameState.setNewRound(false);
+            if (gameState.doorOpen() instanceof Monster) {
+                model.put("door","monster");
+                model.put("gamePhase","fight");
+            }
+            else{
+                model.put("door","curse");
+                model.put("gamePhase","nofight");
+            }
+        }
+        else{
+            if (gameState.getCurrentDoorCard() instanceof Monster) {
+                model.put("door","monster");
+                model.put("gamePhase","fight");
+            }
+            else{
+                model.put("door","monster");
+                model.put("gamePhase","nofight");
+            }
+        }
+
+        // Add player information bar
+        // (name, class, race, level, fighting strength)
         playerModel(cuID, model);
-        //
+        // Add boots information, if any...
         bootsModel(cuID, model);
+        // Add armour information, if any...
         armourModel(cuID, model);
+        // Add headgear information, if any...
         headgearModel(cuID, model);
+        // Add items information, if any...
         itemsModel(cuID, model);
 
-        model.put("gamePhase","fight");
-
-        // ------------------------------------------------
-        // Testing monster doors
-        model.put("door","Curse");
-        // ------------------------------------------------
-
-
+        // Communication handling
         if (messageRepository.count()==0){
            messageRepository.save(new Message("Chat history"));
        }
@@ -84,6 +104,21 @@ public class ActionController {
     public String ChatMessage(@Valid Message message, @PathVariable("currentUserId") long cuID,
                               @PathVariable("mainPlayerId") long mpID,
                               Map<String, Object> model) {
+/*
+        // Add player information bar
+        // (name, class, race, level, fighting strength)
+        playerModel(cuID, model);
+        // Add boots information, if any...
+        bootsModel(cuID, model);
+        // Add armour information, if any...
+        armourModel(cuID, model);
+        // Add headgear information, if any...
+        headgearModel(cuID, model);
+        // Add items information, if any...
+        itemsModel(cuID, model);
+*/
+
+        // Communication handling
             String sender = "";
         if (userRepository.findById(cuID).isPresent()){
             Optional<User> pageUser = userRepository.findById(cuID);
@@ -94,29 +129,26 @@ public class ActionController {
             message.setMessageText(sender+": "+message.getMessageText());
             messageRepository.save(message);
         }
-
-        // Add player information bar (name, class, race, level, fighting strength)
-        playerModel(cuID, model);
-        //
-        bootsModel(cuID, model);
-        armourModel(cuID, model);
-        headgearModel(cuID, model);
-        itemsModel(cuID, model);
-
-        model.put("gamePhase","Curse");
-
-        // ------------------------------------------------
-        // Testing monster doors
-        model.put("door","Curse");
-        // ------------------------------------------------
-
-
         model.put("messages", messageRepository.findAll());
+
         return "ActionPage";
     }
 
+    //
+    @PostMapping("/action/{currentUserId}/{mainPlayerId}/sell")
+    public String temp(@PathVariable("currentUserId") long cuID,
+                       @PathVariable("mainPlayerId") long mpID,
+                       Map<String, Object> model){
+
+        return "Hi";
+    }
+
+
+
+
+
     // Post method which sets the fighting state of a player appropriately.
-    @PostMapping("/action/{currentUserId}/{mainPlayerId}/fight")
+    @PostMapping("/action/{currentUserId}/{mainPlayerId}/fightState")
     public String fightHelp(@PathVariable("currentUserId") long cuID,
                             @PathVariable("mainPlayerId") long mpID,
                             Map<String, Object> model){
