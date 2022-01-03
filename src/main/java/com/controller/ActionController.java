@@ -117,7 +117,7 @@ public class ActionController {
 
     }
 
-    // .....
+    // Post method which sells all equipment that a user has selected to sell.
     @PostMapping("/action/{currentUserId}/sell")
     public String sellItems(@PathVariable("currentUserId") long cuID){
 
@@ -158,7 +158,6 @@ public class ActionController {
 
         Player currentPlayer = findPlayerbyID(cuID, gameState.getAllPlayers());
         sellState(currentPlayer.getBoots());
-// !!        return "redirect:/action/"+ cuID +"/"+mpID;
         return "redirect:/action/"+ cuID;
     }
 
