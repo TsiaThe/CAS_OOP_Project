@@ -109,4 +109,27 @@ public class Player {
     public void setFights(boolean fights) {
         this.fights = fights;
     }
+
+    public void sell(){
+        int totalSellValue = 0;
+        if (boots!=null && boots.getSell()){
+            totalSellValue+=boots.getValue();
+            boots=null;
+        }
+        if (armour!=null && armour.getSell()){
+            totalSellValue+=armour.getValue();
+            armour=null;
+        }
+        if (headgear!=null && headgear.getSell()){
+            totalSellValue+=headgear.getValue();
+            headgear=null;
+        }
+        for (Item i:items){
+            if (i!=null && i.getSell()) {
+                totalSellValue += i.getValue();
+                i=null;
+            }
+        }
+        level += totalSellValue/1000;
+    }
 }

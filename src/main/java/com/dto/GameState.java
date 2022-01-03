@@ -102,7 +102,7 @@ public class GameState {
         secondaryPlayers.add(mainPlayer);
         mainPlayer = secondaryPlayers.remove(0);
         round++;
-        //phase = "Door open";
+        newRound = true;
     }
 
     // This method opens a new door. If the door cards have finished,

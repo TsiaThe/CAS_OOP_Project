@@ -85,7 +85,7 @@ public class ActionController {
         return "WaitPage";
     }
 
-    //
+    // Post method which posts a new message to the server.
     @PostMapping("/action/{currentUserId}/{mainPlayerId}")
     public String ChatMessage(@Valid Message message, @PathVariable("currentUserId") long cuID,
                               @PathVariable("mainPlayerId") long mpID,
@@ -104,18 +104,24 @@ public class ActionController {
         return "redirect:/action/"+ cuID +"/"+mpID;
     }
 
-    //
-    @PostMapping("/action/{currentUserId}/{mainPlayerId}/sell")
-    public String temp(@PathVariable("currentUserId") long cuID,
-                       @PathVariable("mainPlayerId") long mpID,
-                       Map<String, Object> model){
-
-        return "Hi";
+    // Post method which starts a new round.
+    @PostMapping("/action/{currentUserId}/{mainPlayerId}/newRound")
+    public String fight(@PathVariable("currentUserId") long cuID,
+                       @PathVariable("mainPlayerId") long mpID){
+        gameState.nextRound();
+        return "redirect:/action/"+ cuID +"/"+mpID;
     }
 
 
+    // .....
+    @PostMapping("/action/{currentUserId}/{mainPlayerId}/sell")
+    public String sellItems(@PathVariable("currentUserId") long cuID,
+                       @PathVariable("mainPlayerId") long mpID){
 
-
+        Player currentPlayer = findPlayerbyID(cuID, gameState.getAllPlayers());
+        currentPlayer.sell();
+        return "redirect:/action/"+ cuID +"/"+mpID;
+    }
 
     // Post method which sets the fighting state of a player appropriately.
     @PostMapping("/action/{currentUserId}/{mainPlayerId}/fightState")
