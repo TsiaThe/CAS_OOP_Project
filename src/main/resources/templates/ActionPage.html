@@ -6,6 +6,8 @@
     <meta http-equiv="refresh" content="5">
 </head>
 
+<th><h2 style="color: grey;" th:text="${round}"></h2></th>
+
 <body>
 <table>
     <tr>
@@ -28,10 +30,6 @@
 <!-------------------------------------------------------------->
 <!--------------------- GAME PHASE BUTTONS --------------------->
 
-<form action="#" th:action="@{${#httpServletRequest.requestURI+'/test'}}" method="post">
-    <input type="submit" th:value="test">
-</form>
-
 <div th:if="${gamePhase=='nofight'}">
     <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sell'}}" method="post">
         <input th:value="Kaempfen" disabled>
@@ -47,8 +45,8 @@
         <input type="submit" th:value="Kaempfen">
         <input type="submit" th:value="Verkaufen" disabled>
         <input type="submit" th:value="Rundenabschluss" disabled>
-    </form>
-    <form action="#" th:action="@{${#httpServletRequest.requestURI+'/run'}}" method="post">
+    </form>  <!--run-->
+    <form action="#" th:action="@{${#httpServletRequest.requestURI+'/newRound'}}" method="post">
         <input type="submit" th:value="Weglaufen">
     </form>
 </div>

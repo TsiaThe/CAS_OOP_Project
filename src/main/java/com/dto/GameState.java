@@ -160,6 +160,10 @@ public class GameState {
         return newRound;
     }
 
+    public int getRound(){
+        return round;
+    }
+
     public Card getCurrentDoorCard(){
         return currentGameDoorCard;
     }

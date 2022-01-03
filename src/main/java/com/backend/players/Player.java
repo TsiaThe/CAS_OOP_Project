@@ -6,6 +6,8 @@ import com.backend.cards.Boots;
 import com.backend.cards.Headgear;
 import com.backend.cards.Item;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -111,25 +113,35 @@ public class Player {
     }
 
     public void sell(){
+        // Total sell value
         int totalSellValue = 0;
+        // Sell value of boots to be sold.
         if (boots!=null && boots.getSell()){
             totalSellValue+=boots.getValue();
             boots=null;
         }
+        // Sell value of armour to be sold.
         if (armour!=null && armour.getSell()){
             totalSellValue+=armour.getValue();
             armour=null;
         }
+
+        // Sell value of headgear to be sold.
         if (headgear!=null && headgear.getSell()){
             totalSellValue+=headgear.getValue();
             headgear=null;
         }
+
+        // Sell value of items to be sold.
+        List<Item> removeItems = new ArrayList<>();
         for (Item i:items){
-            if (i!=null && i.getSell()) {
-                totalSellValue += i.getValue();
-                i=null;
+            if (i.getSell()){
+                totalSellValue+=i.getValue();
+                removeItems.add(i);
             }
         }
+        for (Item i:removeItems) items.remove(i);
+
         level += totalSellValue/1000;
     }
 }
