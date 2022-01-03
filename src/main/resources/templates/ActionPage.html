@@ -6,9 +6,11 @@
     <meta http-equiv="refresh" content="5">
 </head>
 
+<!-- TESTING SECTION -->
 <p>Round: </p> <span th:text="${round}"></span>
 <p>MainP: </p> <span th:text="${mainPlayer}"></span>
 <p>CurrentP: </p> <span th:text="${currentPlayer}"></span>
+<!-- TESTING SECTION -->
 
 <body>
 <table>
@@ -32,6 +34,7 @@
 <!-------------------------------------------------------------->
 <!--------------------- GAME PHASE BUTTONS --------------------->
 
+
 <div th:if="${gamePhase=='nofight'}">
     <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sell'}}" method="post">
         <input th:value="Kaempfen" disabled>
@@ -53,8 +56,6 @@
     </form>
 </div>
 <!-------------------------------------------------------------->
-
-
 
 
 <form action="#" th:action="@{${#httpServletRequest.requestURI+'/fightState'}}" method="post">

@@ -47,11 +47,11 @@ public class ActionController {
     public String ActionPage(@PathVariable("currentUserId") long cuID,
                               Map<String, Object> model) {
 
-        // Testing
+        // Testing section
         model.put("round", gameState.getRound());
         model.put("mainPlayer", gameState.getMainPlayer().getId());
         model.put("currentPlayer", cuID);
-
+        // Testing section
 
         // User-specific information for URL
         model.put("currentUser", userRepository.findById(cuID));
@@ -59,12 +59,12 @@ public class ActionController {
 
         // Show monster/curse icon and activate corresponding
         // buttons by door opening.
-        if (cuID==gameState.getMainPlayer().getId() && gameState.getNewRound()){
+        if (gameState.getNewRound()){
             gameState.setNewRound(false);
-            doorModel((DoorCard)gameState.doorOpen(), model);
+            doorModel((DoorCard)gameState.doorOpen(),cuID, model);
         }
         else{
-            doorModel((DoorCard)gameState.getCurrentDoorCard(), model);
+            doorModel((DoorCard)gameState.getCurrentDoorCard(), cuID, model);
         }
 
         // Add player information bar
@@ -184,14 +184,14 @@ public class ActionController {
 
     // Method which populates the current model view with the open door information
     // (and the corresponding available buttons).
-    private Map<String, Object> doorModel(DoorCard dc, Map<String, Object> currentModel){
+    private Map<String, Object> doorModel(DoorCard dc, long cuID, Map<String, Object> currentModel){
         if (dc instanceof Monster) {
             currentModel.put("door","monster");
-            currentModel.put("gamePhase","fight");
+            if (cuID==gameState.getMainPlayer().getId()) currentModel.put("gamePhase","fight");
         }
         else{
             currentModel.put("door","curse");
-            currentModel.put("gamePhase","nofight");
+            if (cuID==gameState.getMainPlayer().getId()) currentModel.put("gamePhase","nofight");
         }
         return currentModel;
     }
