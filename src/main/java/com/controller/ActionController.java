@@ -3,8 +3,10 @@ package com.controller;
 import com.backend.cards.*;
 import com.backend.players.*;
 import com.dto.GameState;
+import com.repository.GameHistoryRepository;
 import com.repository.MessageRepository;
 import com.repository.UserRepository;
+import com.web.GamePhase;
 import com.web.Message;
 import com.web.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,15 +32,19 @@ public class ActionController {
     private final UserRepository userRepository;
     // Repo with all communicated messages.
     private final MessageRepository messageRepository;
+    // Repo with all game history.
+    private final GameHistoryRepository gameHistoryRepository;
     // DTO which holds the actual game state.
     private final GameState gameState;
 
     @Autowired
     public ActionController(UserRepository userRepository,
                             MessageRepository messageRepository,
+                            GameHistoryRepository gameHistoryRepository,
                             GameState gameState) {
         this.userRepository = userRepository;
         this.messageRepository = messageRepository;
+        this.gameHistoryRepository = gameHistoryRepository;
         this.gameState= gameState;
     }
 
@@ -48,9 +54,9 @@ public class ActionController {
                               Map<String, Object> model) {
 
         // Testing section
-        model.put("round", gameState.getRound());
-        model.put("mainPlayer", gameState.getMainPlayer().getId());
-        model.put("currentPlayer", cuID);
+        String gen="Runde: "+ gameState.getRound()+", Hauptspieler: " + getMainPlayerName();
+        model.put("GeneralInfo", gen);
+        model.put("gameHistory", gameHistoryRepository.findAll());
         // Testing section
 
         // User-specific information for URL
@@ -60,15 +66,14 @@ public class ActionController {
         // Show monster/curse icon and activate corresponding
         // buttons by door opening.
         if (gameState.getNewRound()){
-            gameState.setNewRound(false);
             doorModel((DoorCard)gameState.doorOpen(),cuID, model);
+            gameState.setNewRound(false);
         }
         else{
             doorModel((DoorCard)gameState.getCurrentDoorCard(), cuID, model);
         }
 
         // Add player information bar
-        // (name, class, race, level, fighting strength)
         playerModel(cuID, model);
         // Add boots information, if any...
         bootsModel(cuID, model);
@@ -116,6 +121,22 @@ public class ActionController {
         return "redirect:/action/"+ cuID;
 
     }
+
+    // .
+    @PostMapping("/action/{currentUserId}/fight")
+    public String figh(@PathVariable("currentUserId") long cuID,
+                            Map<String, Object> model){
+
+
+
+
+
+
+
+        return "redirect:/action/"+ cuID;
+    }
+
+
 
     // Post method which sells all equipment that a user has selected to sell.
     @PostMapping("/action/{currentUserId}/sell")
@@ -188,6 +209,11 @@ public class ActionController {
         // Monster door
         if (dc instanceof Monster) {
             currentModel.put("door","monster");
+            // If the door just opened, add to the game history.
+            if (gameState.getNewRound()){
+                String descrpition = "R: "+gameState.getRound()+", HS: "+ getMainPlayerName() + ", Monster hinten der Tuer!";
+                gameHistoryRepository.save(new GamePhase(descrpition));
+            }
             // For the main player the gamePhase is returned. This shows 4-buttons!
             if (cuID==gameState.getMainPlayer().getId()) {
                 currentModel.put("gamePhase","fight");
@@ -200,9 +226,18 @@ public class ActionController {
         // Curse door
         else{
             currentModel.put("door","curse");
+            // If the door just opened, add to the game history.
+            if (gameState.getNewRound()){
+                String descrpition = "R: "+gameState.getRound()+", HS: "+ getMainPlayerName() + ", Fluch hinten der Tuer!";
+                gameHistoryRepository.save(new GamePhase(descrpition));
+            }
             // For the main player the gamePhase is returned. This shows 4-buttons!
             if (cuID==gameState.getMainPlayer().getId()) currentModel.put("gamePhase","nofight");
         }
+
+        currentModel.put("doorName","Name: "+dc.getName());
+        currentModel.put("doorDescription","Beschreibung: "+dc.getDescription());
+
         return currentModel;
     }
 
@@ -352,6 +387,10 @@ public class ActionController {
             out = "Zauberer /";
         }
         return out;
+    }
+
+    private String getMainPlayerName(){
+        return userRepository.findById(gameState.getMainPlayer().getId()).get().getName();
     }
 
 }

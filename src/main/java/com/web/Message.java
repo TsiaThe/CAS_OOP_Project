@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 
 /**
- * User entity. It represents one of the four game users.
+ * Message entity. It represents a sent message.
  * Contains only id and the message itself.
  * @author Theofanis Tsiantas
  * @version  2021.12.10 - version 1

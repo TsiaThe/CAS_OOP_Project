@@ -7,10 +7,16 @@
 </head>
 
 <!-- TESTING SECTION -->
-<p>Round: </p> <span th:text="${round}"></span>
-<p>MainP: </p> <span th:text="${mainPlayer}"></span>
-<p>CurrentP: </p> <span th:text="${currentPlayer}"></span>
+<p th:text="${GeneralInfo}"> </p>
+<div class="myBox">
+    <table >
+        <tr th:each="gamePhase : ${gameHistory}">
+            <td th:text="${gamePhase.phaseDescription}"></td>
+        </tr>
+    </table>
+</div>
 <!-- TESTING SECTION -->
+
 
 <body>
 <table>
@@ -29,6 +35,8 @@
 <div class="logo_html_generator">
     <img th:src="@{/images/GenericMunchkinPicture.png}" height="200px"/>
     <img th:src="@{${'/images/' + door + '.png'}}" width="120"/>
+    <p style="color: blue;" th:text="${doorName}"></p>
+    <p style="color: blue;" th:text="${doorDescription}"></p>
 </div>
 
 <!-------------------------------------------------------------->
@@ -181,8 +189,8 @@
 <table>
     <form action="#" th:action="@{${#httpServletRequest.requestURI}}" object="${newMessaga}" newMessaga="message" method="post">
         <input type="text" field="*{name}" name="messageText" class="form-control" id="name" required="" pattern="^\S.*$" placeholder="Chat message">
-        <div class="row">
-            <div class="col-md-6 mt-5">
+        <div >
+            <div>
                 <input type="submit" class="btn btn-primary" value="Send">
             </div>
         </div>
