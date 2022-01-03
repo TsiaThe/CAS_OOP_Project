@@ -60,7 +60,7 @@
 
 <form action="#" th:action="@{${#httpServletRequest.requestURI+'/fightState'}}" method="post">
     <div>
-        <input type="submit" th:value="${fightingButton}">
+        <input th:if="${fightButton}" type="submit" th:value="${fightingState}">
     </div>
 </form>
 
@@ -84,7 +84,7 @@
         <td>
         <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellHeadgear'}}" method="post">
             <div th:switch="${headgearSell}">
-                <input th:case="false" type="submit" th:value="Verkaufen">
+                <input th:case="false" type="submit" th:value="Abgeben">
                 <input th:case="true" type="submit" th:value="Behalten">
             </div>
         </form>
@@ -111,7 +111,7 @@
         <td>
             <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellArmour'}}" method="post">
                 <div th:switch="${armourSell}">
-                    <input th:case="false" type="submit" th:value="Verkaufen">
+                    <input th:case="false" type="submit" th:value="Abgeben">
                     <input th:case="true" type="submit" th:value="Behalten">
                 </div>
             </form>
@@ -137,7 +137,7 @@
         <td>
             <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellBoots'}}" method="post">
                 <div th:switch="${bootsSell}">
-                    <input th:case="false" type="submit" th:value="Verkaufen">
+                    <input th:case="false" type="submit" th:value="Abgeben">
                     <input th:case="true" type="submit" th:value="Behalten">
                 </div>
             </form>
@@ -161,7 +161,7 @@
         <td>
             <form action="#" th:action="@{${#httpServletRequest.requestURI}+'/'+${item.name}}" method="post">
                 <div th:switch="${item.sell}">
-                    <input th:case="false" type="submit" th:value="Verkaufen">
+                    <input th:case="false" type="submit" th:value="Abgeben">
                     <input th:case="true" type="submit" th:value="Behalten">
                 </div>
             </form>

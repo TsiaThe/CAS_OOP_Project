@@ -184,12 +184,23 @@ public class ActionController {
     // Method which populates the current model view with the open door information
     // (and the corresponding available buttons).
     private Map<String, Object> doorModel(DoorCard dc, long cuID, Map<String, Object> currentModel){
+        // Check if the door is monster or curse
+        // Monster door
         if (dc instanceof Monster) {
             currentModel.put("door","monster");
-            if (cuID==gameState.getMainPlayer().getId()) currentModel.put("gamePhase","fight");
+            // For the main player the gamePhase is returned. This shows 4-buttons!
+            if (cuID==gameState.getMainPlayer().getId()) {
+                currentModel.put("gamePhase","fight");
+            }
+            // Else only the fight participation factor is shown.
+            else{
+                currentModel.put("fightButton",true);
+            }
         }
+        // Curse door
         else{
             currentModel.put("door","curse");
+            // For the main player the gamePhase is returned. This shows 4-buttons!
             if (cuID==gameState.getMainPlayer().getId()) currentModel.put("gamePhase","nofight");
         }
         return currentModel;
@@ -282,12 +293,13 @@ public class ActionController {
         currentModel.put("playerStrength", String.valueOf(currentPlayer.getFightStrength()));
 
         // Changes the name of the fight button to be the opposite of the
-        // player fighting state.
+        // player fighting state. The button will be shown only for the non-main players
+        // in case of a monster door (as per doorModel controller!).
         if (currentPlayer.getFights()==true){
-            currentModel.put("fightingButton","Nicht kaempfen!");
+            currentModel.put("fightingState","Nicht mitkaempfen!");
         }
         else{
-            currentModel.put("fightingButton","Kaempfen!");
+            currentModel.put("fightingState","Mitkaempfen!");
         }
 
         return currentModel;
