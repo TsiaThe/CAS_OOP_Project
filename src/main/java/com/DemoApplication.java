@@ -37,8 +37,8 @@ public class DemoApplication {
 
    @PostConstruct
    public void afterInit() {
-       userRepository.save(new User("Fanis"));
-       userRepository.save(new User("Thomas"));
-       userRepository.save(new User("Mathieu"));
+      // userRepository.save(new User("Fanis"));
+      // userRepository.save(new User("Thomas"));
+      // userRepository.save(new User("Mathieu"));
    }
 }

@@ -43,12 +43,14 @@ public class ActionController {
     }
 
     // ................
-    @GetMapping("/action/{currentUserId}")///{mainPlayerId}")
+    @GetMapping("/action/{currentUserId}")
     public String ActionPage(@PathVariable("currentUserId") long cuID,
                               Map<String, Object> model) {
 
         // Testing
         model.put("round", gameState.getRound());
+        model.put("mainPlayer", gameState.getMainPlayer().getId());
+        model.put("currentPlayer", cuID);
 
 
         // User-specific information for URL
@@ -57,7 +59,6 @@ public class ActionController {
 
         // Show monster/curse icon and activate corresponding
         // buttons by door opening.
-// !!  if (cuID==mpID && gameState.getNewRound()){
         if (cuID==gameState.getMainPlayer().getId() && gameState.getNewRound()){
             gameState.setNewRound(false);
             doorModel((DoorCard)gameState.doorOpen(), model);
@@ -90,9 +91,9 @@ public class ActionController {
     }
 
     // Post method which posts a new message to the server.
-    @PostMapping("/action/{currentUserId}")///{mainPlayerId}")
-    public String ChatMessage(@Valid Message message, @PathVariable("currentUserId") long cuID,
-                              // @PathVariable("mainPlayerId") long mpID,
+    @PostMapping("/action/{currentUserId}")
+    public String ChatMessage(@Valid Message message,
+                              @PathVariable("currentUserId") long cuID,
                               Map<String, Object> model) {
         // Add new message to repository and redirect to ActionPage.
             String sender = "";
@@ -105,12 +106,11 @@ public class ActionController {
             message.setMessageText(sender+": "+message.getMessageText());
             messageRepository.save(message);
         }
-//  !!        return "redirect:/action/"+ cuID +"/"+mpID;
         return "redirect:/action/"+ cuID;
     }
 
     // Post method which starts a new round.
-    @PostMapping("/action/{currentUserId}/newRound") // /{mainPlayerId}/newRound")
+    @PostMapping("/action/{currentUserId}/newRound")
     public String fight(@PathVariable("currentUserId") long cuID){
         gameState.nextRound();
         return "redirect:/action/"+ cuID;
@@ -118,46 +118,42 @@ public class ActionController {
     }
 
     // .....
-    @PostMapping("/action/{currentUserId}/sell") //{mainPlayerId}/sell")
+    @PostMapping("/action/{currentUserId}/sell")
     public String sellItems(@PathVariable("currentUserId") long cuID){
 
         Player currentPlayer = findPlayerbyID(cuID, gameState.getAllPlayers());
         currentPlayer.sell();
-//  !!        return "redirect:/action/"+ cuID +"/"+mpID;
         return "redirect:/action/"+ cuID;
     }
 
     // Post method which sets the fighting state of a player appropriately.
-    @PostMapping("/action/{currentUserId}/fightState") //{mainPlayerId}/fightState")
+    @PostMapping("/action/{currentUserId}/fightState")
     public String fightHelp(@PathVariable("currentUserId") long cuID,
                             Map<String, Object> model){
         fightState(cuID);
-//  !!        return "redirect:/action/"+ cuID +"/"+mpID;
         return "redirect:/action/"+ cuID;
     }
 
     // Post method which sets the sell attribute of Headgear.
-    @PostMapping("/action/{currentUserId}/sellHeadgear") ///{mainPlayerId}/sellHeadgear")
+    @PostMapping("/action/{currentUserId}/sellHeadgear")
     public String sellHeadgear(@PathVariable("currentUserId") long cuID){
 
         Player currentPlayer = findPlayerbyID(cuID, gameState.getAllPlayers());
         sellState(currentPlayer.getHeadgear());
-// !!        return "redirect:/action/"+ cuID +"/"+mpID;
         return "redirect:/action/"+ cuID;
     }
 
     // Post method which sets the sell attribute of an Armour.
-    @PostMapping("/action/{currentUserId}/sellArmour") //{mainPlayerId}/sellArmour")
+    @PostMapping("/action/{currentUserId}/sellArmour")
     public String sellArmour(@PathVariable("currentUserId") long cuID){
 
         Player currentPlayer = findPlayerbyID(cuID, gameState.getAllPlayers());
         sellState(currentPlayer.getArmour());
-//  !!        return "redirect:/action/"+ cuID +"/"+mpID;
         return "redirect:/action/"+ cuID;
     }
 
     // Post method which sets the sell attribute of Boots.
-    @PostMapping("/action/{currentUserId}/sellBoots") //{mainPlayerId}/sellBoots")
+    @PostMapping("/action/{currentUserId}/sellBoots")
     public String sellBoots(@PathVariable("currentUserId") long cuID){
 
         Player currentPlayer = findPlayerbyID(cuID, gameState.getAllPlayers());
@@ -167,9 +163,8 @@ public class ActionController {
     }
 
     // Post method which sets the sell attribute of an item.
-    @PostMapping("/action/{currentUserId}/{itemName}") ///{mainPlayerId}/{itemName}")
+    @PostMapping("/action/{currentUserId}/{itemName}")
     public String sellItem(@PathVariable("currentUserId") long cuID,
-                            //@PathVariable("mainPlayerId") long mpID,
                             @PathVariable("itemName") String itemName){
 
         Player currentPlayer = findPlayerbyID(cuID, gameState.getAllPlayers());
@@ -179,7 +174,6 @@ public class ActionController {
                 break;
             }
         }
-// !!        return "redirect:/action/"+ cuID +"/"+mpID;
         return "redirect:/action/"+ cuID;
     }
 
