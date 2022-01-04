@@ -142,6 +142,12 @@ public class GameState {
         return mainPlayer;
     }
 
+    // This method returns all the players which participate in a game
+    // except for the main player.
+    public List<Player> getSecondaryPlayers(){
+        return secondaryPlayers;
+    }
+
     // Returns a list of randomly shorted door cards.
     public List<Card> getGameDoorCards() {
         return gameDoorCards;

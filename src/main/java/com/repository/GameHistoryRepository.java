@@ -14,6 +14,6 @@ import java.util.List;
  */
 @Repository
 public interface GameHistoryRepository extends CrudRepository<GamePhase, Long> {
-    List<Message> findByPhaseDescription(String phaseDescription);
+    List<GamePhase> findByPhaseDescription(String phaseDescription);
 }
 

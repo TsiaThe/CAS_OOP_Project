@@ -14,9 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 /**
  * This controller is responsible for:
@@ -56,6 +54,9 @@ public class ActionController {
         // Testing section
         String gen="Runde: "+ gameState.getRound()+", Hauptspieler: " + getMainPlayerName();
         model.put("GeneralInfo", gen);
+
+
+
         model.put("gameHistory", gameHistoryRepository.findAll());
         // Testing section
 
@@ -119,14 +120,34 @@ public class ActionController {
     public String fight(@PathVariable("currentUserId") long cuID){
         gameState.nextRound();
         return "redirect:/action/"+ cuID;
-
     }
 
     // .
     @PostMapping("/action/{currentUserId}/fight")
-    public String figh(@PathVariable("currentUserId") long cuID,
+    public String fight(@PathVariable("currentUserId") long cuID,
                             Map<String, Object> model){
 
+        // Message that fight has begun
+        String descrpition = "R: "+gameState.getRound()+", HS: "+ getMainPlayerName() + ", Kampf angefangen!";
+        gameHistoryRepository.save(new GamePhase(descrpition));
+        // Calculation of fighting players (w/t main player)
+        gameHistoryRepository.save(new GamePhase("Kaempfende Spieler: "));
+        descrpition=getMainPlayerName();
+        for (Player p:gameState.getSecondaryPlayers()){
+            if(p.getFights()){
+                String secPlayerName = userRepository.findById(p.getId()).get().getName();
+                descrpition += ", "+secPlayerName;
+            }
+        }
+        gameHistoryRepository.save(new GamePhase(descrpition));
+
+        int limit = 5;
+        long iterations = gameHistoryRepository.count()-limit;
+        if (iterations>0){
+            Iterable<GamePhase> it = gameHistoryRepository.findAll();
+            for (int i=1;i<=iterations;i++)
+                gameHistoryRepository.deleteById(it.iterator().next().getId());
+        }
 
 
 
