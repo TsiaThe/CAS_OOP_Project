@@ -1,9 +1,6 @@
 package com.backend.players;
 
-import com.backend.cards.Armour;
-import com.backend.cards.Boots;
-import com.backend.cards.Headgear;
-import com.backend.cards.Item;
+import com.backend.cards.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +30,6 @@ public class Player {
 
     public Player(PlayerClass  playerClass,PlayerRace  playerRace) {
         this.level = 1;
-        this.fightStrength = 1;
         this.items = new ArrayList<>();
         this.boots = null;
         this.headgear = null;
@@ -48,6 +44,23 @@ public class Player {
 
     public void setFightStrength(int fightStrength) {
         this.fightStrength = fightStrength;
+    }
+
+    public void calculateFightStrength(){
+        // Start from player level
+        fightStrength = level;
+        // If the player is human, it has always +1.
+        if (this.getPlayerClass() instanceof Human) fightStrength += 1;
+        // Bonus from boots, if any...
+        if (boots!=null) fightStrength+=boots.getBonus();
+        // Bonus from armour, if any...
+        if (armour!=null) fightStrength+=armour.getBonus();
+        // Bonus from headgear, if any...
+        if (headgear!=null) fightStrength+=headgear.getBonus();
+        // Bonus from items, if any... and if the class is correct...
+        for (Item i:items){
+            i.getItemPower().itemPower(this);
+        }
     }
 
     public int getLevel() {
@@ -141,5 +154,42 @@ public class Player {
         for (Item i:removeItems) items.remove(i);
 
         level += totalSellValue/1000;
+    }
+
+    // Method which applies a treasure card (tc) to the current player.
+    // It re-calcualtes its fighting strength afterwards.
+    public void applyTreasureCard(TreasureCard tc){
+        // if treasure = boots and no current boots -> wear them.
+        if (tc instanceof Boots && this.boots!=null) this.boots = (Boots)tc;
+        // if treasure = armour and no current armour -> wear it.
+        else if (tc instanceof Armour && this.armour!=null) this.armour = (Armour)tc;
+        // if treasure = headgear and no current headgear -> wear it.
+        else if (tc instanceof Headgear && this.headgear!=null) this.headgear = (Headgear)tc;
+        // if treasure = item, it depends on the player class and item list.
+        else if (tc instanceof Item) {
+            Item treasureItem = (Item) tc;
+            // count current large and small items
+            int currentSmallItems = 0;
+            int currentLargeItems = 0;
+            for (Item it:items) {
+                if (it.isSmallItem()) currentSmallItems++;
+                else currentLargeItems++;
+            }
+            // maximum allowed small items = 2
+            if (treasureItem.isSmallItem() && currentSmallItems<2) {
+                items.add(treasureItem);
+            }
+            // maximum allowed large items = 1 (dwarfs = 2)
+            else if (!treasureItem.isSmallItem()) {
+                if ((playerClass instanceof Dwarf) && currentLargeItems<2){
+                    items.add(treasureItem);
+                }
+                else if (!(playerClass instanceof Dwarf) && currentLargeItems<1) {
+                    items.add(treasureItem);
+                }
+            }
+        }
+        else if (tc instanceof LevelSpell) ((LevelSpell) tc).levelUp(this);
+        calculateFightStrength();
     }
 }

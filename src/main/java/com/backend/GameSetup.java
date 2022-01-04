@@ -128,7 +128,7 @@ public class GameSetup {
 
         gameCards.add(new Item("Stange 11-Fuss.","",200,1 ,
                 null,true, p -> {
-                p.setFightStrength(p.getFightStrength()+2);}));
+                p.setFightStrength(p.getFightStrength()+1);}));
 
         gameCards.add(new Item("Hinterhaeltiges bastard-Schwert.","",400,2 ,
                 null,true, p -> {
@@ -136,7 +136,7 @@ public class GameSetup {
 
         gameCards.add(new Item("Kettensäge der blutigen Zerstuckelung.","",600,3 ,
                 null,false, p -> {
-                p.setFightStrength(p.getFightStrength()+2);}));
+                p.setFightStrength(p.getFightStrength()+3);}));
 
         gameCards.add(new Item("Riesige Fells.","",0,3 ,
                 null,false, p -> {

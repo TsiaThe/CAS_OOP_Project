@@ -44,6 +44,8 @@ public class GameState {
     private static Card currentGameDoorCard;
     // List of all treasure cards (randomly mixed from Starter).
     private static List<Card> gameTreasureCards = new ArrayList<>();
+    // Current element of game treasure card.
+    private static int currentGameTreasureCardElement=0;
 
     private static int round = 0;
     private static boolean newRound=true;
@@ -82,9 +84,9 @@ public class GameState {
                     }
                 }
             }
+            p.calculateFightStrength();
         }
     }
-
 
     public void nextRound(){
         // Change the main player
@@ -92,6 +94,19 @@ public class GameState {
         mainPlayer = secondaryPlayers.remove(0);
         round++;
         newRound = true;
+    }
+
+    // This method opens a new treasure card. If the treasure cards have finished,
+    // it opens them from the beginning again after reshuffling.
+    public Card treasureOpen(){
+        if (currentGameTreasureCardElement<gameTreasureCards.size()){
+            currentGameTreasureCardElement++;
+        }
+        else{
+            Collections.shuffle(gameTreasureCards);
+            currentGameTreasureCardElement = 1;
+        }
+        return gameTreasureCards.get(currentGameTreasureCardElement-1);
     }
 
     // This method opens a new door. If the door cards have finished,

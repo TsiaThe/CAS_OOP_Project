@@ -32,6 +32,9 @@ public class ActionController {
     private final GameState gameState;
     // String  which passes the phase info to the ActionPage.
     private String dynamicInformation = "";
+    // Boolean which controls if the action (fight/run/curse action)
+    // of a current round has been performed.
+    private boolean doorActionPerformed = false;
 
     @Autowired
     public ActionController(UserRepository userRepository,
@@ -47,11 +50,12 @@ public class ActionController {
     public String ActionPage(@PathVariable("currentUserId") long cuID,
                               Map<String, Object> model) {
 
-        // Testing section
+        // Action bar/window information
+        // GeneralInfo -> changes in every round, stays at the top of the window
         String gen="Runde: "+ gameState.getRound()+", Hauptspieler: " + getMainPlayerName();
         model.put("GeneralInfo", gen);
+        // DynamicInfo -> changes in every round phase
         model.put("DynamicInfo", dynamicInformation);
-        // Testing section
 
         // User-specific information for URL
         model.put("currentUser", userRepository.findById(cuID));
@@ -62,10 +66,24 @@ public class ActionController {
         if (gameState.getNewRound()){
             doorModel((DoorCard)gameState.doorOpen(),cuID, model);
             gameState.setNewRound(false);
+            doorActionPerformed = false;
         }
         else{
             doorModel((DoorCard)gameState.getCurrentDoorCard(), cuID, model);
         }
+
+        // If the door was a curse, it immediately acts to the main player.
+        // Acts during the get of the main player, and only once/round!
+        if ((gameState.getCurrentDoorCard() instanceof Curse))
+            if ((cuID==gameState.getMainPlayer().getId()) && (doorActionPerformed==false)){
+            ((Curse) gameState.getCurrentDoorCard()).curse(gameState.getMainPlayer());
+            // Fighting strength must be recalculated after the curse action.
+            gameState.getMainPlayer().calculateFightStrength();
+            // Set to true for the remaining of the round.
+            doorActionPerformed=true;
+            dynamicInformation = "Die Fluch hat auf Spieler: "+getMainPlayerName()+" gewirkt";
+            model.put("DynamicInfo", dynamicInformation);
+            }
 
         // Add player information bar
         playerModel(cuID, model);
@@ -125,12 +143,70 @@ public class ActionController {
         System.out.println(dynamicInformation);
         // Calculation of fighting players (w/t main player)
         dynamicInformation += " Kaempfende Spieler: "+getMainPlayerName();
+        List<Player> fightingPlayers = new ArrayList<>();
         for (Player p:gameState.getSecondaryPlayers()){
             if(p.getFights()){
                 String secPlayerName = userRepository.findById(p.getId()).get().getName();
                 dynamicInformation += ", "  + secPlayerName;
+                fightingPlayers.add(p);
             }
         }
+
+        // totalPlayerStrength: Strength of all players which participate in fight
+        int totalPlayerStrength = gameState.getMainPlayer().getFightStrength();
+        Monster monster = (Monster) gameState.getCurrentDoorCard();
+        // Check if the monster gets additional points because of the race of a player
+        monster.monsterExtraStrength(gameState.getMainPlayer());
+        for (Player p:gameState.getSecondaryPlayers()){
+            if (p.getFights()){
+                totalPlayerStrength += p.getFightStrength();
+                monster.monsterExtraStrength(p);
+            }
+        }
+        // Information on fight
+        dynamicInformation += ". Gesamte Monsterkampfwert: " + monster.getLevelValue();
+        dynamicInformation += ". Gesamte Spielerkampfwert" + totalPlayerStrength;
+        // Monster wins fight
+        if (monster.getLevelValue()>=totalPlayerStrength) {
+            monster.monsterWinsFight(gameState.getMainPlayer());
+            gameState.getMainPlayer().calculateFightStrength();
+            dynamicInformation += ". Monster hat gewonnen. HS versucht wegzulaufen...";
+        }
+        // Players win fight
+        else{
+            // Won treasures
+            int wonTreasures = monster.getTreasureValue();
+            dynamicInformation += ". Monster wurde erschlagen. Gewonnene SChaetze: "+wonTreasures;
+            // Each supporting (fighting player) gets a treasure, if one remains.
+            for (Player p:fightingPlayers){
+                if (wonTreasures>0){
+                    Card wonTreasure = gameState.treasureOpen();
+                    String secPlayerName = userRepository.findById(p.getId()).get().getName();
+                    dynamicInformation += ". Player "+secPlayerName+" gewinnt: "+wonTreasure.getName();
+                    p.applyTreasureCard((TreasureCard) wonTreasure);
+                    wonTreasures--;
+                }
+            }
+            // The main player gets all remaining treasures + a level.
+            dynamicInformation += ". HS gewinnt: ";
+            for (int i=1;i<=wonTreasures;i++){
+                Card wonTreasure = gameState.treasureOpen();
+                dynamicInformation += wonTreasure.getName() +", ";
+                gameState.getMainPlayer().applyTreasureCard((TreasureCard) wonTreasure);
+            }
+            gameState.getMainPlayer().setLevel(gameState.getMainPlayer().getLevel()+1);
+            gameState.getMainPlayer().calculateFightStrength();
+            dynamicInformation += "one level. Current level = "+gameState.getMainPlayer().getLevel();
+
+
+
+
+
+
+
+
+        }
+
 
 
 
@@ -152,6 +228,7 @@ public class ActionController {
 
         Player currentPlayer = findPlayerbyID(cuID, gameState.getAllPlayers());
         currentPlayer.sell();
+        currentPlayer.calculateFightStrength();
         return "redirect:/action/"+ cuID;
     }
 
@@ -244,6 +321,8 @@ public class ActionController {
         }
 
         currentModel.put("doorName","Name: "+dc.getName());
+        if (dc instanceof Monster) currentModel.put("doorName","Name: "+dc.getName()+" (lvl: "+
+                ((Monster) dc).getLevelValue()+")");
         currentModel.put("doorDescription","Beschreibung: "+dc.getDescription());
 
         return currentModel;

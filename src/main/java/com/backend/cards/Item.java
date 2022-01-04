@@ -32,4 +32,7 @@ public class Item extends Equipment{
         return smallItem;
     }
 
+    public ItemPower getItemPower() {
+        return itemPower;
+    }
 }
