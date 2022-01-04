@@ -138,9 +138,11 @@ public class ActionController {
     public String fight(@PathVariable("currentUserId") long cuID,
                             Map<String, Object> model){
 
+        // If monster has been fought, return.
+        if (doorActionPerformed == true) return "redirect:/action/"+ cuID;
+        // Else, start fight...
         // Message that fight has begun
         dynamicInformation = " Kampf angefangen.";
-        System.out.println(dynamicInformation);
         // Calculation of fighting players (w/t main player)
         dynamicInformation += " Kaempfende Spieler: "+getMainPlayerName();
         List<Player> fightingPlayers = new ArrayList<>();
@@ -151,7 +153,6 @@ public class ActionController {
                 fightingPlayers.add(p);
             }
         }
-
         // totalPlayerStrength: Strength of all players which participate in fight
         int totalPlayerStrength = gameState.getMainPlayer().getFightStrength();
         Monster monster = (Monster) gameState.getCurrentDoorCard();
@@ -199,30 +200,11 @@ public class ActionController {
             gameState.getMainPlayer().setLevel(gameState.getMainPlayer().getLevel()+1);
             gameState.getMainPlayer().calculateFightStrength();
             dynamicInformation += "und eine Stuffe. Aktuelle Stufe = "+gameState.getMainPlayer().getLevel();
-
-
-
-
-
-
-
-
         }
-
-
-
-
-
-
-
-
-
-
-
+        // Disables the fight button for the remaining of the round.
+        doorActionPerformed = true;
         return "redirect:/action/"+ cuID;
     }
-
-
 
     // Post method which sells all equipment that a user has selected to sell.
     @PostMapping("/action/{currentUserId}/sell")

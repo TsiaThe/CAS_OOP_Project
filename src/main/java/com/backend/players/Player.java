@@ -160,11 +160,11 @@ public class Player {
     // It re-calcualtes its fighting strength afterwards.
     public void applyTreasureCard(TreasureCard tc){
         // if treasure = boots and no current boots -> wear them.
-        if (tc instanceof Boots && this.boots!=null) this.boots = (Boots)tc;
+        if (tc instanceof Boots && this.boots==null) this.boots = (Boots)tc;
         // if treasure = armour and no current armour -> wear it.
-        else if (tc instanceof Armour && this.armour!=null) this.armour = (Armour)tc;
+        else if (tc instanceof Armour && this.armour==null) this.armour = (Armour)tc;
         // if treasure = headgear and no current headgear -> wear it.
-        else if (tc instanceof Headgear && this.headgear!=null) this.headgear = (Headgear)tc;
+        else if (tc instanceof Headgear && this.headgear==null) this.headgear = (Headgear)tc;
         // if treasure = item, it depends on the player class and item list.
         else if (tc instanceof Item) {
             Item treasureItem = (Item) tc;
