@@ -81,7 +81,7 @@ public class ActionController {
             gameState.getMainPlayer().calculateFightStrength();
             // Set to true for the remaining of the round.
             doorActionPerformed=true;
-            dynamicInformation = "Die Fluch hat auf Spieler: "+getMainPlayerName()+" gewirkt";
+            dynamicInformation = "Die Fluch hat auf Spieler: "+getMainPlayerName()+" gewirkt.";
             model.put("DynamicInfo", dynamicInformation);
             }
 
@@ -139,7 +139,7 @@ public class ActionController {
                             Map<String, Object> model){
 
         // Message that fight has begun
-        dynamicInformation += " Kampf angefangen.";
+        dynamicInformation = " Kampf angefangen.";
         System.out.println(dynamicInformation);
         // Calculation of fighting players (w/t main player)
         dynamicInformation += " Kaempfende Spieler: "+getMainPlayerName();
@@ -165,7 +165,7 @@ public class ActionController {
         }
         // Information on fight
         dynamicInformation += ". Gesamte Monsterkampfwert: " + monster.getLevelValue();
-        dynamicInformation += ". Gesamte Spielerkampfwert" + totalPlayerStrength;
+        dynamicInformation += ". Gesamte Spielerkampfwert: " + totalPlayerStrength;
         // Monster wins fight
         if (monster.getLevelValue()>=totalPlayerStrength) {
             monster.monsterWinsFight(gameState.getMainPlayer());
@@ -176,13 +176,14 @@ public class ActionController {
         else{
             // Won treasures
             int wonTreasures = monster.getTreasureValue();
-            dynamicInformation += ". Monster wurde erschlagen. Gewonnene SChaetze: "+wonTreasures;
+            dynamicInformation += ". Monster wurde erschlagen. Gewonnene Schaetze: "+wonTreasures;
             // Each supporting (fighting player) gets a treasure, if one remains.
             for (Player p:fightingPlayers){
                 if (wonTreasures>0){
                     Card wonTreasure = gameState.treasureOpen();
                     String secPlayerName = userRepository.findById(p.getId()).get().getName();
-                    dynamicInformation += ". Player "+secPlayerName+" gewinnt: "+wonTreasure.getName();
+                    dynamicInformation += ". Player "+secPlayerName+" gewinnt: "+wonTreasure.getName()
+                    +" ("+getTreasureType((TreasureCard) wonTreasure)+")";
                     p.applyTreasureCard((TreasureCard) wonTreasure);
                     wonTreasures--;
                 }
@@ -191,12 +192,13 @@ public class ActionController {
             dynamicInformation += ". HS gewinnt: ";
             for (int i=1;i<=wonTreasures;i++){
                 Card wonTreasure = gameState.treasureOpen();
-                dynamicInformation += wonTreasure.getName() +", ";
+                dynamicInformation += wonTreasure.getName()
+                        +" ("+getTreasureType((TreasureCard) wonTreasure)+")"+", ";
                 gameState.getMainPlayer().applyTreasureCard((TreasureCard) wonTreasure);
             }
             gameState.getMainPlayer().setLevel(gameState.getMainPlayer().getLevel()+1);
             gameState.getMainPlayer().calculateFightStrength();
-            dynamicInformation += "one level. Current level = "+gameState.getMainPlayer().getLevel();
+            dynamicInformation += "und eine Stuffe. Aktuelle Stufe = "+gameState.getMainPlayer().getLevel();
 
 
 
@@ -478,6 +480,15 @@ public class ActionController {
 
     private String getMainPlayerName(){
         return userRepository.findById(gameState.getMainPlayer().getId()).get().getName();
+    }
+
+    private String getTreasureType(TreasureCard tc){
+        if (tc instanceof Boots) return "Schuhe";
+        else if (tc instanceof Armour) return "Ruestung";
+        else if (tc instanceof Headgear) return "Kopfbedeckung";
+        else if (tc instanceof Item) return "Gegenstand";
+        else if (tc instanceof LevelSpell) return "LevelUp";
+        return "Unbekannt";
     }
 
 }
