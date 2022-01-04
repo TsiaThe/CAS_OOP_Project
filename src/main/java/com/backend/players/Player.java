@@ -1,13 +1,11 @@
 package com.backend.players;
 
-import com.backend.cards.*;
 import com.backend.cards.Armour;
 import com.backend.cards.Boots;
 import com.backend.cards.Headgear;
 import com.backend.cards.Item;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -36,7 +34,7 @@ public class Player {
     public Player(PlayerClass  playerClass,PlayerRace  playerRace) {
         this.level = 1;
         this.fightStrength = 1;
-        this.items = null;
+        this.items = new ArrayList<>();
         this.boots = null;
         this.headgear = null;
         this.armour = null;

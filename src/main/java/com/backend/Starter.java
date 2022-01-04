@@ -41,10 +41,10 @@ public class Starter {
         gameTreasureCards = gameSetup.generateHeadgearCards(gameTreasureCards);
         // Generate item cards
         gameTreasureCards = gameSetup.generateItemCards(gameTreasureCards);
-        // Generate monster booster cards
-        gameTreasureCards = gameSetup.generateMonsterBoosterCards(gameTreasureCards);
-        // Generate fight spell cards
-        gameTreasureCards = gameSetup.generateFightSpellCards(gameTreasureCards);
+        // Generate monster booster cards (not supported in current version)
+        // gameTreasureCards = gameSetup.generateMonsterBoosterCards(gameTreasureCards);
+        // Generate fight spell cards (not supported in current version)
+        // gameTreasureCards = gameSetup.generateFightSpellCards(gameTreasureCards);
         // Generate level spell cards
         gameTreasureCards = gameSetup.generateLevelSpellCards(gameTreasureCards);
         // Generate monster cards

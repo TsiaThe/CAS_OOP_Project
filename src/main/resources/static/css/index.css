@@ -16,11 +16,17 @@
 .button4 {background-color: #0044aa;} /* Blue */
 
 /* class for scroll box */
-.myBox {
+.myBoxSc {
     background-color: lightblue;
     width: 250px;
     height: 110px;
     overflow: scroll;
 }
 
+/* class for normal box */
+.myBoxNr {
+    background-color: lightblue;
+    width: 500px;
+    height: 110px;
+}
 

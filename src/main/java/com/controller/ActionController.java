@@ -3,10 +3,8 @@ package com.controller;
 import com.backend.cards.*;
 import com.backend.players.*;
 import com.dto.GameState;
-import com.repository.GameHistoryRepository;
 import com.repository.MessageRepository;
 import com.repository.UserRepository;
-import com.web.GamePhase;
 import com.web.Message;
 import com.web.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,19 +28,17 @@ public class ActionController {
     private final UserRepository userRepository;
     // Repo with all communicated messages.
     private final MessageRepository messageRepository;
-    // Repo with all game history.
-    private final GameHistoryRepository gameHistoryRepository;
     // DTO which holds the actual game state.
     private final GameState gameState;
+    // String  which passes the phase info to the ActionPage.
+    private String dynamicInformation = "";
 
     @Autowired
     public ActionController(UserRepository userRepository,
                             MessageRepository messageRepository,
-                            GameHistoryRepository gameHistoryRepository,
                             GameState gameState) {
         this.userRepository = userRepository;
         this.messageRepository = messageRepository;
-        this.gameHistoryRepository = gameHistoryRepository;
         this.gameState= gameState;
     }
 
@@ -54,10 +50,7 @@ public class ActionController {
         // Testing section
         String gen="Runde: "+ gameState.getRound()+", Hauptspieler: " + getMainPlayerName();
         model.put("GeneralInfo", gen);
-
-
-
-        model.put("gameHistory", gameHistoryRepository.findAll());
+        model.put("DynamicInfo", dynamicInformation);
         // Testing section
 
         // User-specific information for URL
@@ -122,32 +115,26 @@ public class ActionController {
         return "redirect:/action/"+ cuID;
     }
 
-    // .
+    // .....................
     @PostMapping("/action/{currentUserId}/fight")
     public String fight(@PathVariable("currentUserId") long cuID,
                             Map<String, Object> model){
 
         // Message that fight has begun
-        String descrpition = "R: "+gameState.getRound()+", HS: "+ getMainPlayerName() + ", Kampf angefangen!";
-        gameHistoryRepository.save(new GamePhase(descrpition));
+        dynamicInformation += " Kampf angefangen.";
+        System.out.println(dynamicInformation);
         // Calculation of fighting players (w/t main player)
-        gameHistoryRepository.save(new GamePhase("Kaempfende Spieler: "));
-        descrpition=getMainPlayerName();
+        dynamicInformation += " Kaempfende Spieler: "+getMainPlayerName();
         for (Player p:gameState.getSecondaryPlayers()){
             if(p.getFights()){
                 String secPlayerName = userRepository.findById(p.getId()).get().getName();
-                descrpition += ", "+secPlayerName;
+                dynamicInformation += ", "  + secPlayerName;
             }
         }
-        gameHistoryRepository.save(new GamePhase(descrpition));
 
-        int limit = 5;
-        long iterations = gameHistoryRepository.count()-limit;
-        if (iterations>0){
-            Iterable<GamePhase> it = gameHistoryRepository.findAll();
-            for (int i=1;i<=iterations;i++)
-                gameHistoryRepository.deleteById(it.iterator().next().getId());
-        }
+
+
+
 
 
 
@@ -232,8 +219,8 @@ public class ActionController {
             currentModel.put("door","monster");
             // If the door just opened, add to the game history.
             if (gameState.getNewRound()){
-                String descrpition = "R: "+gameState.getRound()+", HS: "+ getMainPlayerName() + ", Monster hinten der Tuer!";
-                gameHistoryRepository.save(new GamePhase(descrpition));
+                dynamicInformation = "Monster hinten der Tuer!";
+                currentModel.put("DynamicInfo", dynamicInformation);
             }
             // For the main player the gamePhase is returned. This shows 4-buttons!
             if (cuID==gameState.getMainPlayer().getId()) {
@@ -249,8 +236,8 @@ public class ActionController {
             currentModel.put("door","curse");
             // If the door just opened, add to the game history.
             if (gameState.getNewRound()){
-                String descrpition = "R: "+gameState.getRound()+", HS: "+ getMainPlayerName() + ", Fluch hinten der Tuer!";
-                gameHistoryRepository.save(new GamePhase(descrpition));
+                dynamicInformation = "Fluch hinten der Tuer!";
+                currentModel.put("DynamicInfo", dynamicInformation);
             }
             // For the main player the gamePhase is returned. This shows 4-buttons!
             if (cuID==gameState.getMainPlayer().getId()) currentModel.put("gamePhase","nofight");

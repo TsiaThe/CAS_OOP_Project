@@ -67,33 +67,22 @@ public class GameState {
         Collections.shuffle(gameStarter.getGameTreasureCards());
         gameTreasureCards = gameStarter.getGameTreasureCards();
 
-
-
-
-
-
-        // Testing equipment
-        Boots testBoots = null;
-        Armour testArmour = null;
-        Headgear testHeadgear = null;
-        List<Item> testItems =  new ArrayList<>();
-        for (Card c:gameTreasureCards){
-            if (c instanceof Boots) testBoots = (Boots)c;
-            if (c instanceof Armour) testArmour = (Armour)c;
-            if (c instanceof Headgear) testHeadgear = (Headgear)c;
-            if (c instanceof Item) testItems.add((Item)c);
-            if (testBoots!=null && testArmour!=null && testHeadgear!=null && testItems!=null) break;
-        }
+        // Every player starts with three random equipment objects.
         for (Player p:gamePlayers){
-            p.setHeadgear(testHeadgear);
-            p.setArmour(testArmour);
-            p.setBoots(testBoots);
-            p.setItems(testItems);
+            for (int i=0;i<3;i++){
+                Card treasureCard = gameTreasureCards.remove(0);
+                if (!(treasureCard instanceof Equipment)) i--; // Repeat loop if no equipment.
+                else{
+                    if (treasureCard instanceof Boots) p.setBoots((Boots)treasureCard);
+                    if (treasureCard instanceof Armour) p.setArmour((Armour)treasureCard);
+                    if (treasureCard instanceof Headgear) p.setHeadgear((Headgear) treasureCard);
+                    if (treasureCard instanceof Item) { // Only small items are given for start.
+                        if (((Item) treasureCard).isSmallItem()) p.getItems().add((Item)treasureCard);
+                        else i--;
+                    }
+                }
+            }
         }
-        // Testing equipment
-
-
-
     }
 
 

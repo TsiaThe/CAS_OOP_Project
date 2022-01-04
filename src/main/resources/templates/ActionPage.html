@@ -8,12 +8,8 @@
 
 <!-- TESTING SECTION -->
 <p th:text="${GeneralInfo}"> </p>
-<div class="myBox">
-    <table >
-        <tr th:each="gamePhase : ${gameHistory}">
-            <td th:text="${gamePhase.phaseDescription}"></td>
-        </tr>
-    </table>
+<div class="myBoxNr">
+    <p th:text="${DynamicInfo}"> </p>
 </div>
 <!-- TESTING SECTION -->
 
@@ -166,6 +162,8 @@
         <td th:text="${item.bonus}"></td>
         <td>Wert: </td>
         <td th:text="${item.value}"></td>
+        <td>Klein: </td>
+        <td th:text="${item.smallItem}"></td>
         <td>
             <form action="#" th:action="@{${#httpServletRequest.requestURI}+'/'+${item.name}}" method="post">
                 <div th:switch="${item.sell}">
@@ -179,7 +177,7 @@
 </table>
 
 
-<div class="myBox">
+<div class="myBoxSc">
     <table >
         <tr th:each="message : ${messages}">
             <td th:text="${message.messageText}"></td>

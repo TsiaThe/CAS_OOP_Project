@@ -696,21 +696,6 @@ public class GameSetup {
                         return standardMessage+"Du bist zum Gluck kein Mensch. Du verlierst nur zwei Stufen";
                     }
                 }));
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         return gameCards;
     }
 
