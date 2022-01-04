@@ -133,14 +133,23 @@ public class ActionController {
         return "redirect:/action/"+ cuID;
     }
 
-    // .....................
+    // Post method which simulates the attempt of the main player
+    // to escape (run).
+    @PostMapping("/action/{currentUserId}/run")
+    public String run(@PathVariable("currentUserId") long cuID){
+        dynamicInformation = "HS versucht wegzulaufen.";
+        run();
+        // Disables the fight button for the remaining of the round.
+        doorActionPerformed = true;
+        return "redirect:/action/"+ cuID;
+    }
+
+    // Post method which simulates a complete fight with all participating players.
+    // It will work only once per round.
     @PostMapping("/action/{currentUserId}/fight")
     public String fight(@PathVariable("currentUserId") long cuID,
                             Map<String, Object> model){
 
-        // If monster has been fought, return.
-        if (doorActionPerformed == true) return "redirect:/action/"+ cuID;
-        // Else, start fight...
         // Message that fight has begun
         dynamicInformation = " Kampf angefangen.";
         // Calculation of fighting players (w/t main player)
@@ -169,9 +178,8 @@ public class ActionController {
         dynamicInformation += ". Gesamte Spielerkampfwert: " + totalPlayerStrength;
         // Monster wins fight
         if (monster.getLevelValue()>=totalPlayerStrength) {
-            monster.monsterWinsFight(gameState.getMainPlayer());
-            gameState.getMainPlayer().calculateFightStrength();
-            dynamicInformation += ". Monster hat gewonnen. HS versucht wegzulaufen...";
+            dynamicInformation += ". Monster hat gewonnen. ";
+            run();
         }
         // Players win fight
         else{
@@ -199,7 +207,7 @@ public class ActionController {
             }
             gameState.getMainPlayer().setLevel(gameState.getMainPlayer().getLevel()+1);
             gameState.getMainPlayer().calculateFightStrength();
-            dynamicInformation += "und eine Stuffe. Aktuelle Stufe = "+gameState.getMainPlayer().getLevel();
+            dynamicInformation += "und eine Stuffe. Aktuelle Stufe: "+gameState.getMainPlayer().getLevel();
         }
         // Disables the fight button for the remaining of the round.
         doorActionPerformed = true;
@@ -213,6 +221,9 @@ public class ActionController {
         Player currentPlayer = findPlayerbyID(cuID, gameState.getAllPlayers());
         currentPlayer.sell();
         currentPlayer.calculateFightStrength();
+        dynamicInformation = "Spieler: "+getMainPlayerName()+" hat Teile seiner Ausruestung verkauft. ";
+        dynamicInformation += "Aktuelle Stufe: "+gameState.getMainPlayer().getLevel();
+
         return "redirect:/action/"+ cuID;
     }
 
@@ -277,17 +288,23 @@ public class ActionController {
         // Check if the door is monster or curse
         // Monster door
         if (dc instanceof Monster) {
+            // Show monster icon
             currentModel.put("door","monster");
-            // If the door just opened, add to the game history.
+            // If the door just opened, show message in  the dynamic section.
             if (gameState.getNewRound()){
                 dynamicInformation = "Monster hinten der Tuer!";
                 currentModel.put("DynamicInfo", dynamicInformation);
             }
             // For the main player the gamePhase is returned. This shows 4-buttons!
-            if (cuID==gameState.getMainPlayer().getId()) {
+            // If the action (fight/run) has not been performed, then only "fight"/"run" are active.
+            if (cuID==gameState.getMainPlayer().getId() && !doorActionPerformed) {
                 currentModel.put("gamePhase","fight");
             }
-            // Else only the fight participation factor is shown.
+            // If the action (fight/run) has been performed, then only "sell"/"close round" are active.
+            else if (cuID==gameState.getMainPlayer().getId() && doorActionPerformed) {
+                currentModel.put("gamePhase","nofight");
+            }
+            // For all other players only the fight participation factor is shown.
             else{
                 currentModel.put("fightButton",true);
             }
@@ -460,10 +477,12 @@ public class ActionController {
         return out;
     }
 
+    // Method which returns the name of the main player from the GameState DTO.
     private String getMainPlayerName(){
         return userRepository.findById(gameState.getMainPlayer().getId()).get().getName();
     }
 
+    // Method which returns a string with the name of a treasure card.
     private String getTreasureType(TreasureCard tc){
         if (tc instanceof Boots) return "Schuhe";
         else if (tc instanceof Armour) return "Ruestung";
@@ -473,4 +492,22 @@ public class ActionController {
         return "Unbekannt";
     }
 
+    // This method simulates the dice throwing during the board game.
+    // If >= is thrown (>=3 for Elfs) the player escapes!
+    private void run(){
+        int playerScore = (new Random()).nextInt(0,6)+1;
+        dynamicInformation += " Gewuerfelt: "+playerScore;
+        if (gameState.getMainPlayer().getPlayerClass() instanceof Elf) {
+            playerScore++;
+            dynamicInformation += ". HS ist ein Elf (+1 beim Weglaufen).";
+        }
+        if (playerScore>3) {
+            dynamicInformation += ". HS konnte weglaufen!";
+        }
+        else{
+            Monster monster = (Monster)gameState.getCurrentDoorCard();
+            dynamicInformation += " "+monster.monsterWinsFight(gameState.getMainPlayer());
+            gameState.getMainPlayer().calculateFightStrength();
+        }
+    }
 }

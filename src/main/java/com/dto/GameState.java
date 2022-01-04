@@ -35,7 +35,7 @@ public class GameState {
     Player mainPlayer;
     // "secondaryPlayers" is a list of all the players in the actual game,
     // except for the "mainPlayer".
-    List<Player> secondaryPlayers = new ArrayList<>(3);
+    List<Player> secondaryPlayers;
     // List of all door cards (randomly mixed from Starter).
     private static List<Card> gameDoorCards = new ArrayList<>();
     // Current element of game door card.
@@ -55,6 +55,7 @@ public class GameState {
         this.gameStarter = gameStarter;
         this.gamePlayers = gameStarter.getPlayers();
         mainPlayer = gamePlayers.get(0);
+        this.secondaryPlayers = new ArrayList<>(gameStarter.getNumPlayers()-1);
         for (Player p:gamePlayers){
             if (!p.equals(mainPlayer)) secondaryPlayers.add(p);
         }

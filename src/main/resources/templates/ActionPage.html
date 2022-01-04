@@ -55,7 +55,7 @@
         <input type="submit" th:value="Verkaufen" disabled>
         <input type="submit" th:value="Rundenabschluss" disabled>
     </form>  <!--run-->
-    <form action="#" th:action="@{${#httpServletRequest.requestURI+'/newRound'}}" method="post">
+    <form action="#" th:action="@{${#httpServletRequest.requestURI+'/run'}}" method="post">
         <input type="submit" th:value="Weglaufen">
     </form>
 </div>

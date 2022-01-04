@@ -134,4 +134,9 @@ public class Starter {
     public List<Card> getGameTreasureCards() {
         return gameTreasureCards;
     }
+
+    // Getter for the total number of players of the game.
+    public static int getNumPlayers() {
+        return numPlayers;
+    }
 }

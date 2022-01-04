@@ -27,10 +27,6 @@ public class Monster extends DoorCard {
         return treasureValue;
     }
 
-    public void setTreasureValue(int treasureValue) {
-        this.treasureValue = treasureValue;
-    }
-
     public void monsterExtraStrength(Player p) {
         monsterEffects.monsterExtraStrength(this, p);
     }
