@@ -153,6 +153,10 @@ public class Player {
         }
         for (Item i:removeItems) items.remove(i);
 
+        // Halblings have the special property of selling in
+        // double price!
+        if (playerClass instanceof Halbling) totalSellValue = 2*totalSellValue;
+
         level += totalSellValue/1000;
     }
 

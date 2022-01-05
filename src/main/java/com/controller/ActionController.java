@@ -101,7 +101,7 @@ public class ActionController {
            messageRepository.save(new Message("Chat history"));
         }
         model.put("messages", messageRepository.findAll());
-        if (userRepository.count()==4){
+        if (userRepository.count()==gameState.getNumberOfPlayers()){
             return "ActionPage";
         }
         return "WaitPage";

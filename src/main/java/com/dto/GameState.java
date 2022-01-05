@@ -74,16 +74,29 @@ public class GameState {
         gameTreasureCards = gameStarter.getGameTreasureCards();
 
         // Every player starts with three random equipment objects.
+        // They must be unique (e.g. they should not  get 2xBoots).
         for (Player p:gamePlayers){
             for (int i=0;i<3;i++){
                 Card treasureCard = gameTreasureCards.remove(0);
                 if (!(treasureCard instanceof Equipment)) i--; // Repeat loop if no equipment.
                 else{
-                    if (treasureCard instanceof Boots) p.setBoots((Boots)treasureCard);
-                    if (treasureCard instanceof Armour) p.setArmour((Armour)treasureCard);
-                    if (treasureCard instanceof Headgear) p.setHeadgear((Headgear) treasureCard);
+                    if (treasureCard instanceof Boots) {
+                        if (p.getBoots()!=null) i--;
+                        else p.setBoots((Boots)treasureCard);
+                    }
+                    if (treasureCard instanceof Armour){
+                        if (p.getArmour()!=null) i--;
+                        else p.setArmour((Armour)treasureCard);
+                    }
+                    if (treasureCard instanceof Headgear) {
+                        if (p.getHeadgear()!=null) i--;
+                        else p.setHeadgear((Headgear) treasureCard);
+                    }
                     if (treasureCard instanceof Item) { // Only small items are given for start.
-                        if (((Item) treasureCard).isSmallItem()) p.getItems().add((Item)treasureCard);
+                        if (((Item) treasureCard).isSmallItem()){
+                            if (p.getItems().size()==2) i--;
+                            else p.getItems().add((Item)treasureCard);
+                        }
                         else i--;
                     }
                 }

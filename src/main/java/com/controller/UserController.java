@@ -70,7 +70,6 @@ public class UserController {
         User newUser = userRepository.save(user);
         gameState.assignPlayerId(user.getId());
         model.addAttribute("users", userRepository.findAll());
-     //   return "redirect:/action/"+newUser.getId() +"/"+gameState.getMainPlayer().getId();
         return "redirect:/action/"+newUser.getId();
 
     }
