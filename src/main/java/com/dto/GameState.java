@@ -29,6 +29,8 @@ public class GameState {
     // (which generates all cards and players with random classes/races).
     // It also contains all lists of cards (door/treasure cards).
     private final Starter gameStarter;
+    // The number of players as defined in the Starter instance.
+    private final int numberOfPlayers;
     // "gamePlayers" is a list of all the players in the actual game.
     private List<Player> gamePlayers;
     // "mainPlayer" is the currently active player of a round.
@@ -55,7 +57,8 @@ public class GameState {
         this.gameStarter = gameStarter;
         this.gamePlayers = gameStarter.getPlayers();
         mainPlayer = gamePlayers.get(0);
-        this.secondaryPlayers = new ArrayList<>(gameStarter.getNumPlayers()-1);
+        numberOfPlayers = gameStarter.getNumPlayers();
+        this.secondaryPlayers = new ArrayList<>(numberOfPlayers);
         for (Player p:gamePlayers){
             if (!p.equals(mainPlayer)) secondaryPlayers.add(p);
         }
@@ -177,5 +180,9 @@ public class GameState {
 
     public Card getCurrentDoorCard(){
         return currentGameDoorCard;
+    }
+
+    public int getNumberOfPlayers(){
+        return numberOfPlayers;
     }
 }
