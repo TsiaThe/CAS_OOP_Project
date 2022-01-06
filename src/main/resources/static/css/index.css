@@ -18,8 +18,8 @@
 /* class for scroll box */
 .myBoxSc {
     background-color: lightblue;
-    width: 250px;
-    height: 110px;
+    width: 550px;
+    height: 375px;
     overflow: scroll;
 }
 
@@ -28,5 +28,10 @@
     background-color: lightblue;
     width: 500px;
     height: 110px;
+}
+
+/*  */
+.hiddenText {
+    color:white;
 }
 

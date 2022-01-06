@@ -340,10 +340,14 @@ public class ActionController {
         Player currentPlayer = findPlayerbyID(cuID, gameState.getAllPlayers());
         if (currentPlayer.getItems().size()>0){
             currentModel.put("items", currentPlayer.getItems());
+
         }
-        else{
-            currentModel.put("Noitem", "Kein Gegenstand");
+        List<String> NoItemList=new ArrayList<>();
+        for (int i=0;i<(4-currentPlayer.getItems().size());i++){
+            NoItemList.add("KeinGegenstand");
         }
+        currentModel.put("Noitems", NoItemList);
+
         return currentModel;
     }
 
