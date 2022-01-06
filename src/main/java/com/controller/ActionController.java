@@ -321,10 +321,10 @@ public class ActionController {
             if (cuID==gameState.getMainPlayer().getId()) currentModel.put("gamePhase","nofight");
         }
 
-        currentModel.put("doorName","Name: "+dc.getName());
+        currentModel.put("doorName",dc.getName());
         if (dc instanceof Monster) currentModel.put("doorName","Name: "+dc.getName()+" (lvl: "+
                 ((Monster) dc).getLevelValue()+")");
-        currentModel.put("doorDescription","Beschreibung: "+dc.getDescription());
+        currentModel.put("doorDescription",dc.getDescription());
 
         return currentModel;
     }
@@ -414,9 +414,11 @@ public class ActionController {
     private Map<String, Object> playerModel(long cuID, Map<String, Object> currentModel){
 
         Player currentPlayer = findPlayerbyID(cuID, gameState.getAllPlayers());
+        String playerName = userRepository.findById(cuID).get().getName();
+        currentModel.put("playerName", playerName);
         currentModel.put("playerClass", getPlayerClass(currentPlayer.getPlayerClass()));
         currentModel.put("playerRace", getPlayerRace(currentPlayer.getPlayerRace()));
-        currentModel.put("playerLevel", currentPlayer.getLevel()+" /");
+        currentModel.put("playerLevel", currentPlayer.getLevel());
         currentModel.put("playerStrength", String.valueOf(currentPlayer.getFightStrength()));
 
         // Changes the name of the fight button to be the opposite of the
@@ -448,16 +450,16 @@ public class ActionController {
     private String getPlayerClass(PlayerClass pC){
         String out = "Klasse: N/A";
         if (pC instanceof Dwarf){
-            out = "Zwerg /";
+            out = "Zwerg";
         }
         else if (pC instanceof Elf){
-            out = "Elf /";
+            out = "Elf";
         }
         else if (pC instanceof Halbling){
-            out = "Halbling /";
+            out = "Halbling";
         }
         else if (pC instanceof Human){
-            out = "Mensch /";
+            out = "Mensch";
         }
         return out;
     }
@@ -467,16 +469,16 @@ public class ActionController {
     private String getPlayerRace(PlayerRace pR){
         String out = "Rasse: N/A";
         if (pR instanceof Priest){
-            out = "Priester /";
+            out = "Priester";
         }
         else if (pR instanceof Thief){
-            out = "Dieb /";
+            out = "Dieb";
         }
         else if (pR instanceof Warrior){
-            out = "Krieger /";
+            out = "Krieger";
         }
         else if (pR instanceof Wizard){
-            out = "Zauberer /";
+            out = "Zauberer";
         }
         return out;
     }

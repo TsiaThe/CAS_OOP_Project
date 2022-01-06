@@ -5,9 +5,6 @@
     <link th:href="@{/css/index.css}" rel="stylesheet" />
     <meta http-equiv="refresh" content="5">
 </head>
-
-
-
 <style>
     table, th, td {
         border:1px solid black;
@@ -17,29 +14,13 @@
         font-size: 15px;
     }
     h2{
-        font-family:"Arial";
-        font-size: 12px;
-        color: blue;
-    }
 
+    }
     .test{
         vertical-align: top;
         text-align: left;
     }
 
-    .test2{
-        height: 75%;
-        background-color: #000
-    }
-
-
-    .vertical-center {
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        -ms-transform: translateY(-50%);
-        transform: translateY(-50%);
-    }
 </style>
 
 <body>
@@ -49,15 +30,19 @@
         <th style="width:50%">DynamicInfo</th>
     </tr>
     <tr>
+        <!-- This part works fine but does not look nice
+             (propably because of accessing the name attribute directly).
         <td style="width: 10%;">
             <h2>
                 <input type="text" th:object="${currentUser}" th:field="*{name}" disabled>
             </h2>
         </td>
-        <td style="width: 10%;"> <h2 th:text="${playerClass}"></h2> </td>
-        <td style="width: 10%;"> <h2 th:text="${playerRace}"></h2> </td>
-        <td style="width: 10%;"> <h2 th:text="${playerLevel}"></h2> </td>
-        <td style="width: 10%;"> <h2 th:text="${playerStrength}"></h2> </td>
+        -->
+        <td style="width: 10%;"> <h2 class="mainAttribute" th:text="'Name: '+${playerName}"></h2> </td>
+        <td style="width: 10%;"> <h2 class="mainAttribute" th:text="'Klasse: '+${playerClass}"></h2> </td>
+        <td style="width: 10%;"> <h2 class="mainAttribute" th:text="'Rasse: '+${playerRace}"></h2> </td>
+        <td style="width: 10%;"> <h2 class="mainAttribute" th:text="'Stufe: '+${playerLevel}"></h2> </td>
+        <td style="width: 10%;"> <h2 class="mainAttribute" th:text="'Kampfwert: '+${playerStrength}"></h2> </td>
         <td>
             <p th:text="${GeneralInfo}"> </p>
         </td>
@@ -80,7 +65,7 @@
     </tr>
     <tr>
         <td>
-            Description:
+            Beschreibung:
         </td>
         <td colspan="3" >
             <p th:text="${doorDescription}"></p>
@@ -100,7 +85,7 @@
         </div>
         <div th:if="${gamePhase=='fight'}">
             <form action="#" th:action="@{${#httpServletRequest.requestURI+'/fight'}}" method="post">
-                <td> <input type="submit" th:value="Kaempfen">  </td>
+                <td> <input class="button" type="submit" th:value="Kaempfen">  </td>
                 <td> <input type="submit" th:value="Verkaufen" disabled>  </td>
                 <td> <input type="submit" th:value="Rundenabschluss" disabled>  </td>
             </form>  <!--run-->
