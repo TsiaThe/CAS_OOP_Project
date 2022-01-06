@@ -86,11 +86,11 @@
         <div th:if="${gamePhase=='fight'}">
             <form action="#" th:action="@{${#httpServletRequest.requestURI+'/fight'}}" method="post">
                 <td> <input class="button" type="submit" th:value="Kaempfen">  </td>
-                <td> <input type="submit" th:value="Verkaufen" disabled>  </td>
-                <td> <input type="submit" th:value="Rundenabschluss" disabled>  </td>
             </form>  <!--run-->
             <form action="#" th:action="@{${#httpServletRequest.requestURI+'/run'}}" method="post">
                 <td> <input type="submit" th:value="Weglaufen"> </td>
+                <td> <input type="submit" th:value="Verkaufen" disabled>  </td>
+                <td> <input type="submit" th:value="Rundenabschluss" disabled>  </td>
             </form>
         </div>
         <!--------------------- FIGHTING STATE BUTTON --------------------->
