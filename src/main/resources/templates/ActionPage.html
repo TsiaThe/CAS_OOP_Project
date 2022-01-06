@@ -5,29 +5,12 @@
     <link th:href="@{/css/index.css}" rel="stylesheet" />
     <meta http-equiv="refresh" content="5">
 </head>
-<style>
-    table, th, td {
-        border:1px solid black;
-    }
-    h1, td, th{
-        font-family:"Arial";
-        font-size: 15px;
-    }
-    h2{
-
-    }
-    .test{
-        vertical-align: top;
-        text-align: left;
-    }
-
-</style>
 
 <body>
-<table style="width:100%">
+<table class="borderClass" style="width:100%">
     <tr>
-        <th colspan="5">One</th>
-        <th style="width:50%">DynamicInfo</th>
+        <th style="background-color: #efc39f" colspan="5">Generische Spielinformationen</th>
+        <th class="leftborderClass" style="width:50%;background-color: #efc39f">Runde Informationen</th>
     </tr>
     <tr>
         <!-- This part works fine but does not look nice
@@ -43,7 +26,7 @@
         <td style="width: 10%;"> <h2 class="mainAttribute" th:text="'Rasse: '+${playerRace}"></h2> </td>
         <td style="width: 10%;"> <h2 class="mainAttribute" th:text="'Stufe: '+${playerLevel}"></h2> </td>
         <td style="width: 10%;"> <h2 class="mainAttribute" th:text="'Kampfwert: '+${playerStrength}"></h2> </td>
-        <td>
+        <td class="leftborderClass" style="background-color:  #e7ae81">
             <p th:text="${GeneralInfo}"> </p>
         </td>
     </tr>
@@ -57,8 +40,8 @@
         <td colspan="3" >
             <p th:text="${doorName}"></p>
         </td>
-        <td rowspan="3">
-            <div class="myBoxNr">
+        <td rowspan="3" class="leftborderClass" style="background-color: #e08d4b">
+            <div>
                 <p th:text="${DynamicInfo}"> </p>
             </div>
         </td>
@@ -75,28 +58,28 @@
         <!--------------------- GAME PHASE BUTTONS --------------------->
         <div th:if="${gamePhase=='nofight'}">
             <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sell'}}" method="post">
-                <td> <input th:value="Kaempfen" disabled> </td>
-                <td> <input th:value="Weglaufen" disabled> </td>
-                <td> <input type="submit" th:value="Verkaufen"> </td>
+                <td> <input class="Inactivebutton" th:value="Kaempfen" disabled> </td>
+                <td> <input class="Inactivebutton" th:value="Weglaufen" disabled> </td>
+                <td> <input class="Activebutton" type="submit" th:value="Verkaufen"> </td>
             </form>
             <form action="#" th:action="@{${#httpServletRequest.requestURI+'/newRound'}}" method="post">
-                <td> <input type="submit" th:value="Rundenabschluss"> </td>
+                <td colspan="2"> <input class="Activebutton" type="submit" th:value="Rundenabschluss"> </td>
             </form>
         </div>
         <div th:if="${gamePhase=='fight'}">
             <form action="#" th:action="@{${#httpServletRequest.requestURI+'/fight'}}" method="post">
-                <td> <input class="button" type="submit" th:value="Kaempfen">  </td>
+                <td> <input class="Activebutton" type="submit" th:value="Kaempfen">  </td>
             </form>  <!--run-->
             <form action="#" th:action="@{${#httpServletRequest.requestURI+'/run'}}" method="post">
-                <td> <input type="submit" th:value="Weglaufen"> </td>
-                <td> <input type="submit" th:value="Verkaufen" disabled>  </td>
-                <td> <input type="submit" th:value="Rundenabschluss" disabled>  </td>
+                <td> <input class="Activebutton" type="submit" th:value="Weglaufen"> </td>
+                <td> <input class="Inactivebutton" th:value="Verkaufen" disabled>  </td>
+                <td colspan="2"> <input class="Inactivebutton" th:value="Rundenabschluss" disabled>  </td>
             </form>
         </div>
         <!--------------------- FIGHTING STATE BUTTON --------------------->
         <form action="#" th:action="@{${#httpServletRequest.requestURI+'/fightState'}}" method="post">
             <div>
-                <td> <input th:if="${fightButton}" type="submit" th:value="${fightingState}"> </td>
+                <td> <input class="Activebutton" th:if="${fightButton}" type="submit" th:value="${fightingState}"> </td>
             </div>
         </form>
         <!-------------------------------------------------------------->
@@ -106,32 +89,32 @@
 <!------------------------------------------------------------------------->
 <table style="width:100%">
     <tr>
-        <th style="width:60%">Gegenstaende</th>
-        <th style="width:40%">Chat history</th>
+        <th class="centeringEquipment" style="width:60%"> Gegenstaende</th>
+        <th class="centeringEquipment" style="width:40%;">Chat history</th>
     </tr>
     <tr>
-        <td class="test">
+        <td class="topAllignment">
             <table style="width:100%">
                 <!-- Gegenstaende -->
                 <tr>
                    <th style="width: 30%;"> Name </th>
-                   <th style="width: 40%;"> Beschreibung </th>
-                   <th style="width: 5%;"> Bonus </th>
-                   <th style="width: 5%;"> Wert </th>
-                   <th style="width: 8%;"> Klein </th>
+                   <th style="width: 43%;"> Beschreibung </th>
+                   <th class="centeringClass" style="width: 2%;"> Bonus </th>
+                   <th class="centeringClass" style="width: 5%;"> Wert </th>
+                   <th class="centeringClass" style="width: 8%;"> Klein </th>
                    <th class="hiddenText" style="width: 12%;"> Selling </th>
                </tr>
                <tr th:each="item : ${items}">
                    <td th:text="${item.name}"></td>
                    <td th:text="${item.description}"></td>
-                   <td th:text="${item.bonus}"></td>
-                   <td th:text="${item.value}"></td>
-                   <td th:text="${item.smallItem}"></td>
+                   <td class="centeringClass" th:text="${item.bonus}"></td>
+                   <td class="centeringClass" th:text="${item.value}"></td>
+                   <td class="centeringClass" th:text="${item.smallItem}"></td>
                    <td>
                        <form action="#" th:action="@{${#httpServletRequest.requestURI}+'/'+${item.name}}" method="post">
                            <div th:switch="${item.sell}">
-                               <input th:case="false" type="submit" th:value="Abgeben">
-                               <input th:case="true" type="submit" th:value="Behalten">
+                               <input class="Activebutton" th:case="false" type="submit" th:value="Abgeben">
+                               <input class="Activebutton" th:case="true" type="submit" th:value="Behalten">
                            </div>
                        </form>
                    </td>
@@ -144,7 +127,7 @@
 
                 <!-- Headgear -->
                 <tr>
-                    <th colspan="4">Kopfbedeckung</th>
+                    <th colspan="6"  class="centeringEquipment" >Kopfbedeckung</th>
                 </tr>
                 <tr>
                     <td style="width: 5%;"> Name </td>
@@ -158,17 +141,17 @@
                     <td style="width: 5%;"> Wert </td>
                     <td th:if="${headgearValue}" th:text="${headgearValue}"></td>
                     <td>
-                        <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellArmour'}}" method="post">
-                            <div th:switch="${armourSell}">
-                                <input th:case="false" type="submit" th:value="Abgeben">
-                                <input th:case="true" type="submit" th:value="Behalten">
+                        <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellHeadgear'}}" method="post">
+                            <div th:switch="${headgearSell}">
+                                <input class="Activebutton" th:case="false" type="submit" th:value="Abgeben">
+                                <input class="Activebutton" th:case="true" type="submit" th:value="Behalten">
                             </div>
                         </form>
                     </td>
                 </tr>
                 <!-- Armour -->
                 <tr>
-                    <th colspan="4">Ruestung</th>
+                    <th colspan="6" class="centeringEquipment" >Ruestung</th>
                 </tr>
                 <tr>
                     <td style="width: 5%;"> Name </td>
@@ -184,15 +167,15 @@
                     <td>
                         <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellArmour'}}" method="post">
                             <div th:switch="${armourSell}">
-                                <input th:case="false" type="submit" th:value="Abgeben">
-                                <input th:case="true" type="submit" th:value="Behalten">
+                                <input class="Activebutton" th:case="false" type="submit" th:value="Abgeben">
+                                <input class="Activebutton" th:case="true" type="submit" th:value="Behalten">
                             </div>
                         </form>
                     </td>
                 </tr>
                 <!-- Boots -->
                 <tr>
-                    <th colspan="4">Schuhe</th>
+                    <th colspan="6"  class="centeringEquipment" >Schuhe</th>
                 </tr>
                 <tr>
                     <td style="width: 5%;"> Name </td>
@@ -208,18 +191,18 @@
                     <td>
                         <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellBoots'}}" method="post">
                             <div th:switch="${bootsSell}">
-                                <input th:case="false" type="submit" th:value="Abgeben">
-                                <input th:case="true" type="submit" th:value="Behalten">
+                                <input class="Activebutton" th:case="false" type="submit" th:value="Abgeben">
+                                <input class="Activebutton" th:case="true" type="submit" th:value="Behalten">
                             </div>
                         </form>
                     </td>
                 </tr>
             </table>
         </td>
-        <td class="test">
+        <td class="topAllignment">
             <table height="100%" width="100%">
                 <tr>
-                    <td>
+                    <td class="borderClass">
                         <div class="myBoxSc">
                             <table>
                                 <tr th:each="message : ${messages}">
@@ -233,7 +216,7 @@
                     <td>
                         <form action="#" th:action="@{${#httpServletRequest.requestURI}}" object="${newMessaga}" newMessaga="message" method="post">
                             <input size="60" type="text" field="*{name}" name="messageText" class="form-control" id="name" required="" pattern="^\S.*$">
-                            <input type="submit" class="btn btn-primary" value="Send">
+                            <input type="submit" class="Activebutton" value="Absenden">
                         </form>
                     </td>
                 </tr>

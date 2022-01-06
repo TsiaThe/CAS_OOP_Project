@@ -97,9 +97,9 @@ public class ActionController {
         itemsModel(cuID, model);
 
         // Communication handling (show messaging history)
-        if (messageRepository.count()==0){
-           messageRepository.save(new Message("Chat history"));
-        }
+        //if (messageRepository.count()==0){
+        //   messageRepository.save(new Message("Chat history"));
+        //}
         model.put("messages", messageRepository.findAll());
         if (userRepository.count()==gameState.getNumberOfPlayers()){
             return "ActionPage";
@@ -322,7 +322,7 @@ public class ActionController {
         }
 
         currentModel.put("doorName",dc.getName());
-        if (dc instanceof Monster) currentModel.put("doorName","Name: "+dc.getName()+" (lvl: "+
+        if (dc instanceof Monster) currentModel.put("doorName",dc.getName()+" (lvl: "+
                 ((Monster) dc).getLevelValue()+")");
         currentModel.put("doorDescription",dc.getDescription());
 
