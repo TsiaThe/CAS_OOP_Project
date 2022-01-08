@@ -1,7 +1,31 @@
 /* General class to align always
    all elements in the middle*/
 * {
-    text-align:center;
+    text-align: center;
+    font-family:Arial;
+}
+
+.w3-btn,.w3-button{border:none;display:inline-block;padding:8px 16px;vertical-align:middle;overflow:hidden;text-decoration:none;color:inherit;background-color:inherit;text-align:center;cursor:pointer;white-space:nowrap}
+.w3-black,.w3-hover-black:hover{color:#fff!important;background-color:#000!important}
+
+a.Activebutton{
+    display:inline-block;
+    padding:0.3em 1.2em;
+    margin:0 0.3em 0.3em 0;
+    border-radius:2em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-weight:300;
+    color:#FFFFFF;
+    background-color:mediumblue;
+    font-family: "Comic Sans MS", "Comic Sans", cursive;
+    transition: all 0.2s;
+    width: 160px;
+    height: 80px;
+    font-size: 18px;
+}
+a.Activebutton:hover{
+    background-color:red;
 }
 
 .playful span {

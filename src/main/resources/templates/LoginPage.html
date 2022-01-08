@@ -5,10 +5,11 @@
     <th:block th:include="fragments/common.html :: headerfiles"> </th:block>
     <meta http-equiv="refresh" content="2">
     <script src="../static/js/coreLoginPage.js"></script>
-    <link href="../static/css/indexLoginPage.css" rel="stylesheet" />
+    <script th:src="@{/js/coreLoginPage.js}"></script>
+    <link th:href="@{/css/indexLoginPage.css}" rel="stylesheet" />
 </head>
-<body>
 
+<body th:onload="'moveImage();'" >
 <table style="width:50%">
     <tr>
         <th></th>
@@ -16,9 +17,9 @@
         <th></th>
     </tr>
     <tr>
-        <td> <img src="../static/images/effects/torche.gif" alt="!" width="200" /> </td>
-        <td> <img src="../static/images/effects/DungeonDoor.png" alt="!" width="200" /> </td>
-        <td> <img src="../static/images/effects/torche.gif" alt="!" width="200" /> </td>
+        <td><img th:src="@{${'/images/effects/torche.gif'}}" width="200px"/> </td>
+        <td><img th:src="@{${'/images/effects/DungeonDoor.png'}}" height="200px"/> </td>
+        <td><img th:src="@{${'/images/effects/torche.gif'}}" width="200px"/> </td>
     </tr>
     <tr>
         <td></td>
@@ -54,21 +55,27 @@
     <tr>
         <td>
 
+            <table>
+                <th>Test</th>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.name}"></td>
+                </tr>
+            </table>
+
         </td>
-
+        <td>
+            <a href="/signup" class="Activebutton">Sign up</a>
+        </td>
+        <td style="text-align: left">
+            <img style="position:relative;" th:src="@{${'/images/effects/Monster1.png'}}" height="200px"/>
+        </td>
     </tr>
-
-
-
 
 
 
 </table>
 
-
-<div>
-
-    <div th:switch="${users}">
+<div th:switch="${users}">
         <h2 th:case="null">No users yet!</h2>
         <div th:case="*">
             <p>Existing players</p>
@@ -84,21 +91,14 @@
             </table>
         </div>
     </div>
-    <div>
-        <h2>Moechtest du spielen?</h2>
-        <div>
-            <div>
-                <a href="/signup" class="button">Sign up</a>
-            </div>
-        </div>
-    </div>
-</div>
 
+
+<!--
 <img id="Image" src="../static/images/Monster.png" height="100px"/>
 <img style="position:absolute;" id="Image1" onload="moveImage()" src="../static/images/effects/Monster1.png" height="100px"/>
 <img style="position:absolute;" id="Image2" onload="moveImage()" src="../static/images/effects/Monster4.png" height="100px"/>
 
-
+-->
 
 <footer th:insert="fragments/common.html :: footer"></footer>
 </body>
