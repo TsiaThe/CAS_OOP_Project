@@ -41,6 +41,7 @@ public class UserController {
     @GetMapping("/")
     public String loginPage(Model model) {
         if (userRepository.count()==4) return "SupportPage";
+        if (userRepository.count()>0) model.addAttribute("existingUsers",true);
         model.addAttribute("users", userRepository.findAll());
         return "LoginPage";
     }

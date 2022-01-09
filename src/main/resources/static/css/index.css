@@ -1,8 +1,5 @@
-/* class with table borders for testing
-table, th, td {
-    border:1px solid black;
-}*/
-
+/* Classes to create a table-like feeling
+   using borders and lines */
 .borderClass {
     border:1px solid black;
 }
@@ -11,6 +8,7 @@ table, th, td {
     border-left: 3px solid #000;
 }
 
+/* Class to center the text in a field*/
 .centeringClass{
     text-align:center;
 }
@@ -21,12 +19,14 @@ table, th, td {
     font-size: 13px;
 }
 
-/* class for aligning element at top left corner */
+/* Class for aligning an element at top left corner */
 .topAllignment{
     vertical-align: top;
     text-align: left;
 }
 
+/* Class for centering the text of
+   equipment attributes */
 .centeringEquipment{
     text-align:center;
     background-color: #b8d7f8;
@@ -55,6 +55,8 @@ table, th, td {
     border:1px solid black;
 }
 
+/* Class for the style of
+   currently active buttons */
 input.Activebutton{
     display:inline-block;
     padding:0.3em 1.2em;
@@ -70,10 +72,15 @@ input.Activebutton{
     width: 140px;
     font-size: 12px;
 }
+
+/* Class for the hovering effect
+   of currently active buttons */
 input.Activebutton:hover{
     background-color:red;
 }
 
+/* Class for the style of
+   currently inactive buttons */
 input.Inactivebutton{
     display:inline-block;
     padding:0.3em 1.2em;
@@ -89,5 +96,3 @@ input.Inactivebutton{
     width: 140px;
     font-size: 12px;
 }
-
-

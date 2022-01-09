@@ -12,9 +12,7 @@
 <body th:onload="'moveImage();'" >
 <table style="width:50%">
     <tr>
-        <th></th>
-        <th>Wilkommen zu Dungeon</th>
-        <th></th>
+        <th height="100" colspan="3" class="titleFont">Wilkommen zu Dungeon</th>
     </tr>
     <tr>
         <td><img th:src="@{${'/images/effects/torche.gif'}}" width="200px"/> </td>
@@ -23,7 +21,7 @@
     </tr>
     <tr>
         <td></td>
-        <td>Ein auf Munchkin basierendes Spiel</td>
+        <td class="subtitleFont"> Ein auf Munchkin basierendes Spiel </td>
         <td></td>
     </tr>
     <tr>
@@ -56,7 +54,7 @@
         <td>
 
             <table>
-                <th>Test</th>
+                <th th:if="${existingUsers}" style="text-decoration: underline">Spieler:</th>
                 <tr th:each="user : ${users}">
                     <td th:text="${user.name}"></td>
                 </tr>
@@ -70,35 +68,7 @@
             <img style="position:relative;" th:src="@{${'/images/effects/Monster1.png'}}" height="200px"/>
         </td>
     </tr>
-
-
-
 </table>
-
-<div th:switch="${users}">
-        <h2 th:case="null">No users yet!</h2>
-        <div th:case="*">
-            <p>Existing players</p>
-            <table>
-                <tr>
-                    <th>Name</th>
-                </tr>
-                <tbody>
-                <tr th:each="user : ${users}">
-                    <td th:text="${user.name}"></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-
-<!--
-<img id="Image" src="../static/images/Monster.png" height="100px"/>
-<img style="position:absolute;" id="Image1" onload="moveImage()" src="../static/images/effects/Monster1.png" height="100px"/>
-<img style="position:absolute;" id="Image2" onload="moveImage()" src="../static/images/effects/Monster4.png" height="100px"/>
-
--->
 
 <footer th:insert="fragments/common.html :: footer"></footer>
 </body>
