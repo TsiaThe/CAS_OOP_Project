@@ -8,7 +8,7 @@ function moveImage(){
 
 // Function that performs the image move in a certain direction
 function move(i) {
-    // The monster image is the 4rth image element of the LoginPage.
+    // The monster image is the 4th image element of the LoginPage.
     var imageToMove = document.getElementsByTagName("img")[3];
     imageToMove.style.left = -i*6+"px";
 }
