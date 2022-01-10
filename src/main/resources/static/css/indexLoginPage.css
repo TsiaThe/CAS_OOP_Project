@@ -38,7 +38,7 @@ a.Activebutton{
     font-family: "Comic Sans MS", "Comic Sans", cursive;
     transition: all 0.2s;
     width: 160px;
-    height: 80px;
+    height: 45px;
     font-size: 18px;
 }
 
@@ -49,6 +49,7 @@ a.Activebutton:hover{
 
 /* Classes the colorful effects of a message*/
 .playful span {
+    text-align: center;
     color: #5362F6;
     font-family: "Comic Sans MS", "Comic Sans", cursive;
     font-size: 35px;
@@ -73,4 +74,29 @@ a.Activebutton:hover{
 .playful span:nth-child(7n), .playful span:nth-child(11n) {
     color: #FF9C55;
     text-shadow: 0.25px 0.25px #FF5555, 0.5px 0.5px #FF5555, 0.75px 0.75px #FF5555, 1px 1px #FF5555, 1.25px 1.25px #FF5555, 1.5px 1.5px #FF5555, 1.75px 1.75px #FF5555, 2px 2px #FF5555, 2.25px 2.25px #FF5555, 2.5px 2.5px #FF5555, 2.75px 2.75px #FF5555, 3px 3px #FF5555, 3.25px 3.25px #FF5555, 3.5px 3.5px #FF5555, 3.75px 3.75px #FF5555, 4px 4px #FF5555, 4.25px 4.25px #FF5555, 4.5px 4.5px #FF5555, 4.75px 4.75px #FF5555, 5px 5px #FF5555, 5.25px 5.25px #FF5555, 5.5px 5.5px #FF5555, 5.75px 5.75px #FF5555, 6px 6px #FF5555;
+}
+
+/* Style for signup input field */
+input.custom-field {
+    font-size: 14px;
+    position: relative;
+    vertical-align: bottom;
+    horiz-align: left;
+    border: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: #77cbde;
+    padding: 12px;
+    border-radius: 8px;
+    width: 100px;
+    height: 20px;
+}
+
+::placeholder {
+    color: #555BFF;
+}
+
+td.Extrawidth{
+    width: 700px;
 }

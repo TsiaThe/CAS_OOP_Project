@@ -200,7 +200,7 @@
             </table>
         </td>
         <td class="topAllignment">
-            <table height="100%" width="100%">
+            <table height="100%">
                 <tr>
                     <td class="borderClass">
                         <div class="myBoxSc">
@@ -215,7 +215,7 @@
                 <tr>
                     <td>
                         <form action="#" th:action="@{${#httpServletRequest.requestURI}}" object="${newMessaga}" newMessaga="message" method="post">
-                            <input size="60" type="text" field="*{name}" name="messageText" class="form-control" id="name" required="" pattern="^\S.*$">
+                            <input size="50" type="text" field="*{name}" name="messageText" class="form-control" id="name" required="" pattern="^\S.*$">
                             <input type="submit" class="Activebutton" value="Absenden">
                         </form>
                     </td>

@@ -4,7 +4,6 @@
     <title>Dungeon spiel</title>
     <th:block th:include="fragments/common.html :: headerfiles"> </th:block>
     <meta http-equiv="refresh" content="2">
-    <script src="../static/js/coreLoginPage.js"></script>
     <script th:src="@{/js/coreLoginPage.js}"></script>
     <link th:href="@{/css/indexLoginPage.css}" rel="stylesheet" />
 </head>
@@ -52,17 +51,15 @@
     </tr>
     <tr>
         <td>
-
             <table>
                 <th th:if="${existingUsers}" style="text-decoration: underline">Spieler:</th>
                 <tr th:each="user : ${users}">
                     <td th:text="${user.name}"></td>
                 </tr>
             </table>
-
         </td>
         <td>
-            <a href="/signup" class="Activebutton">Sign up</a>
+            <a style="position: relative;top:-0.8cm" href="/signup" class="Activebutton">Sign up</a>
         </td>
         <td style="text-align: left">
             <img style="position:relative;" th:src="@{${'/images/effects/Monster1.png'}}" height="200px"/>
