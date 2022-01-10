@@ -6,7 +6,7 @@ function moveImage(){
     }
 }
 
-// Fuction that perfomrs the immage move in a certain direction
+// Function that moves the door to the left.
 function move(i) {
     // The monster image is the 4rth image element of the LoginPage.
     var imageToMove = document.getElementsByTagName("img")[3];

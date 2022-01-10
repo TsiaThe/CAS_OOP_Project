@@ -15,13 +15,14 @@
         <th height="100" colspan="3" class="titleFont">Wilkommen zu Dungeon</th>
     </tr>
     <tr>
+        <!--------------------- GAME MAIN IMAGES --------------------->
         <td><img th:src="@{${'/images/effects/torche.gif'}}" width="200px"/> </td>
         <td class="Extrawidth">
+            <!--- Using relative position creates a space after the EmptyDoor image.
+                  To make the graphics centered, a white door is added before this. --->
             <img style="position: relative;" th:src="@{${'/images/effects/WhiteDoor.png'}}" height="100px" />
             <img style="position: relative;" th:src="@{${'/images/effects/EmptyDoor.png'}}" height="120px" />
             <img style="position: relative; top:-0.25cm; left:-2.7cm" th:src="@{${'/images/effects/Door.png'}}" height="100px" />
-            <!--        <img style="position: relative; left:7cm;" th:src="@{${'/images/effects/EmptyDoor.png'}}" height="200px" />
-                    <img style=" top:0cm;" th:src="@{${'/images/effects/Door.png'}}" height="170px"/> -->
         </td>
         <td><img th:src="@{${'/images/effects/torche.gif'}}" width="200px"/> </td>
     </tr>
@@ -32,67 +33,14 @@
     </tr>
     <tr>
         <td colspan="3" rowspan="2">
-        <form action="#" th:action="@{/adduser}" object="${newUser}" newUser="user" method="post">
+            <!--------------------- Form to add a name --------------------->
+            <form action="#" th:action="@{/adduser}" object="${newUser}" newUser="user" method="post">
             <input class="custom-field" type="text" field="*{name}" name="name" id="name" placeholder="Name">
             <input type="submit" class="Activebutton" style="position: relative;top:-0.2cm" value="Einloggen">
-        <!--    <img style="position: relative; top:-7cm;" th:src="@{${'/images/effects/Door.png'}}" height="170px"/> -->
         </form>
     </tr>
-      <!--  <td>
-            <img style="position: relative; top:-7cm; right:10.5cm" th:src="@{${'/images/effects/EmptyDoor.png'}}" height="200px" />
-            <img style="position: relative; top:-7cm;" th:src="@{${'/images/effects/Door.png'}}" height="170px"/>
-        </td>
-        -->
-
-<!--
-        <td class="playful">
-            <span aria-hidden="true">N</span>
-            <span aria-hidden="true">a</span>
-            <span aria-hidden="true">m</span>
-            <span aria-hidden="true">e</span>
-        </td>
-
-            <form action="#" th:action="@{/adduser}" object="${newUser}" newUser="user" method="post">
-                <td>   <input class="custom-field" type="text" field="*{name}" name="name" id="name" placeholder="Name"> </td>
-                <td>   <input type="submit" class="Activebutton" value="Einloggen"> </td>
-            </form>
-        </tr>
-        -->
 </table>
 
-
-
-
-
-
-
-
-
-
-<!--
-
-
-<div class="container my-5">
-    <h2 class="mb-5">New User</h2>
-    <div class="row">
-        <div class="col-md-6">
-            <form action="#" th:action="@{/adduser}" object="${newUser}" newUser="user" method="post">
-                <div class="row">
-                    <div class="form-group col-md-6">
-                        <label for="name" class="col-form-label">Name</label>
-                        <input type="text" field="*{name}" name="name" class="form-control" id="name" placeholder="Name">
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mt-5">
-                        <input type="submit" class="btn btn-primary" value="Einloggen">
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
--->
 <footer th:insert="fragments/common.html :: footer"></footer>
 </body>
 </html>
