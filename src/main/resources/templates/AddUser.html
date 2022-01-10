@@ -6,7 +6,6 @@
     <script th:src="@{/js/coreAddUserPage.js}"></script>
     <link th:href="@{/css/additionalIndex.css}" rel="stylesheet" />
     <link th:href="@{/css/index.css}" rel="stylesheet" />
-
 </head>
 
 <body th:onload="'moveImage();'">
@@ -41,7 +40,7 @@
     </tr>
 </table>
 
-<!--------------------- Monsters to move aling the page --------------------->
+<!--------------------- Monsters to move along the page --------------------->
 <img style="position: absolute;" onload="moveImage()" th:src="@{${'/images/effects/Monster2.png'}}" height="100px" />
 <img style="position: absolute;" onload="moveImage()" th:src="@{${'/images/effects/Monster3.png'}}" height="100px" />
 
