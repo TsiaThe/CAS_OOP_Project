@@ -223,7 +223,8 @@ public class ActionController {
             }
             gameState.getMainPlayer().setLevel(gameState.getMainPlayer().getLevel()+1);
             gameState.getMainPlayer().calculateFightStrength();
-            dynamicInformation += "und eine Stuffe. Aktuelle Stufe: "+gameState.getMainPlayer().getLevel();
+            if (wonTreasures>0) dynamicInformation += "und ";
+            dynamicInformation += "eine Stuffe. Aktuelle Stufe: "+gameState.getMainPlayer().getLevel();
         }
         // Disables the fight button for the remaining of the round.
         doorActionPerformed = true;
