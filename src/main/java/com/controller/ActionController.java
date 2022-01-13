@@ -102,7 +102,7 @@ public class ActionController {
         //}
         model.put("messages", messageRepository.findAll());
         if (userRepository.count()==gameState.getNumberOfPlayers()){
-            return "ActionPage";
+            return "ActionPageEND";
         }
         return "WaitPage";
     }
@@ -357,7 +357,7 @@ public class ActionController {
         if (currentPlayer.getBoots()!=null){
             currentModel.put("bootsName", currentPlayer.getBoots().getName());
             currentModel.put("bootsBonus", currentPlayer.getBoots().getBonus());
-            currentModel.put("bootsValue", currentPlayer.getBoots().getValue()+" Goldstuecke");
+            currentModel.put("bootsValue", currentPlayer.getBoots().getValue()); //BT entfernt
             currentModel.put("bootsSell", currentPlayer.getBoots().getSell());
         }
         else{
@@ -372,11 +372,11 @@ public class ActionController {
         if (currentPlayer.getArmour()!=null){
             currentModel.put("armourName", currentPlayer.getArmour().getName());
             currentModel.put("armourBonus", currentPlayer.getArmour().getBonus());
-            currentModel.put("armourValue", currentPlayer.getArmour().getValue()+" Goldstuecke");
+            currentModel.put("armourValue", currentPlayer.getArmour().getValue()); //BT entfernt
             currentModel.put("armourSell", currentPlayer.getArmour().getSell());
         }
         else{
-            currentModel.put("armourName", "Keine Ruestung");
+            currentModel.put("armourName", "Keine Rüstung"); //BT geändert
         }
         return currentModel;
     }
@@ -387,7 +387,7 @@ public class ActionController {
         if (currentPlayer.getHeadgear()!=null){
             currentModel.put("headgearName", currentPlayer.getHeadgear().getName());
             currentModel.put("headgearBonus", currentPlayer.getHeadgear().getBonus());
-            currentModel.put("headgearValue", currentPlayer.getHeadgear().getValue()+" Goldstuecke");
+            currentModel.put("headgearValue", currentPlayer.getHeadgear().getValue()); //BT entfernt
             currentModel.put("headgearSell", currentPlayer.getHeadgear().getSell());
         }
         else{
@@ -425,10 +425,10 @@ public class ActionController {
         // player fighting state. The button will be shown only for the non-main players
         // in case of a monster door (as per doorModel controller!).
         if (currentPlayer.getFights()==true){
-            currentModel.put("fightingState","Nicht mitkaempfen!");
+            currentModel.put("fightingState","Beobachten"); //BT geändert
         }
         else{
-            currentModel.put("fightingState","Mitkaempfen!");
+            currentModel.put("fightingState","Mitkämpfen"); //BT geändert
         }
 
         return currentModel;
