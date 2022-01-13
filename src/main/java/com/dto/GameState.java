@@ -20,7 +20,7 @@ import java.util.List;
  * controls the flow of the game through the
  * various controllers (see "controller" package).
  * @author Theofanis Tsiantas
- * @version  2021.12.27 - version 1
+ * @version  2022.01.13 - version 3
  */
 @Component
 public class GameState {
@@ -31,6 +31,8 @@ public class GameState {
     private final Starter gameStarter;
     // The number of players as defined in the Starter instance.
     private final int numberOfPlayers;
+    // The maximum player level for the game to end.
+    private final int maxLevel;
     // "gamePlayers" is a list of all the players in the actual game.
     private List<Player> gamePlayers;
     // "mainPlayer" is the currently active player of a round.
@@ -58,6 +60,7 @@ public class GameState {
         this.gamePlayers = gameStarter.getPlayers();
         mainPlayer = gamePlayers.get(0);
         numberOfPlayers = gameStarter.getNumPlayers();
+        maxLevel = gameStarter.getMaxLevel();
         this.secondaryPlayers = new ArrayList<>(numberOfPlayers);
         for (Player p:gamePlayers){
             if (!p.equals(mainPlayer)) secondaryPlayers.add(p);
@@ -198,4 +201,6 @@ public class GameState {
     public int getNumberOfPlayers(){
         return numberOfPlayers;
     }
+
+    public int getMaxLevel(){return maxLevel;}
 }

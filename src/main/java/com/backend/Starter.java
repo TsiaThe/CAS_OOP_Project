@@ -12,13 +12,15 @@ import java.util.List;
  * (of random class and race).  It contains lists with all
  * door and treasure cards as well as with the players.
  * @author Theofanis Tsiantas
- * @version  2021.11.23 - version 1
+ * @version  2022.01.13 - version 3
  */
 @Component
 public class Starter {
 
-    // Number of game players (simple version=4).
-    private static int numPlayers = 2;
+    // Number of game players.
+    private static final int numPlayers = 2;
+    // Maximum level till game ends.
+    private static final int maxLevel = 4;
     // List of randomly generated players.
     private static List<Player> players = new ArrayList<>(numPlayers);
     // List of all door cards.
@@ -139,4 +141,7 @@ public class Starter {
     public static int getNumPlayers() {
         return numPlayers;
     }
+
+    // Getter for the maximum player level of the game.
+    public static int getMaxLevel(){return maxLevel;}
 }

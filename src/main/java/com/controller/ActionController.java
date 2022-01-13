@@ -97,11 +97,27 @@ public class ActionController {
         itemsModel(cuID, model);
 
         // Communication handling (show messaging history)
-        //if (messageRepository.count()==0){
-        //   messageRepository.save(new Message("Chat history"));
-        //}
         model.put("messages", messageRepository.findAll());
-        if (userRepository.count()==gameState.getNumberOfPlayers()){
+
+        // Check if game has started, otherwise go to WaitPage
+        if (userRepository.count()==gameState.getNumberOfPlayers()) {
+
+            // Check if game has ended
+            if (gameState.getAllPlayers().stream().filter(p -> p.getLevel() >= gameState.getMaxLevel()).count() > 0) {
+                List<Player> winners = new ArrayList<>();
+                for (Player p : gameState.getAllPlayers()) {
+                    if (p.getLevel() >= gameState.getMaxLevel()) {
+                        winners.add(p);
+                    }
+                }
+                String winnerNames = userRepository.findById(winners.get(0).getId()).get().getName();
+                for (int i = 1; i < winners.size(); i++) {
+                    winnerNames += ", ";
+                    winnerNames += userRepository.findById(winners.get(i).getId()).get().getName();
+                }
+                model.put("winners", winnerNames);
+                return "WinPage";
+            }
             return "ActionPage";
         }
         return "WaitPage";
