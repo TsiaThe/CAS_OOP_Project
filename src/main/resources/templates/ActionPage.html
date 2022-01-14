@@ -21,11 +21,11 @@
             </h2>
         </td>
         -->
-        <td style="width: 10%;"> <h2 class="mainAttribute" th:text="'Name: '+${playerName}"></h2> </td>
-        <td style="width: 10%;"> <h2 class="mainAttribute" th:text="'Klasse: '+${playerClass}"></h2> </td>
-        <td style="width: 10%;"> <h2 class="mainAttribute" th:text="'Rasse: '+${playerRace}"></h2> </td>
-        <td style="width: 10%;"> <h2 class="mainAttribute" th:text="'Stufe: '+${playerLevel}"></h2> </td>
-        <td style="width: 10%;"> <h2 class="mainAttribute" th:text="'Kampfwert: '+${playerStrength}"></h2> </td>
+        <td style="width: 10%;"> <h2 class="mainAttribute" th:text="'Name: '+${currentPlayerName}"></h2> </td>
+        <td style="width: 10%;"> <h2 class="mainAttribute" th:text="'Klasse: '+${currentPlayerClass}"></h2> </td>
+        <td style="width: 10%;"> <h2 class="mainAttribute" th:text="'Rasse: '+${currentPlayerRace}"></h2> </td>
+        <td style="width: 10%;"> <h2 class="mainAttribute" th:text="'Stufe: '+${currentPlayerLevel}"></h2> </td>
+        <td style="width: 10%;"> <h2 class="mainAttribute" th:text="'Kampfwert: '+${currentPlayerStrength}"></h2> </td>
         <td class="leftborderClass" style="background-color:  #e7ae81">
             <p th:text="${GeneralInfo}"> </p>
         </td>
@@ -224,6 +224,35 @@
         </td>
     </tr>
 </table>
+
+<p>  Test  </p>
+<h1> Current player image</h1>
+<img th:src="@{${'/images/avatars/' + currentPlayerClass + '.png'}}" height="100px"/>
+<table>
+    <th>Other player 1</th>
+    <tr>
+        <td> <h2 th:text="'Name: '+${otherPlayerName1}"></h2> </td>
+        <td> <h2 th:text="'Klasse: '+${otherPlayerClass1}"></h2> </td>
+        <td> <h2 th:text="'Rasse: '+${otherPlayerRace1}"></h2> </td>
+        <td> <h2 th:text="'Stufe: '+${otherPlayerLevel1}"></h2> </td>
+        <td> <h2 th:text="'Kampfwert: '+${otherPlayerStrength1}"></h2> </td>
+        <td> <img th:src="@{${'/images/avatars/' + otherPlayerClass1 + '.png'}}" height="100px"/>
+        </td>
+    </tr>
+</table>
+<table>
+    <th>Other player 2</th>
+    <tr>
+        <td> <h2 th:text="'Name: '+${otherPlayerName2}"></h2> </td>
+        <td> <h2 th:text="'Klasse: '+${otherPlayerClass2}"></h2> </td>
+        <td> <h2 th:text="'Rasse: '+${otherPlayerRace2}"></h2> </td>
+        <td> <h2 th:text="'Stufe: '+${otherPlayerLevel2}"></h2> </td>
+        <td> <h2 th:text="'Kampfwert: '+${otherPlayerStrength2}"></h2> </td>
+        <td> <img th:src="@{${'/images/avatars/' + otherPlayerClass2 + '.png'}}" height="100px"/>
+        </td>
+    </tr>
+</table>
+
 <!------------------------------------------------------------------------->
 <footer th:insert="fragments/common.html :: footer"></footer>
 </body>

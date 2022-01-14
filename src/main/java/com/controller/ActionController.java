@@ -101,7 +101,6 @@ public class ActionController {
 
         // Check if game has started, otherwise go to WaitPage
         if (userRepository.count()==gameState.getNumberOfPlayers()) {
-
             // Check if game has ended
             if (gameState.getAllPlayers().stream().filter(p -> p.getLevel() >= gameState.getMaxLevel()).count() > 0) {
                 List<Player> winners = new ArrayList<>();
@@ -430,13 +429,14 @@ public class ActionController {
     // (class, race, level, fighting strength, fight participation, etc...).
     private Map<String, Object> playerModel(long cuID, Map<String, Object> currentModel){
 
+        // Info of the current player
         Player currentPlayer = findPlayerbyID(cuID, gameState.getAllPlayers());
         String playerName = userRepository.findById(cuID).get().getName();
-        currentModel.put("playerName", playerName);
-        currentModel.put("playerClass", getPlayerClass(currentPlayer.getPlayerClass()));
-        currentModel.put("playerRace", getPlayerRace(currentPlayer.getPlayerRace()));
-        currentModel.put("playerLevel", currentPlayer.getLevel());
-        currentModel.put("playerStrength", String.valueOf(currentPlayer.getFightStrength()));
+        currentModel.put("currentPlayerName", playerName);
+        currentModel.put("currentPlayerClass", getPlayerClass(currentPlayer.getPlayerClass()));
+        currentModel.put("currentPlayerRace", getPlayerRace(currentPlayer.getPlayerRace()));
+        currentModel.put("currentPlayerLevel", currentPlayer.getLevel());
+        currentModel.put("currentPlayerStrength", String.valueOf(currentPlayer.getFightStrength()));
 
         // Changes the name of the fight button to be the opposite of the
         // player fighting state. The button will be shown only for the non-main players
@@ -446,6 +446,20 @@ public class ActionController {
         }
         else{
             currentModel.put("fightingState","Mitkaempfen!");
+        }
+
+        // Info of the other players
+        int pCount = 1;
+        for (Player p:gameState.getAllPlayers()){
+            if ((p != currentPlayer) && (userRepository.existsById(p.getId()))){
+                String otherPlayerName = userRepository.findById(p.getId()).get().getName();
+                currentModel.put("otherPlayerName"+pCount, otherPlayerName);
+                currentModel.put("otherPlayerClass"+pCount, getPlayerClass(p.getPlayerClass()));
+                currentModel.put("otherPlayerRace"+pCount, getPlayerRace(p.getPlayerRace()));
+                currentModel.put("otherPlayerLevel"+pCount, p.getLevel());
+                currentModel.put("otherPlayerStrength"+pCount, String.valueOf(p.getFightStrength()));
+                pCount++;
+            }
         }
 
         return currentModel;
