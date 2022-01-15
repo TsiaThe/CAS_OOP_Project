@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html style="font-size: 16px;"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="​Wonderful tours, ​Backpacking Trips, About Us, Freedom, Get in touch">
+    <meta name="description" content="">
+    <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <title>ActionPage</title>
+    <!--<link rel="stylesheet" href="../static/css/nicepage.css" media="screen">
+    <link rel="stylesheet" href="../static/css/ActionPage.css" media="screen">-->
+    <link th:href="@{/css/nicepage.css}" rel="stylesheet" />
+    <link th:href="@{/css/ActionPage.css}" rel="stylesheet" />
+    <!--<script class="u-script" type="text/javascript" src="../static/js/jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="../static/js/nicepage.js" defer=""></script>-->
+    <script th:src="@{/js/jquery.js}" ></script>
+    <script th:src="@{/js/nicepage.js}" ></script>
+    <meta name="generator" content="Nicepage 4.2.6, nicepage.com">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
+
+
+    <script type="application/ld+json">{
+        "@context": "http://schema.org",
+        "@type": "Organization",
+        "name": ""
+    }</script>
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="ActionPage">
+    <meta property="og:type" content="website">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("button").click(function(){
+                $("p").toggle();
+            });
+        });
+    </script>
+</head>
+<body class="u-body u-overlap u-overlap-contrast">
+
+<button>Teil der Seite ein-/ausblenden bzw. neuladen</button>
+
+<section class="u-align-center u-clearfix u-image u-shading u-section-1" id="sec-d061" data-image-width="1280" data-image-height="720">
+
+    <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-clearfix u-gutter-8 u-layout-wrap u-layout-wrap-1">
+            <div class="u-layout">
+                <div class="u-layout-row">
+                    <div class="u-container-style u-layout-cell u-opacity u-opacity-80 u-palette-1-light-1 u-radius-15 u-shape-round u-size-12-lg u-size-12-xl u-size-14-sm u-size-14-xs u-size-30-md u-layout-cell-1">
+                        <div class="u-container-layout u-container-layout-1">
+                            <img class="u-image u-image-default u-image-1" src="../static/images/squid_avatar_munchkin.png" alt="" data-image-width="1024" data-image-height="991">
+                            <div class="u-align-left u-container-style u-expanded-width u-group u-opacity u-opacity-0 u-palette-1-light-1 u-group-1">
+                                <div class="u-container-layout">
+                                    <h4 class="u-text u-text-default u-text-1">Name S1</h4>
+                                    <h5 class="u-text u-text-default u-text-2" th:text="${playerRace}"></h5>
+                                    <h5 class="u-text u-text-default u-text-3" th:text="${playerClass}"></h5>
+                                    <h5 class="u-text u-text-default u-text-4" th:text="${playerLevel}"></h5>
+                                    <h5 class="u-text u-text-default u-text-4" th:text="${playerStrength}"></h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="u-container-style u-layout-cell u-opacity u-opacity-80 u-palette-1-base u-radius-15 u-shape-round u-size-12-lg u-size-12-xl u-size-14-sm u-size-14-xs u-size-30-md u-layout-cell-2">
+                        <div class="u-container-layout u-container-layout-3">
+                            <img class="u-image u-image-default u-image-2" src="../static/images/squid_avatar_munchkin.png" alt="" data-image-width="1024" data-image-height="991">
+                            <div class="u-align-left u-container-style u-expanded-width u-group u-opacity u-opacity-0 u-palette-1-light-1 u-group-2">
+                                <div class="u-container-layout">
+                                    <h4 class="u-text u-text-default u-text-5">Name S2</h4>
+                                    <h5 class="u-text u-text-default u-text-6">Rasse S2</h5>
+                                    <h5 class="u-text u-text-default u-text-7">Klasse S2</h5>
+                                    <h5 class="u-text u-text-default u-text-8">L S2 / S S2</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="u-container-style u-layout-cell u-opacity u-opacity-80 u-palette-1-base u-radius-15 u-shape-round u-size-12-lg u-size-12-xl u-size-14-sm u-size-14-xs u-size-30-md u-layout-cell-3">
+                        <div class="u-container-layout u-container-layout-5">
+                            <img class="u-image u-image-default u-image-3" src="../static/images/squid_avatar_munchkin.png" alt="" data-image-width="1024" data-image-height="991">
+                            <div class="u-container-style u-group u-opacity u-opacity-0 u-palette-1-light-1 u-group-3">
+                                <div class="u-container-layout">
+                                    <h4 class="u-text u-text-default u-text-9">Name S3</h4>
+                                    <h5 class="u-text u-text-default u-text-10">Rasse S3</h5>
+                                    <h5 class="u-text u-text-default u-text-11">Klasse S3</h5>
+                                    <h5 class="u-text u-text-default u-text-12">L S3 / S S3</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="u-container-style u-layout-cell u-opacity u-opacity-80 u-palette-1-base u-radius-15 u-shape-round u-size-12-lg u-size-12-xl u-size-14-sm u-size-14-xs u-size-30-md u-layout-cell-4">
+                        <div class="u-container-layout u-container-layout-7">
+                            <img class="u-image u-image-default u-image-4" src="../static/images/squid_avatar_munchkin.png" alt="" data-image-width="1024" data-image-height="991">
+                            <div class="u-align-left u-container-style u-expanded-width u-group u-opacity u-opacity-0 u-palette-1-light-1 u-group-4">
+                                <div class="u-container-layout">
+                                    <h4 class="u-text u-text-default u-text-13">Name S4</h4>
+                                    <h5 class="u-text u-text-default u-text-14">Rasse S4</h5>
+                                    <h5 class="u-text u-text-default u-text-15">Klasse S4</h5>
+                                    <h5 class="u-text u-text-default u-text-16">L S4 / S S4</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="u-container-style u-layout-cell u-radius-15 u-shape-round u-size-12 u-white u-layout-cell-5">
+                        <div class="u-border-8 u-border-palette-1-light-1 u-container-layout u-valign-middle u-container-layout-9">
+                            <img class="u-image u-image-5" src="../static/images/munchkinMonster.png" data-image-width="456" data-image-height="442">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="u-align-left u-container-style u-group u-opacity u-opacity-75 u-palette-1-light-1 u-radius-15 u-shape-round u-group-5">
+            <div class="u-container-layout u-container-layout-10">
+                <h1 class="u-align-center u-text u-text-17"><p>Thomas ist dran, lasst uns kämpfen!</p></h1>
+                <div class="u-clearfix u-layout-wrap u-layout-wrap-2">
+                    <div class="u-layout">
+                        <div class="u-layout-row">
+                            <div class="u-container-style u-layout-cell u-size-14 u-layout-cell-6">
+                                <div class="u-container-layout u-container-layout-11">
+                                    <div class="u-container-style u-group u-group-6">
+                                        <!--<div class="u-container-layout">
+                                            <a href="https://nicepage.studio" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-4 u-hover-palette-2-dark-1 u-radius-6 u-btn-1">Kämpfen</a>
+                                            <a href="https://nicepage.studio" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-2 u-hover-custom-color-1 u-radius-6 u-btn-2">Verkaufen</a>
+                                            <a href="https://nicepage.studio" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-2 u-hover-custom-color-1 u-radius-6 u-btn-3">R-Abschluss</a>
+                                            <a href="https://nicepage.studio" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-2 u-hover-custom-color-1 u-radius-6 u-btn-4">Weglaufen</a>
+                                        </div>-->
+                                        <div class="u-container-layout">
+
+                                            <div th:if="${gamePhase=='nofight'}">
+                                                <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sell'}}" method="post">
+                                                    <a href="javascript:;" onclick="parentNode.submit();" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-2 u-hover-custom-color-1 u-radius-6 u-btn-2">Verkaufen</a>
+                                                    <input type="hidden" name="mess" value="Verkaufen">
+                                                </form>
+                                                <form action="#" th:action="@{${#httpServletRequest.requestURI+'/newRound'}}" method="post">
+                                                    <a href="javascript:;" onclick="parentNode.submit();" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-2 u-hover-custom-color-1 u-radius-6 u-btn-3">R-Abschluss</a>
+                                                    <input type="hidden" name="mess" value="R-Abschluss">
+                                                </form>
+                                            </div>
+
+                                            <div th:if="${gamePhase=='fight'}">
+                                                <form action="#" th:action="@{${#httpServletRequest.requestURI+'/fight'}}" method="post">
+                                                    <a href="javascript:;" onclick="parentNode.submit();" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-4 u-hover-palette-2-dark-1 u-radius-6 u-btn-1">Kämpfen</a>
+                                                    <input type="hidden" name="mess" value="Kämpfen">
+                                                </form>  <!--run-->
+
+                                                <form action="#" th:action="@{${#httpServletRequest.requestURI+'/newRound'}}" method="post">
+                                                    <a href="javascript:;" onclick="parentNode.submit();" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-2 u-hover-custom-color-1 u-radius-6 u-btn-4">Weglaufen</a>
+                                                    <input type="hidden" name="mess" value="Weglaufen">
+                                                </form>
+                                            </div>
+
+                                            <div th:if="${fightButton}">
+                                                <form action="#" th:action="@{${#httpServletRequest.requestURI+'/fightState'}}" method="post">
+                                                    <a href="javascript:;" onclick="parentNode.submit();" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-4 u-hover-palette-2-dark-1 u-radius-6 u-btn-1"><span th:text="${fightingState}"></span></a>
+                                                    <input type="hidden" name="mess" th:value="${fightingState}">
+                                                </form>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="u-container-style u-layout-cell u-size-15 u-layout-cell-7">
+                                <div class="u-container-layout u-container-layout-13">
+                                    <h4 class="u-text u-text-18">Kopfbedeckung</h4>
+                                    <div class="u-container-style u-group u-group-7">
+                                        <div class="u-container-layout">
+
+                                            <h5 class="u-text u-text-body-color u-text-19" th:text="${headgearName}"></h5>
+                                            <span th:if="${headgearName != 'Keine Kopfbedeckung'}">
+                                                <h5 class="u-text u-text-20">Bonuswert: <span th:text="${headgearBonus}"></span></h5>
+                                                <h5 class="u-text u-text-21">Wert (Goldstücke): <span th:text="${headgearValue}"></span></h5>
+
+                                                <div th:if="${headgearSell}">
+                                                    <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellHeadgear'}}" method="post">
+                                                        <a href="javascript:;" onclick="parentNode.submit();" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-4 u-hover-palette-2-dark-1 u-radius-6 u-btn-1">Behalten</a>
+                                                        <input type="hidden" name="mess1" th:value="Behalten">
+                                                    </form>
+                                                </div>
+
+                                                <div th:unless="${headgearSell}">
+                                                    <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellHeadgear'}}" method="post">
+                                                        <a href="javascript:;" onclick="parentNode.submit();" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-4 u-hover-palette-2-dark-1 u-radius-6 u-btn-1">Abgeben</a>
+                                                        <input type="hidden" name="mess1" th:value="Abgeben">
+                                                    </form>
+                                                </div>
+                                            </span>
+
+                                        </div>
+                                    </div>
+                                    <h4 class="u-text u-text-22">Rüstung</h4>
+                                    <div class="u-align-left u-container-style u-group u-group-8">
+                                        <div class="u-container-layout">
+
+                                            <h5 class="u-text u-text-body-color u-text-19" th:text="${armourName}"></h5>
+                                            <span th:if="${armourName != 'Keine Ruestung'}">
+                                                <h5 class="u-text u-text-20">Bonuswert: <span th:text="${armourBonus}"></span></h5>
+                                                <h5 class="u-text u-text-21">Wert (Goldstücke): <span th:text="${armourValue}"></span></h5>
+
+                                                <div th:if="${armourSell}">
+                                                    <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellArmour'}}" method="post">
+                                                        <a href="javascript:;" onclick="parentNode.submit();" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-4 u-hover-palette-2-dark-1 u-radius-6 u-btn-1">Behalten</a>
+                                                        <input type="hidden" name="mess1" th:value="Behalten">
+                                                    </form>
+                                                </div>
+
+                                                <div th:unless="${armourSell}">
+                                                    <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellArmour'}}" method="post">
+                                                        <a href="javascript:;" onclick="parentNode.submit();" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-4 u-hover-palette-2-dark-1 u-radius-6 u-btn-1">Abgeben</a>
+                                                        <input type="hidden" name="mess1" th:value="Abgeben">
+                                                    </form>
+                                                </div>
+                                            </span>
+
+                                        </div>
+                                    </div>
+                                    <h4 class="u-text u-text-26">Schuhe</h4>
+
+                                    <div class="u-align-left u-container-style u-group u-group-8">
+                                        <div class="u-container-layout">
+
+                                            <h5 class="u-text u-text-body-color u-text-19" th:text="${bootsName}"></h5>
+                                            <span th:if="${bootsName != 'Keine Schuhe'}">
+                                                <h5 class="u-text u-text-20">Bonuswert: <span th:text="${bootsBonus}"></span></h5>
+                                                <h5 class="u-text u-text-21">Wert (Goldstücke): <span th:text="${bootsValue}"></span></h5>
+
+                                                <div th:if="${bootsSell}">
+                                                    <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellBoots'}}" method="post">
+                                                        <a href="javascript:;" onclick="parentNode.submit();" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-4 u-hover-palette-2-dark-1 u-radius-6 u-btn-1">Behalten</a>
+                                                        <input type="hidden" name="mess1" th:value="Behalten">
+                                                    </form>
+                                                </div>
+
+                                                <div th:unless="${bootsSell}">
+                                                    <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellBoots'}}" method="post">
+                                                        <a href="javascript:;" onclick="parentNode.submit();" class="u-border-none u-btn u-btn-round u-button-style u-custom-color-4 u-hover-palette-2-dark-1 u-radius-6 u-btn-1">Abgeben</a>
+                                                        <input type="hidden" name="mess1" th:value="Abgeben">
+                                                    </form>
+                                                </div>
+                                            </span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="u-container-style u-layout-cell u-size-16 u-layout-cell-8">
+                                <div class="u-container-layout u-container-layout-17">
+                                    <h4 class="u-text u-text-30">Gegenstände</h4>
+                                    <div class="u-align-left u-container-style u-group u-group-10">
+                                        <div class="u-container-layout">
+                                            <h5 class="u-text u-text-body-color u-text-default u-text-31">Scharfer Streitkolben</h5>
+                                            <h5 class="u-text u-text-default u-text-32">Nur von Priestern nutzbar</h5>
+                                            <h5 class="u-text u-text-default u-text-33">Bonuswert: 4</h5>
+                                            <h5 class="u-text u-text-34">Wert (Goldstücke): 600</h5>
+                                            <a href="https://nicepage.com/joomla-templates" class="u-btn u-button-style u-btn-8">Abgeben</a>
+                                        </div>
+                                    </div>
+                                    <div class="u-align-left u-container-style u-group u-group-11">
+                                        <div class="u-container-layout">
+                                            <h5 class="u-text u-text-body-color u-text-default u-text-35">Scharfer Streitkolben</h5>
+                                            <h5 class="u-text u-text-default u-text-36">Nur von Priestern nutzbar</h5>
+                                            <h5 class="u-text u-text-default u-text-37">Bonuswert: 4</h5>
+                                            <h5 class="u-text u-text-38">Wert (Goldstücke): 600</h5>
+                                            <a href="https://nicepage.com/joomla-templates" class="u-btn u-button-style u-btn-9">Abgeben</a>
+                                        </div>
+                                    </div>
+                                    <div class="u-align-left u-container-style u-group u-group-12">
+                                        <div class="u-container-layout">
+                                            <h5 class="u-text u-text-body-color u-text-default u-text-39">Scharfer Streitkolben</h5>
+                                            <h5 class="u-text u-text-default u-text-40">Nur von Priestern nutzbar</h5>
+                                            <h5 class="u-text u-text-default u-text-41">Bonuswert: 4</h5>
+                                            <h5 class="u-text u-text-42">Wert (Goldstücke): 600</h5>
+                                            <a href="https://nicepage.com/joomla-templates" class="u-btn u-button-style u-btn-10">Abgeben</a>
+                                        </div>
+                                    </div>
+                                    <div class="u-align-left u-container-style u-group u-group-13">
+                                        <div class="u-container-layout">
+                                            <h5 class="u-text u-text-body-color u-text-default u-text-43">Scharfer Streitkolben</h5>
+                                            <h5 class="u-text u-text-default u-text-44">Nur von Priestern nutzbar</h5>
+                                            <h5 class="u-text u-text-default u-text-45">Bonuswert: 4</h5>
+                                            <h5 class="u-text u-text-46">Wert (Goldstücke): 600</h5>
+                                            <a href="https://nicepage.com/joomla-templates" class="u-btn u-button-style u-btn-11">Abgeben</a>
+                                        </div>
+                                    </div>
+                                    <div class="u-container-style u-group u-group-14">
+                                        <div class="u-container-layout">
+                                            <h5 class="u-text u-text-body-color u-text-default u-text-47">Scharfer Streitkolben</h5>
+                                            <h5 class="u-text u-text-default u-text-48">Nur von Priestern nutzbar</h5>
+                                            <h5 class="u-text u-text-default u-text-49">Bonuswert: 4</h5>
+                                            <h5 class="u-text u-text-50">Wert (Goldstücke): 600</h5>
+                                            <a href="https://nicepage.com/joomla-templates" class="u-btn u-button-style u-btn-12">Abgeben</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="u-container-style u-layout-cell u-size-15 u-layout-cell-9">
+                                <div class="u-container-layout u-container-layout-23">
+                                    <div class="u-border-2 u-border-grey-75 u-container-style u-group u-radius-15 u-shape-round u-white u-group-15">
+                                        <div class="u-container-layout u-container-layout-24">
+                                            <input id=input class="no-outline" placeholder="Nachricht" />
+                                        </div>
+                                    </div>
+                                    <div class="u-border-2 u-border-grey-75 u-container-style u-group u-radius-15 u-shape-round u-white u-group-16">
+                                        <div class="u-container-layout u-container-layout-25 u-sidenav-overflow" id=box>
+
+                                        </div>
+                                        <script src=https://cdn.pubnub.com/sdk/javascript/pubnub.4.28.2.min.js></script>
+                                        <script> (function() {
+                                            var pubnub = new PubNub({
+                                                publishKey: 'pub-c-769b4c89-5837-4eed-90e1-1d91e521d4bb',
+                                                subscribeKey: 'sub-c-bb54dc52-7139-11ec-bb6e-fa616d2d2ecf'
+                                            });
+                                            function $(id) {
+                                                return document.getElementById(id);
+                                            }
+                                            var box = $('box'),
+                                                input = $('input'),
+                                                channel = '10chat-demo';
+                                            pubnub.addListener({
+                                                message: function(obj) {
+                                                    box.innerHTML = ('' + obj.message).replace(/[<>]/g, '') + '<br>' + box.innerHTML
+                                                }
+                                            });
+                                            pubnub.subscribe({
+                                                channels: [channel]
+                                            });
+                                            input.addEventListener('keyup', function(e) {
+                                                if ((e.keyCode || e.charCode) === 13) {
+                                                    pubnub.publish({
+                                                        channel: channel,
+                                                        message: input.value,
+                                                        x: (input.value = '')
+                                                    });
+                                                }
+                                            });
+                                        })();
+                                        </script>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-ad58"><div class="u-align-left u-clearfix u-sheet u-sheet-1"></div></footer>
+<section class="u-backlink u-clearfix u-grey-80">
+    <a class="u-link" href="https://nicepage.com/css-templates" target="_blank">
+        <span>CSS Templates</span>
+    </a>
+    <p class="u-text">
+        <span>created with</span>
+    </p>
+    <a class="u-link" href="https://nicepage.best" target="_blank">
+        <span>Website Builder</span>
+    </a>.
+</section><span style="height: 64px; width: 64px; margin-left: 0px; margin-right: auto; margin-top: 0px; background-image: none; right: 20px; bottom: 20px" class="u-back-to-top u-icon u-icon-circle u-opacity u-opacity-85 u-palette-1-base u-spacing-15" data-href="#">
+        <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 551.13 551.13"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-1d98"></use></svg>
+        <svg class="u-svg-content" enable-background="new 0 0 551.13 551.13" viewBox="0 0 551.13 551.13" xmlns="http://www.w3.org/2000/svg" id="svg-1d98"><path d="m275.565 189.451 223.897 223.897h51.668l-275.565-275.565-275.565 275.565h51.668z"></path></svg>
+    </span>
+</body>
+</html>

@@ -97,27 +97,12 @@ public class ActionController {
         itemsModel(cuID, model);
 
         // Communication handling (show messaging history)
+        //if (messageRepository.count()==0){
+        //   messageRepository.save(new Message("Chat history"));
+        //}
         model.put("messages", messageRepository.findAll());
-
-        // Check if game has started, otherwise go to WaitPage
-        if (userRepository.count()==gameState.getNumberOfPlayers()) {
-            // Check if game has ended
-            if (gameState.getAllPlayers().stream().filter(p -> p.getLevel() >= gameState.getMaxLevel()).count() > 0) {
-                List<Player> winners = new ArrayList<>();
-                for (Player p : gameState.getAllPlayers()) {
-                    if (p.getLevel() >= gameState.getMaxLevel()) {
-                        winners.add(p);
-                    }
-                }
-                String winnerNames = userRepository.findById(winners.get(0).getId()).get().getName();
-                for (int i = 1; i < winners.size(); i++) {
-                    winnerNames += ", ";
-                    winnerNames += userRepository.findById(winners.get(i).getId()).get().getName();
-                }
-                model.put("winners", winnerNames);
-                return "WinPage";
-            }
-            return "ActionPage";
+        if (userRepository.count()==gameState.getNumberOfPlayers()){
+            return "website";
         }
         return "WaitPage";
     }
@@ -222,8 +207,7 @@ public class ActionController {
             }
             gameState.getMainPlayer().setLevel(gameState.getMainPlayer().getLevel()+1);
             gameState.getMainPlayer().calculateFightStrength();
-            if (wonTreasures>0) dynamicInformation += "und ";
-            dynamicInformation += "eine Stuffe. Aktuelle Stufe: "+gameState.getMainPlayer().getLevel();
+            dynamicInformation += "und eine Stuffe. Aktuelle Stufe: "+gameState.getMainPlayer().getLevel();
         }
         // Disables the fight button for the remaining of the round.
         doorActionPerformed = true;
@@ -373,7 +357,7 @@ public class ActionController {
         if (currentPlayer.getBoots()!=null){
             currentModel.put("bootsName", currentPlayer.getBoots().getName());
             currentModel.put("bootsBonus", currentPlayer.getBoots().getBonus());
-            currentModel.put("bootsValue", currentPlayer.getBoots().getValue()+" Goldstuecke");
+            currentModel.put("bootsValue", currentPlayer.getBoots().getValue()); //BT entfernt
             currentModel.put("bootsSell", currentPlayer.getBoots().getSell());
         }
         else{
@@ -388,11 +372,11 @@ public class ActionController {
         if (currentPlayer.getArmour()!=null){
             currentModel.put("armourName", currentPlayer.getArmour().getName());
             currentModel.put("armourBonus", currentPlayer.getArmour().getBonus());
-            currentModel.put("armourValue", currentPlayer.getArmour().getValue()+" Goldstuecke");
+            currentModel.put("armourValue", currentPlayer.getArmour().getValue()); //BT entfernt
             currentModel.put("armourSell", currentPlayer.getArmour().getSell());
         }
         else{
-            currentModel.put("armourName", "Keine Ruestung");
+            currentModel.put("armourName", "Keine Rüstung"); //BT geändert
         }
         return currentModel;
     }
@@ -403,7 +387,7 @@ public class ActionController {
         if (currentPlayer.getHeadgear()!=null){
             currentModel.put("headgearName", currentPlayer.getHeadgear().getName());
             currentModel.put("headgearBonus", currentPlayer.getHeadgear().getBonus());
-            currentModel.put("headgearValue", currentPlayer.getHeadgear().getValue()+" Goldstuecke");
+            currentModel.put("headgearValue", currentPlayer.getHeadgear().getValue()); //BT entfernt
             currentModel.put("headgearSell", currentPlayer.getHeadgear().getSell());
         }
         else{
@@ -429,37 +413,22 @@ public class ActionController {
     // (class, race, level, fighting strength, fight participation, etc...).
     private Map<String, Object> playerModel(long cuID, Map<String, Object> currentModel){
 
-        // Info of the current player
         Player currentPlayer = findPlayerbyID(cuID, gameState.getAllPlayers());
         String playerName = userRepository.findById(cuID).get().getName();
-        currentModel.put("currentPlayerName", playerName);
-        currentModel.put("currentPlayerClass", getPlayerClass(currentPlayer.getPlayerClass()));
-        currentModel.put("currentPlayerRace", getPlayerRace(currentPlayer.getPlayerRace()));
-        currentModel.put("currentPlayerLevel", currentPlayer.getLevel());
-        currentModel.put("currentPlayerStrength", String.valueOf(currentPlayer.getFightStrength()));
+        currentModel.put("playerName", playerName);
+        currentModel.put("playerClass", getPlayerClass(currentPlayer.getPlayerClass()));
+        currentModel.put("playerRace", getPlayerRace(currentPlayer.getPlayerRace()));
+        currentModel.put("playerLevel", currentPlayer.getLevel());
+        currentModel.put("playerStrength", String.valueOf(currentPlayer.getFightStrength()));
 
         // Changes the name of the fight button to be the opposite of the
         // player fighting state. The button will be shown only for the non-main players
         // in case of a monster door (as per doorModel controller!).
         if (currentPlayer.getFights()==true){
-            currentModel.put("fightingState","Nicht mitkaempfen!");
+            currentModel.put("fightingState","Beobachten"); //BT geändert
         }
         else{
-            currentModel.put("fightingState","Mitkaempfen!");
-        }
-
-        // Info of the other players
-        int pCount = 1;
-        for (Player p:gameState.getAllPlayers()){
-            if ((p != currentPlayer) && (userRepository.existsById(p.getId()))){
-                String otherPlayerName = userRepository.findById(p.getId()).get().getName();
-                currentModel.put("otherPlayerName"+pCount, otherPlayerName);
-                currentModel.put("otherPlayerClass"+pCount, getPlayerClass(p.getPlayerClass()));
-                currentModel.put("otherPlayerRace"+pCount, getPlayerRace(p.getPlayerRace()));
-                currentModel.put("otherPlayerLevel"+pCount, p.getLevel());
-                currentModel.put("otherPlayerStrength"+pCount, String.valueOf(p.getFightStrength()));
-                pCount++;
-            }
+            currentModel.put("fightingState","Mitkämpfen"); //BT geändert
         }
 
         return currentModel;
