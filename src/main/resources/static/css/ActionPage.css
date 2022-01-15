@@ -835,3 +835,15 @@
     margin-right: 0;
   }
 }
+
+input {
+  margin:8px;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: hidden;
+  background-color: #ffffff;
+}
+.no-outline:focus {
+  outline: none;
+}

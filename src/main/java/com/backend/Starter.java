@@ -18,7 +18,7 @@ import java.util.List;
 public class Starter {
 
     // Number of game players (simple version=4).
-    private static int numPlayers = 4;
+    private static int numPlayers = 2;
     // List of randomly generated players.
     private static List<Player> players = new ArrayList<>(numPlayers);
     // List of all door cards.

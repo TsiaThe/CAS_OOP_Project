@@ -102,7 +102,7 @@ public class ActionController {
         //}
         model.put("messages", messageRepository.findAll());
         if (userRepository.count()==gameState.getNumberOfPlayers()){
-            return "ActionPageEND";
+            return "website";
         }
         return "WaitPage";
     }
