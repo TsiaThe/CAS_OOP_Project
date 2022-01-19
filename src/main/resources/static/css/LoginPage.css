@@ -1,0 +1,129 @@
+.u-section-1 {
+    background-image: url("../images/munchkinbg.jpg");
+    background-position: 50% 50%;
+}
+
+.u-section-1 .u-sheet-1 {
+    min-height: 50vw;
+}
+
+.u-section-1 .u-group-1 {
+    min-height: 603px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.u-section-1 .u-container-layout-1 {
+    padding: 0 30px;
+}
+
+.u-section-1 .u-text-1 {
+    font-style: italic;
+    font-weight: 700;
+    margin: 73px auto 0;
+}
+
+.u-section-1 .u-image-1 {
+    width: 282px;
+    height: 309px;
+    margin: 20px auto 0 30px;
+}
+
+.u-section-1 .u-image-2 {
+    width: 283px;
+    height: 315px;
+    margin: -309px 30px 0 auto;
+}
+
+.u-section-1 .u-btn-1 {
+    border-style: none;
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    font-weight: 700;
+    background-image: none;
+    margin: -137px auto 0;
+    padding: 26px 87px 27px;
+}
+
+.u-section-1 .u-text-2 {
+    font-weight: 400;
+    margin: 121px auto 0;
+}
+
+@media (max-width: 1199px) {
+    .u-section-1 .u-sheet-1 {
+        min-height: 596px;
+    }
+
+    .u-section-1 .u-group-1 {
+        width: 940px;
+        height: auto;
+    }
+
+    .u-section-1 .u-text-1 {
+        margin-top: 101px;
+    }
+
+    .u-section-1 .u-image-1 {
+        margin-top: 40px;
+    }
+
+    .u-section-1 .u-image-2 {
+        margin-top: -312px;
+    }
+
+    .u-section-1 .u-btn-1 {
+        margin-top: -34px;
+    }
+}
+
+@media (max-width: 991px) {
+    .u-section-1 .u-sheet-1 {
+        min-height: 457px;
+    }
+
+    .u-section-1 .u-group-1 {
+        width: 720px;
+    }
+
+    .u-section-1 .u-image-1 {
+        margin-top: -12px;
+    }
+}
+
+@media (max-width: 767px) {
+    .u-section-1 .u-sheet-1 {
+        min-height: 343px;
+    }
+
+    .u-section-1 .u-group-1 {
+        width: 540px;
+    }
+
+    .u-section-1 .u-container-layout-1 {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+@media (max-width: 575px) {
+    .u-section-1 .u-sheet-1 {
+        min-height: 216px;
+    }
+
+    .u-section-1 .u-group-1 {
+        width: 340px;
+    }
+
+    .u-section-1 .u-image-1 {
+        margin-top: 26px;
+    }
+
+    .u-section-1 .u-btn-1 {
+        margin-top: -258px;
+    }
+
+    .u-section-1 .u-text-2 {
+        margin-top: 90px;
+    }
+}
