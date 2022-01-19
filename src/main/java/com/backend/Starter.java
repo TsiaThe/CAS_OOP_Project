@@ -20,7 +20,7 @@ public class Starter {
     // Number of game players.
     private static final int numPlayers = 3;
     // Maximum level till game ends.
-    private static final int maxLevel = 4;
+    private static final int maxLevel = 3;
     // List of randomly generated players.
     private static List<Player> players = new ArrayList<>(numPlayers);
     // List of all door cards.

@@ -115,11 +115,11 @@ public class ActionController {
                     winnerNames += userRepository.findById(winners.get(i).getId()).get().getName();
                 }
                 model.put("winners", winnerNames);
-                return "WinPage";
+                return "WinPageEND"; //BT geändert
             }
-            return "ActionPage";
+            return "ActionPageEND";
         }
-        return "WaitPage";
+        return "WaitPageEND"; //BT geändert
     }
 
     // Post method which posts a new message to the server.
@@ -373,7 +373,7 @@ public class ActionController {
         if (currentPlayer.getBoots()!=null){
             currentModel.put("bootsName", currentPlayer.getBoots().getName());
             currentModel.put("bootsBonus", currentPlayer.getBoots().getBonus());
-            currentModel.put("bootsValue", currentPlayer.getBoots().getValue()+" Goldstuecke");
+            currentModel.put("bootsValue", currentPlayer.getBoots().getValue()); //BT entfernt +" Goldstuecke");
             currentModel.put("bootsSell", currentPlayer.getBoots().getSell());
         }
         else{
@@ -388,11 +388,11 @@ public class ActionController {
         if (currentPlayer.getArmour()!=null){
             currentModel.put("armourName", currentPlayer.getArmour().getName());
             currentModel.put("armourBonus", currentPlayer.getArmour().getBonus());
-            currentModel.put("armourValue", currentPlayer.getArmour().getValue()+" Goldstuecke");
+            currentModel.put("armourValue", currentPlayer.getArmour().getValue()); //BT entfernt +" Goldstuecke");
             currentModel.put("armourSell", currentPlayer.getArmour().getSell());
         }
         else{
-            currentModel.put("armourName", "Keine Ruestung");
+            currentModel.put("armourName", "Keine Rüstung");
         }
         return currentModel;
     }
@@ -403,7 +403,7 @@ public class ActionController {
         if (currentPlayer.getHeadgear()!=null){
             currentModel.put("headgearName", currentPlayer.getHeadgear().getName());
             currentModel.put("headgearBonus", currentPlayer.getHeadgear().getBonus());
-            currentModel.put("headgearValue", currentPlayer.getHeadgear().getValue()+" Goldstuecke");
+            currentModel.put("headgearValue", currentPlayer.getHeadgear().getValue()); //BT entfernt +" Goldstuecke");
             currentModel.put("headgearSell", currentPlayer.getHeadgear().getSell());
         }
         else{

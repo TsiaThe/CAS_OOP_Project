@@ -40,17 +40,17 @@ public class UserController {
     // In case of started game, it redirects to the SupportPage (info that game is ongoing).
     @GetMapping("/")
     public String loginPage(Model model) {
-        if (userRepository.count()==4) return "SupportPage";
+        if (userRepository.count()== gameState.getMaxLevel()) return "SupportPageEND";
         if (userRepository.count()>0) model.addAttribute("existingUsers",true);
         model.addAttribute("users", userRepository.findAll());
-        return "LoginPage";
+        return "LoginPageEND"; //BT geändert
     }
 
     // Mapping to the signp capability which is provided by the AddUser page.
     @GetMapping("/signup")
     public String showSignUpForm() {
-        return "AddUser";
-    }
+        return "AddUserEND";
+    } //BT geändert
 
     // Post method of the AddUser page.
     // It redirects to the same page (AddUser) if:
@@ -62,11 +62,11 @@ public class UserController {
     @PostMapping("/adduser")
     public String addUser(@Valid User user, BindingResult result, Model model) {
         for (User u:userRepository.findAll()){
-         if (u.getName().equals(user.getName())) return "AddUser";
+         if (u.getName().equals(user.getName())) return "AddUserEND"; //BT geändert
         }
-        if (user.getName()=="" || user.getName().charAt(0)==' ') return  "AddUser";
+        if (user.getName()=="" || user.getName().charAt(0)==' ') return  "AddUserEND"; //BT geändert
         if (userRepository.count()==gameState.getNumberOfPlayers()){
-            return "SupportPage";
+            return "SupportPageEND";
         }
         User newUser = userRepository.save(user);
         gameState.assignPlayerId(user.getId());
