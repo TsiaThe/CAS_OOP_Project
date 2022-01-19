@@ -115,11 +115,11 @@ public class ActionController {
                     winnerNames += userRepository.findById(winners.get(i).getId()).get().getName();
                 }
                 model.put("winners", winnerNames);
-                return "WinPageEND"; //BT geändert
+                return "WinPage"; //BT geändert
             }
-            return "ActionPageEND";
+            return "ActionPage";
         }
-        return "WaitPageEND"; //BT geändert
+        return "WaitPage"; //BT geändert
     }
 
     // Post method which posts a new message to the server.
