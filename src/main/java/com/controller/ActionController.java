@@ -156,7 +156,7 @@ public class ActionController {
 
     // Post method which starts a new round.
     @PostMapping("/action/{currentUserId}/newRound")
-    public String fight(@PathVariable("currentUserId") long cuID){
+    public String newRound(@PathVariable("currentUserId") long cuID){
         gameState.nextRound();
         return "redirect:/action/"+ cuID;
     }
