@@ -40,17 +40,17 @@ public class UserController {
     // In case of started game, it redirects to the SupportPage (info that game is ongoing).
     @GetMapping("/")
     public String loginPage(Model model) {
-        if (userRepository.count()== gameState.getMaxLevel()) return "SupportPage";
+        if (userRepository.count()== gameState.getNumberOfPlayers()) return "SupportPage";
         if (userRepository.count()>0) model.addAttribute("existingUsers",true);
         model.addAttribute("users", userRepository.findAll());
-        return "LoginPage"; //BT geändert
+        return "LoginPage";
     }
 
     // Mapping to the signp capability which is provided by the AddUser page.
     @GetMapping("/signup")
     public String showSignUpForm() {
         return "AddUser";
-    } //BT geändert
+    }
 
     // Post method of the AddUser page.
     // It redirects to the same page (AddUser) if:
@@ -62,9 +62,9 @@ public class UserController {
     @PostMapping("/adduser")
     public String addUser(@Valid User user, BindingResult result, Model model) {
         for (User u:userRepository.findAll()){
-         if (u.getName().equals(user.getName())) return "AddUser"; //BT geändert
+         if (u.getName().equals(user.getName())) return "AddUser";
         }
-        if (user.getName()=="" || user.getName().charAt(0)==' ') return "AddUser"; //BT geändert
+        if (user.getName()=="" || user.getName().charAt(0)==' ') return "AddUser";
         if (userRepository.count()==gameState.getNumberOfPlayers()){
             return "SupportPage";
         }
