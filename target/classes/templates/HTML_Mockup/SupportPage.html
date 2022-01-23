@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Dungeon spiel</title>
+    <th:block th:include="fragments/common.html :: headerfiles"> </th:block>
+</head>
+<body>
+<div class="container">
+    <div class="py-5">
+        <a><h2>Willkomen zu Dungeon! </h2></a>
+        <p class="lead">Ein Munchkin basierendes Spiel</p>
+    </div>
+    <div class="py-5">
+        <p class="lead">Momentan ist ein Spiel am laufen! Bitte probieren Sie wieder spaeter.</p>
+        <p class="lead">Dungeon unterstützt zurzeit nur vier Spieler in einem Spiel.</p>
+    </div>
+</div>
+<footer th:insert="fragments/common.html :: footer"></footer>
+</body>
+</html>
