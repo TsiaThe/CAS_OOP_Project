@@ -10,15 +10,27 @@ import com.web.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.*;
 
 /**
- * This controller is responsible for:
- * 1.
+ * This controller is responsible for all the actions hapenning in the game.
+ * The game works with Autorefresh, calling the get method of the controller.
+ * This is mapped under "/action/{currentUserId}" so that each user can have
+ * his/her own game view. Apart from this it contains post methods for:
+ * - Posting a message in the common chat (/action/{currentUserId})
+ * - Closing the round of a game and starting a new one (/action/{currentUserId}/newRound)
+ * - Simulating a run of the main player from a monster (/action/{currentUserId}/run)
+ * - Simulating a game fight (/action/{currentUserId}/fight)
+ * - Selling items for gaining levels (/action/{currentUserId}/sell)
+ * - Participating/no-participating to a fight (/action/{currentUserId}/fightState)
+ * - Marking a headgear to be sold (/action/{currentUserId}/sellHeadgear)
+ * - Marking an armour to be sold (/action/{currentUserId}/sellArmour)
+ * - Marking boots to be sold (/action/{currentUserId}/sellBoots)
+ * - Marking a SPECIFIC item to be sold (/action/{currentUserId}/{itemName})
+ * Lastly, it contains supporting methods to complete the above actions
  * @author Theofanis Tsiantas
- * @version  2021.12.27 - version 1
+ * @version  2021.01.05 - version 6
  */
 @Controller
 @RequestMapping // (path="/users")
@@ -45,7 +57,8 @@ public class ActionController {
         this.gameState= gameState;
     }
 
-    // ................
+    // Get method. User-dependent. Passes all necessary
+    // Information to the ActionPage.html
     @GetMapping("/action/{currentUserId}")
     public String ActionPage(@PathVariable("currentUserId") long cuID,
                               Map<String, Object> model) {
@@ -115,11 +128,11 @@ public class ActionController {
                     winnerNames += userRepository.findById(winners.get(i).getId()).get().getName();
                 }
                 model.put("winners", winnerNames);
-                return "WinPage"; //BT geändert
+                return "WinPage";
             }
             return "ActionPage";
         }
-        return "WaitPage"; //BT geändert
+        return "WaitPage";
     }
 
     // Post method which posts a new message to the server.
@@ -373,7 +386,7 @@ public class ActionController {
         if (currentPlayer.getBoots()!=null){
             currentModel.put("bootsName", currentPlayer.getBoots().getName());
             currentModel.put("bootsBonus", currentPlayer.getBoots().getBonus());
-            currentModel.put("bootsValue", currentPlayer.getBoots().getValue()); //BT entfernt +" Goldstuecke");
+            currentModel.put("bootsValue", currentPlayer.getBoots().getValue());
             currentModel.put("bootsSell", currentPlayer.getBoots().getSell());
         }
         else{
@@ -388,7 +401,7 @@ public class ActionController {
         if (currentPlayer.getArmour()!=null){
             currentModel.put("armourName", currentPlayer.getArmour().getName());
             currentModel.put("armourBonus", currentPlayer.getArmour().getBonus());
-            currentModel.put("armourValue", currentPlayer.getArmour().getValue()); //BT entfernt +" Goldstuecke");
+            currentModel.put("armourValue", currentPlayer.getArmour().getValue());
             currentModel.put("armourSell", currentPlayer.getArmour().getSell());
         }
         else{
@@ -403,7 +416,7 @@ public class ActionController {
         if (currentPlayer.getHeadgear()!=null){
             currentModel.put("headgearName", currentPlayer.getHeadgear().getName());
             currentModel.put("headgearBonus", currentPlayer.getHeadgear().getBonus());
-            currentModel.put("headgearValue", currentPlayer.getHeadgear().getValue()); //BT entfernt +" Goldstuecke");
+            currentModel.put("headgearValue", currentPlayer.getHeadgear().getValue());
             currentModel.put("headgearSell", currentPlayer.getHeadgear().getSell());
         }
         else{

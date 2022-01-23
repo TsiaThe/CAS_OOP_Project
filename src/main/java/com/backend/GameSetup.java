@@ -32,6 +32,7 @@ public class GameSetup {
     // Random generator.
     private Random randomInteger = new Random();
 
+    // Constructor
     public GameSetup(){
         gameClasses = generateClasses(NUMBER_OF_CLASSES);
         gameRaces = generateRaces(NUMBER_OF_RACES);
@@ -233,6 +234,7 @@ public class GameSetup {
     }
 
     // Method which generates a list of monster booster cards.
+    // At the moment, not implemented in the game
     public List<Card> generateMonsterBoosterCards(List<Card> gameCards){
         gameCards.add(new MonsterBooster("Gigantisch", "+10 for a monster",
                 10, 2));
@@ -248,6 +250,7 @@ public class GameSetup {
     }
 
     // Method which generates a list of fight spell cards.
+    // At the moment, not implemented in the game
     public List<Card> generateFightSpellCards(List<Card> gameCards){
         gameCards.add(new FightSpell("Ekliger Sportdrink", "+2 for one side",2));
         gameCards.add(new FightSpell("Gefrierender Explosivtrank", "+3 for one side",3));

@@ -11,23 +11,35 @@ import java.util.List;
  * In addition, he/she has a class (human/elf/halbling/dwarf)
  * and a race (thief/warrior/priest/wizard). The class is
  * defined as an extension and the race as an interface.
- * BOth are assigned randomly at the beginning of the game.
+ * Both are assigned randomly at the beginning of the game.
  * @author Theofanis Tsiantas
  * @version  2021.12.04 - version 1
  */
 public class Player {
 
+    // Player current level
     private int level;
+    // List of items a player carries
     private List<Item> items;
+    // Boots
     private Boots boots;
+    // Headgear
     private Headgear headgear;
+    // Armour
     private Armour armour;
+    // Player class (assigned randomly at game start)
     private PlayerClass playerClass;
+    // Player race (assigned randomly at game start)
     private PlayerRace playerRace;
+    // Current fighting strength of the player
     private int fightStrength;
+    // Id which connects a player to a user (controller)
     private long id = 0;
+    // Attribute which controls if the player will participate
+    // to a fight (when he/she is not tha mainPlayer!)
     private boolean fights = false;
 
+    // Constructor
     public Player(PlayerClass  playerClass,PlayerRace  playerRace) {
         this.level = 1;
         this.items = new ArrayList<>();
@@ -38,14 +50,78 @@ public class Player {
         this.playerRace = playerRace;
     }
 
+    // Getters
     public int getFightStrength() {
         return fightStrength;
     }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public Boots getBoots() {
+        return boots;
+    }
+
+    public Headgear getHeadgear() {
+        return headgear;
+    }
+
+    public Armour getArmour() {
+        return armour;
+    }
+
+    public PlayerClass getPlayerClass() {
+        return playerClass;
+    }
+
+    public PlayerRace getPlayerRace() {
+        return playerRace;
+    }
+
+    public long getId(){return id;}
+
+    public boolean getFights() {
+        return fights;
+    }
+
+    // Setters
     public void setFightStrength(int fightStrength) {
         this.fightStrength = fightStrength;
     }
 
+    public void setLevel(int level) {
+        this.level = Math.max(level, 1);
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
+
+    public void setBoots(Boots boots) {
+        this.boots = boots;
+    }
+
+    public void setHeadgear(Headgear headgear) {
+        this.headgear = headgear;
+    }
+
+    public void setArmour(Armour armour) {
+        this.armour = armour;
+    }
+
+    public void setId(long id){this.id = id;}
+
+    public void setFights(boolean fights) {
+        this.fights = fights;
+    }
+
+    // Method to calculate the fighting strength of a player
+    // based on its level and equipment
     public void calculateFightStrength(){
         // Start from player level
         fightStrength = level;
@@ -63,66 +139,9 @@ public class Player {
         }
     }
 
-    public int getLevel() {
-        return level;
-    }
-
-    public void setLevel(int level) {
-        this.level = Math.max(level, 1);
-    }
-
-    public List<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Item> items) {
-        this.items = items;
-    }
-
-    public Boots getBoots() {
-        return boots;
-    }
-
-    public void setBoots(Boots boots) {
-        this.boots = boots;
-    }
-
-    public Headgear getHeadgear() {
-        return headgear;
-    }
-
-    public void setHeadgear(Headgear headgear) {
-        this.headgear = headgear;
-    }
-
-    public Armour getArmour() {
-        return armour;
-    }
-
-    public void setArmour(Armour armour) {
-        this.armour = armour;
-    }
-
-    public PlayerClass getPlayerClass() {
-        return playerClass;
-    }
-
-    public PlayerRace getPlayerRace() {
-        return playerRace;
-    }
-
-    public long getId(){return id;}
-
-    public void setId(long id){this.id = id;}
-
-    public boolean getFights() {
-        return fights;
-    }
-
-    public void setFights(boolean fights) {
-        this.fights = fights;
-    }
-
+    // Method which sells all the equipment which is marked to be sold
+    // and increases the level of a player by +1 for each thousand
+    // golden coins. Halblings sell at double price.
     public void sell(){
         // Total sell value
         int totalSellValue = 0;

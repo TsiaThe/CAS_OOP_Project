@@ -14,9 +14,11 @@ import java.util.List;
 public abstract class PlayerClass {
 
     // Number of cards a player can carry
-    private List<Card> handCards;
+    // for future implementations
+    // (incl. FightSpell, MonsterBooster)
     private final int maxHandCards;
-
+    // Actual handcards
+    private List<Card> handCards;
 
     /**
      * Constructor.
@@ -28,6 +30,7 @@ public abstract class PlayerClass {
         this.maxHandCards = maxHandCards;
     }
 
+    // Getters
     public int getMaxHandCards() {
         return maxHandCards;
     }
@@ -36,6 +39,7 @@ public abstract class PlayerClass {
         return handCards;
     }
 
+    // Setters
     public void setHandCards(List<Card> handCards) {
         this.handCards = handCards;
     }
