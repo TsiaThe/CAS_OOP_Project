@@ -18,7 +18,7 @@ import java.util.List;
 public class Starter {
 
     // Number of game players.
-    private static final int numPlayers = 3;
+    private static final int numPlayers = 4;
     // Maximum level till game ends.
     private static final int maxLevel = 3;
     // List of randomly generated players.

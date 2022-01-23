@@ -28,22 +28,34 @@
 </head>
 <body class="u-body">
 <section class="u-clearfix u-image u-section-1" id="sec-40a0" data-image-width="1280" data-image-height="720">
-    <div class="u-clearfix u-valign-middle u-sheet u-sheet-1">
+    <div class="u-clearfix u-valign-middle u-sheet u-sheet-1" id="shake-it">
         <div class="u-container-style u-expanded-width u-group u-opacity u-opacity-75 u-palette-1-light-1 u-radius-15 u-shape-round u-group-1">
             <div class="u-container-layout u-container-layout-1">
                 <h1 class="u-align-left u-custom-font u-font-lobster u-text u-text-default u-text-1">Das geile Dungeon Spiel</h1>
                 <img class="u-image u-image-default u-image-1" th:src="@{${'/images/effects/Monster2.png'}}" alt="" data-image-width="590" data-image-height="647">
                 <img class="u-image u-image-default u-image-2" th:src="@{${'/images/effects/Monster1.png'}}" alt="" data-image-width="283" data-image-height="315">
-                <h5 class="u-align-center u-text u-text-2">Gedulde dich, ein Spiel ist im Gange! Bereits angemeldete Spieler sind:</h5>
-                <div class="u-align-center u-container-style u-group u-radius-25 u-shape-round u-white u-group-2">
+                <h5 class="u-align-center u-text u-text-2">Gedulde dich, ein Spiel ist im Gange! Bitte versuch es später noch einmal.</h5>
+                <!--<div class="u-align-center u-container-style u-group u-radius-25 u-shape-round u-white u-group-2">
                     <div th:each="user : ${users}" class="u-container-layout u-container-layout-2">
                         <h5 class="u-text u-text-3"><input type="text" th:object="${user}" th:field="*{name}" disabled></h5>
                     </div>
+                </div>-->
+                <div class="u-align-center u-container-style u-group u-radius-25 u-shape-round u-group-2">
                 </div>
                 <h4 class="u-align-left u-custom-font u-font-lobster u-text u-text-default u-text-4">© CAS OOP 21.12, Theofanis Tsiantas, Thomas Buriez</h4>
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        var times = 10;
+        var duration = 200;
+        for (var i = 0; i < times; i++)
+            $('div#shake-it').animate({
+                left: (i % 2 === 0 ? "-" : "+") + "=50"
+            }, duration);
+    </script>
+
 </section>
 
 

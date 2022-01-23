@@ -39,6 +39,20 @@ ActionPage.css
   padding: 6px 30px 7px;
 }
 
+AddUser.css
+
+.input-text-middle {
+    padding-bottom: 12px;
+    text-align: center;
+}
+.input-text-middle::-webkit-input-placeholder {
+    text-align: center;
+}
+.input-text-middle:-moz-placeholder {
+    text-align: center;
+}
+
+
 LoginPage.html
 WaitPage.html
 

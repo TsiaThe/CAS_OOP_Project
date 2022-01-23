@@ -141,3 +141,14 @@
         margin-top: -102px;
     }
 }
+
+.input-text-middle {
+    padding-bottom: 12px;
+    text-align: center;
+}
+.input-text-middle::-webkit-input-placeholder {
+    text-align: center;
+}
+.input-text-middle:-moz-placeholder {
+    text-align: center;
+}
