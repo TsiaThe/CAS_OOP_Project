@@ -30,6 +30,7 @@ public class Starter {
     // gameSetup object at which all card types and players are generated.
     private static GameSetup gameSetup = new GameSetup();
 
+    // Constructor
     public Starter(){
         // Generate players
         for (int nPlayers = 1; nPlayers < numPlayers+1; nPlayers++) {

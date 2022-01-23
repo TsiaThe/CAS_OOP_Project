@@ -18,7 +18,7 @@ import javax.validation.Valid;
  *    start of a game, that the game has started.
  * 4. Redirecting a player to the ActionPage.
  * @author Theofanis Tsiantas
- * @version  2021.12.27 - version 1
+ * @version  2021.12.27 - version 3
  */
 @Controller
 @RequestMapping
@@ -72,7 +72,5 @@ public class UserController {
         gameState.assignPlayerId(user.getId());
         model.addAttribute("users", userRepository.findAll());
         return "redirect:/action/"+newUser.getId();
-
     }
-
 }

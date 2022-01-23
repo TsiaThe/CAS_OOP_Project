@@ -1,18 +1,13 @@
 package com.dto;
 
-import com.backend.GameSetup;
 import com.backend.Starter;
 import com.backend.cards.*;
 import com.backend.players.Player;
-import com.repository.MessageRepository;
-import com.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 
 /**
  * This class serves as a DTO.
@@ -20,7 +15,7 @@ import java.util.List;
  * controls the flow of the game through the
  * various controllers (see "controller" package).
  * @author Theofanis Tsiantas
- * @version  2022.01.13 - version 3
+ * @version  2022.01.13 - version 4
  */
 @Component
 public class GameState {
@@ -50,8 +45,10 @@ public class GameState {
     private static List<Card> gameTreasureCards = new ArrayList<>();
     // Current element of game treasure card.
     private static int currentGameTreasureCardElement=0;
-
+    // Counter of the current round
     private static int round = 0;
+    // Attribute which indicates if the current round has just started (true)
+    // or if it started before and we are still in it (necessary at ActionController)
     private static boolean newRound=true;
 
     @Autowired
@@ -108,6 +105,61 @@ public class GameState {
         }
     }
 
+    // Getters
+    public boolean getNewRound(){
+        return newRound;
+    }
+
+    public int getRound(){
+        return round;
+    }
+
+    public Card getCurrentDoorCard(){
+        return currentGameDoorCard;
+    }
+
+    public int getNumberOfPlayers(){
+        return numberOfPlayers;
+    }
+
+    public int getMaxLevel(){return maxLevel;}
+
+    // Returns a list of randomly shorted door cards.
+    public List<Card> getGameDoorCards() {
+        return gameDoorCards;
+    }
+
+    // Returns a list of randomly shorted treasure cards.
+    public List<Card> getGameTreasureCards() {
+        return gameTreasureCards;
+    }
+
+    // This method returns all the players which participate in a game
+    // (each player is controlled by a user).
+    public List<Player> getAllPlayers(){
+        return gamePlayers;
+    }
+
+    // This method returns  the currently active player of a round
+    // (denoted as "Main Player").
+    public Player getMainPlayer(){
+        return mainPlayer;
+    }
+
+    // This method returns all the players which participate in a game
+    // except for the main player.
+    public List<Player> getSecondaryPlayers(){
+        return secondaryPlayers;
+    }
+
+    // Setters
+    public void setNewRound(boolean newRound){
+        this.newRound = newRound;
+    }
+
+    // Method to start a new round.
+    // It also modifies the mainPlayer
+    // and the secondary players
     public void nextRound(){
         // Change the main player
         secondaryPlayers.add(mainPlayer);
@@ -153,54 +205,4 @@ public class GameState {
             }
         }
     }
-
-    // This method returns all the players which participate in a game
-    // (each player is controlled by a user).
-    public List<Player> getAllPlayers(){
-        return gamePlayers;
-    }
-
-    // This method returns  the currently active player of a round
-    // (denoted as "Main Player").
-    public Player getMainPlayer(){
-        return mainPlayer;
-    }
-
-    // This method returns all the players which participate in a game
-    // except for the main player.
-    public List<Player> getSecondaryPlayers(){
-        return secondaryPlayers;
-    }
-
-    // Returns a list of randomly shorted door cards.
-    public List<Card> getGameDoorCards() {
-        return gameDoorCards;
-    }
-
-    // Returns a list of randomly shorted treasure cards.
-    public List<Card> getGameTreasureCards() {
-        return gameTreasureCards;
-    }
-
-    public void setNewRound(boolean newRound){
-        this.newRound = newRound;
-    }
-
-    public boolean getNewRound(){
-        return newRound;
-    }
-
-    public int getRound(){
-        return round;
-    }
-
-    public Card getCurrentDoorCard(){
-        return currentGameDoorCard;
-    }
-
-    public int getNumberOfPlayers(){
-        return numberOfPlayers;
-    }
-
-    public int getMaxLevel(){return maxLevel;}
 }

@@ -3,11 +3,11 @@ package com.backend.cards;
 /**
  * Models an  item of the  game.
  * - Items are weapons which need a  number of hands to carry them.
- * - They can be used only from particular classes.
+ * - Sometimes they can be used only from particular classes.
+ * - They can have a special power (programmed but not implemented currently)
  * - They can be small or large.
- * - They may have a special  power.
  * @author Theofanis Tsiantas
- * @version  2021.12.04 - version 1
+ * @version  2021.01.23 - version 2
  */
 public class Item extends Equipment{
 
@@ -17,9 +17,10 @@ public class Item extends Equipment{
     private Class<?> applicableClass;
     // Size of the item (!small==large).
     private boolean smallItem;
-
+    // Interface to assign a special power to an item
     private ItemPower itemPower;
 
+    // Constructor
     public Item(String name, String description, int value, int bonus,
                 Class<?> applicableClass, boolean smallItem, ItemPower itemPower) {
         super(name, description, value, bonus);
@@ -28,10 +29,12 @@ public class Item extends Equipment{
         this.itemPower = itemPower;
     }
 
+    // Return the size of the item
     public boolean isSmallItem() {
         return smallItem;
     }
 
+    // Get the special power of the item
     public ItemPower getItemPower() {
         return itemPower;
     }
