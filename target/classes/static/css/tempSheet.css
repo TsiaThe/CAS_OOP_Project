@@ -1,0 +1,47 @@
+/* In ActionPage.css
+
+.u-section-1 {
+  background-image: linear-gradient(0deg, rgba(41,46,51,0.4), rgba(41,46,51,0.4)), url("../images/munchkinbg.jpg");
+  background-position: 50% 50%;
+}
+
+.u-section-1 .u-image-4 {
+    object-position: center top;
+    object-fit: contain;
+    width: 203px;
+    height: 194px;
+    margin: 9px auto 0;
+}
+
+In ActionPage.html
+
+Fight Buttons: style="width: 190px;">
+Div chat output: style="height:800px; overflow-y: scroll;">
+
+nicepage.css
+
+input {
+    background-color:transparent;
+    border: 0px solid;
+    height:30px;
+    width:210px;
+    margin-top: 4px;
+}
+input:focus {
+    outline:none;
+}
+
+ActionPage.css
+
+.u-section-1 .u-btn-7 {
+  margin: 3px 2px 0 auto;
+  margin-top: 6px;
+  padding: 6px 30px 7px;
+}
+
+LoginPage.html
+WaitPage.html
+
+<div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+
+*/

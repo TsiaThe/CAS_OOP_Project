@@ -1,0 +1,60 @@
+<!-- -----------------------------------------------------------------
+// Author: Theofanis Tsiantas
+// Developemt span: 23.12.2021 - 02.01.2022
+// Description:
+// The HTML webpage was developed during testing of the backend and
+// the communication. It has been replaced by a more modern one.
+// ------------------------------------------------------------------ -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Dungeon spiel</title>
+    <th:block th:include="fragments/common.html :: headerfiles"> </th:block>
+    <meta http-equiv="refresh" content="2">
+    <script th:src="@{/js/coreWaitPage.js}"></script>
+    <link th:href="@{/css/additionalIndex.css}" rel="stylesheet" />
+    <link th:href="@{/css/index.css}" rel="stylesheet" />
+</head>
+
+<body>
+<table style="width:50%">
+    <tr>
+        <th height="100" colspan="3" class="titleFont">Spiel ist zu Ende gekommen!</th>
+    </tr>
+    <tr>
+        <!--------------- GAME MAIN IMAGES (like AddUser  page) --------------->
+        <td><img th:src="@{${'/images/effects/torche.gif'}}" width="200px"/> </td>
+        <td class="Extrawidth">
+            <img style="position: relative;" th:src="@{${'/images/effects/WhiteDoor.png'}}" height="100px" />
+            <img style="position: relative;" th:src="@{${'/images/effects/EmptyDoor.png'}}" height="120px" />
+            <img style="position: relative; top:-0.25cm; left:-2.7cm" th:src="@{${'/images/effects/Door.png'}}" height="100px" />
+        </td>
+        <td><img th:src="@{${'/images/effects/torche.gif'}}" width="200px"/> </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td class="subtitleFont"> Ein auf Munchkin basierendes Spiel </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <table style="width:100%">
+                <th style="text-decoration: underline;">Gewinner:</th>
+                <tr>
+                    <td th:text="${winners}"></td>
+                </tr>
+            </table>
+        </td>
+        <td></td>
+    </tr>
+</table>
+
+<!--------------------- Monsters are static in this page  --------------------->
+<img style="position: absolute;" onload="moveImage()" th:src="@{${'/images/effects/Monster2.png'}}" height="100px" />
+<img style="position: absolute;" onload="moveImage()" th:src="@{${'/images/effects/Monster3.png'}}" height="100px" />
+
+<footer th:insert="fragments/common.html :: footer"></footer>
+</body>
+</html>

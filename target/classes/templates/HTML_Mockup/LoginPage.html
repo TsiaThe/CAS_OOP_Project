@@ -1,0 +1,84 @@
+<!-- -----------------------------------------------------------------
+// Author: Theofanis Tsiantas
+// Developemt span: 23.12.2021 - 02.01.2022
+// Description:
+// The HTML webpage was developed during testing of the backend and
+// the communication. It has been replaced by a more modern one.
+// ------------------------------------------------------------------ -->
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Dungeon spiel</title>
+    <th:block th:include="fragments/common.html :: headerfiles"> </th:block>
+    <meta http-equiv="refresh" content="2">
+    <script th:src="@{/js/coreLoginPage.js}"></script>
+    <link th:href="@{/css/additionalIndex.css}" rel="stylesheet" />
+</head>
+
+<body th:onload="'moveImage();'" >
+<table style="width:50%">
+    <tr>
+        <th height="100" colspan="3" class="titleFont">Wilkommen zu Dungeon</th>
+    </tr>
+    <tr>
+        <!--------------------- GAME MAIN IMAGES --------------------->
+        <td><img th:src="@{${'/images/effects/torche.gif'}}" width="200px"/> </td>
+        <td><img th:src="@{${'/images/effects/DungeonDoor.png'}}" height="200px"/> </td>
+        <td><img th:src="@{${'/images/effects/torche.gif'}}" width="200px"/> </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td class="subtitleFont"> Ein auf Munchkin basierendes Spiel </td>
+        <td></td>
+    </tr>
+    <tr>
+        <!--------------------- Playful font for main page --------------------->
+        <td colspan="3" class="playful">
+            <span aria-hidden="true">M</span>
+            <span aria-hidden="true">o</span>
+            <span aria-hidden="true">e</span>
+            <span aria-hidden="true">c</span>
+            <span aria-hidden="true">h</span>
+            <span aria-hidden="true">t</span>
+            <span aria-hidden="true">e</span>
+            <span aria-hidden="true">s</span>
+            <span aria-hidden="true">t</span>
+            <span aria-hidden="true">&emsp;</span>
+            <span aria-hidden="true">d</span>
+            <span aria-hidden="true">u</span>
+            <span aria-hidden="true">&emsp;</span>
+            <span aria-hidden="true">s</span>
+            <span aria-hidden="true">p</span>
+            <span aria-hidden="true">i</span>
+            <span aria-hidden="true">e</span>
+            <span aria-hidden="true">l</span>
+            <span aria-hidden="true">e</span>
+            <span aria-hidden="true">n</span>
+            <span aria-hidden="true">&emsp;</span>
+            <span aria-hidden="true">?</span>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table>
+                <!----------- Lists all users that have already logged in ----------->
+                <th th:if="${existingUsers}" style="text-decoration: underline">Spieler:</th>
+                <tr th:each="user : ${users}">
+                    <td th:text="${user.name}"></td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <a style="position: relative;top:-0.8cm" href="/signup" class="Activebutton">Sign up</a>
+        </td>
+        <td style="text-align: left">
+            <!----------- Moving monster image ----------->
+            <img style="position:relative;" th:src="@{${'/images/effects/Monster1.png'}}" height="200px"/>
+        </td>
+    </tr>
+</table>
+
+<footer th:insert="fragments/common.html :: footer"></footer>
+</body>
+</html>
