@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html style="font-size: 16px;"
       xmlns:th="http://www.thymeleaf.org" lang="en">
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Munchkin Game">
-    <meta name="description" content="">
-    <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <meta name="description" content="Dungeon, ein auf Munchkin basierendes Spiel">
     <title>ActionPage</title>
     <link th:href="@{/css/common.css}" rel="stylesheet" />
     <link th:href="@{/css/actionpage.css}" rel="stylesheet" />
@@ -14,7 +14,6 @@
     <script th:src="@{/js/animate.js}" ></script>
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
     <meta http-equiv="refresh" content="5">
-
     <script type="application/ld+json">{
         "@context": "http://schema.org",
         "@type": "Organization",
@@ -24,6 +23,7 @@
     <meta property="og:title" content="ActionPage">
     <meta property="og:type" content="website">
 </head>
+
 <body class="u-body u-overlap u-overlap-contrast">
 <section class="u-align-center u-clearfix u-image u-shading u-section-1" id="sec-d061" data-image-width="1280" data-image-height="720">
     <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
@@ -97,7 +97,6 @@
                                 <div class="u-container-layout u-container-layout-10">
                                     <div class="u-container-style u-group u-group-6">
                                         <div class="u-container-layout">
-
                                             <div th:if="${gamePhase=='nofight'}">
                                                 <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sell'}}" method="post">
                                                     <a href="javascript:;" onclick="parentNode.submit();" class="u-active-palette-2-light-1 u-border-none u-btn u-btn-round u-button-style u-custom-color-4 u-hover-palette-2-light-1 u-radius-6 u-btn-1" style="width: 190px;">Verkaufen</a>
@@ -108,19 +107,16 @@
                                                     <input type="hidden" name="mess" value="Abschluss">
                                                 </form>
                                             </div>
-
                                             <div th:if="${gamePhase=='fight'}">
                                                 <form action="#" th:action="@{${#httpServletRequest.requestURI+'/fight'}}" method="post">
                                                     <a href="javascript:;" onclick="parentNode.submit();" class="u-active-palette-2-light-1 u-border-none u-btn u-btn-round u-button-style u-custom-color-4 u-hover-palette-2-light-1 u-radius-6 u-btn-1" style="width: 190px;">Kämpfen</a>
                                                     <input type="hidden" name="mess" value="Kämpfen">
                                                 </form>
-
                                                 <form action="#" th:action="@{${#httpServletRequest.requestURI+'/newRound'}}" method="post">
                                                     <a href="javascript:;" onclick="parentNode.submit();" class="u-active-custom-color-1 u-border-none u-btn u-btn-round u-button-style u-custom-color-2 u-hover-custom-color-1 u-radius-6 u-btn-2" style="width: 190px;">Weglaufen</a>
                                                     <input type="hidden" name="mess" value="Weglaufen">
                                                 </form>
                                             </div>
-
                                             <div th:if="${fightButton}">
                                                 <form action="#" th:action="@{${#httpServletRequest.requestURI+'/fightState'}}" method="post">
                                                     <a th:if="${fightingState}=='Nicht mitkaempfen!'" href="javascript:;" onclick="parentNode.submit();" class="u-active-palette-2-light-1 u-border-none u-btn u-btn-round u-button-style u-custom-color-4 u-hover-palette-2-light-1 u-radius-6 u-btn-1">Beobachten</a>
@@ -128,14 +124,12 @@
                                                     <input type="hidden" name="mess" th:value="${fightingState}">
                                                 </form>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="u-container-style u-layout-cell u-size-13 u-layout-cell-6">
                                 <div class="u-container-layout u-container-layout-12">
-
                                     <div class="u-container-style u-group u-group-7">
                                         <div class="u-container-layout u-container-layout-13">
                                             <h4 class="u-text u-text-20">Kopfbedeckung</h4>
@@ -143,14 +137,12 @@
                                             <span th:if="${headgearName != 'Keine Kopfbedeckung'}">
                                                 <h5 class="u-text u-text-22">Bonuswert: <span th:text="${headgearBonus}"></span></h5>
                                                 <h5 class="u-text u-text-23">Wert (Goldstücke): <span th:text="${headgearValue}"></span></h5>
-
                                                 <div th:if="${headgearSell}">
                                                     <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellHeadgear'}}" method="post">
                                                         <a href="javascript:;" onclick="parentNode.submit();" class="u-active-custom-color-3 u-border-none u-btn u-button-style u-custom-color-4 u-hover-custom-color-3 u-btn-5">Behalten</a>
                                                         <input type="hidden" name="mess1" th:value="Behalten">
                                                     </form>
                                                 </div>
-
                                                 <div th:unless="${headgearSell}">
                                                     <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellHeadgear'}}" method="post">
                                                         <a href="javascript:;" onclick="parentNode.submit();" class="u-active-custom-color-1 u-border-none u-btn u-button-style u-custom-color-2 u-hover-custom-color-1 u-btn-5">Abgeben</a>
@@ -160,7 +152,6 @@
                                             </span>
                                         </div>
                                     </div>
-
                                     <div class="u-container-style u-group u-group-7">
                                         <div class="u-container-layout u-container-layout-13">
                                             <h4 class="u-text u-text-20">Rüstung</h4>
@@ -168,14 +159,12 @@
                                             <span th:if="${armourName != 'Keine Rüstung'}">
                                                 <h5 class="u-text u-text-22">Bonuswert: <span th:text="${armourBonus}"></span></h5>
                                                 <h5 class="u-text u-text-23">Wert (Goldstücke): <span th:text="${armourValue}"></span></h5>
-
                                                 <div th:if="${armourSell}">
                                                     <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellArmour'}}" method="post">
                                                         <a href="javascript:;" onclick="parentNode.submit();" class="u-active-custom-color-3 u-border-none u-btn u-button-style u-custom-color-4 u-hover-custom-color-3 u-btn-5">Behalten</a>
                                                         <input type="hidden" name="mess1" th:value="Behalten">
                                                     </form>
                                                 </div>
-
                                                 <div th:unless="${armourSell}">
                                                     <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellArmour'}}" method="post">
                                                         <a href="javascript:;" onclick="parentNode.submit();" class="u-active-custom-color-1 u-border-none u-btn u-button-style u-custom-color-2 u-hover-custom-color-1 u-btn-5">Abgeben</a>
@@ -185,7 +174,6 @@
                                             </span>
                                         </div>
                                     </div>
-
                                     <div class="u-container-style u-group u-group-7">
                                         <div class="u-container-layout u-container-layout-13">
                                             <h4 class="u-text u-text-20">Schuhe</h4>
@@ -193,14 +181,12 @@
                                             <span th:if="${bootsName != 'Keine Schuhe'}">
                                                 <h5 class="u-text u-text-22">Bonuswert: <span th:text="${bootsBonus}"></span></h5>
                                                 <h5 class="u-text u-text-23">Wert (Goldstücke): <span th:text="${bootsValue}"></span></h5>
-
                                                 <div th:if="${bootsSell}">
                                                     <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellBoots'}}" method="post">
                                                         <a href="javascript:;" onclick="parentNode.submit();" class="u-active-custom-color-3 u-border-none u-btn u-button-style u-custom-color-4 u-hover-custom-color-3 u-btn-5">Behalten</a>
                                                         <input type="hidden" name="mess1" th:value="Behalten">
                                                     </form>
                                                 </div>
-
                                                 <div th:unless="${bootsSell}">
                                                     <form action="#" th:action="@{${#httpServletRequest.requestURI+'/sellBoots'}}" method="post">
                                                         <a href="javascript:;" onclick="parentNode.submit();" class="u-active-custom-color-1 u-border-none u-btn u-button-style u-custom-color-2 u-hover-custom-color-1 u-btn-5">Abgeben</a>
@@ -210,13 +196,11 @@
                                             </span>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                             <div class="u-container-style u-layout-cell u-size-15 u-layout-cell-7">
                                 <div class="u-container-layout u-container-layout-14">
                                     <h4 class="u-text u-text-24">Gegenstände</h4>
-
                                     <div th:each="item : ${items}" class="u-align-left u-container-style u-group u-group-8">
                                         <div class="u-container-layout u-container-layout-15">
                                             <h5 class="u-text u-text-body-color u-text-default u-text-25" th:text="${item.name}"></h5>
@@ -225,94 +209,38 @@
                                             <h5 class="u-text u-text-default u-text-27" th:unless="${item.smallItem}"><span>Gross</span></h5>
                                             <h5 class="u-text u-text-default u-text-28" th:text="'Bonuswert: '+${item.bonus}"></h5>
                                             <h5 class="u-text u-text-29" th:text="'Wert (Goldstücke): '+${item.value}"></h5>
-
                                             <div th:if="${item.sell}">
                                                 <form action="#" th:action="@{${#httpServletRequest.requestURI}+'/'+${item.name}}" method="post">
                                                     <a href="javascript:;" onclick="parentNode.submit();" class="u-active-custom-color-3 u-border-none u-btn u-button-style u-custom-color-4 u-hover-custom-color-3 u-btn-6">Behalten</a>
                                                     <input type="hidden" name="mess1" th:value="Behalten">
                                                 </form>
                                             </div>
-
                                             <div th:unless="${item.sell}">
                                                 <form action="#" th:action="@{${#httpServletRequest.requestURI}+'/'+${item.name}}" method="post">
                                                     <a href="javascript:;" onclick="parentNode.submit();" class="u-active-custom-color-1 u-border-none u-btn u-button-style u-custom-color-2 u-hover-custom-color-1 u-btn-6">Abgeben</a>
                                                     <input type="hidden" name="mess2" th:value="Abgeben">
                                                 </form>
                                             </div>
-
                                          </div>
                                     </div>
-
                                 </div>
                             </div>
                             <div class="u-container-style u-layout-cell u-size-18 u-layout-cell-8">
                                 <div class="u-container-layout u-container-layout-16">
-
-                                    <!--<div class="u-border-2 u-border-grey-75 u-container-style u-group u-radius-15 u-shape-round u-white u-group-9">
-                                        <div class="u-container-layout u-container-layout-17">
-                                            <a href="https://nicepage.com/website-design" class="u-btn u-btn-round u-button-style u-radius-15 u-btn-7">Send</a>
-                                            <p class="u-text u-text-default u-text-30"><input id="chatInput" placeholder="Nachricht eingeben" /></p>
-                                        </div>
-                                    </div>
-                                    <div class="u-border-2 u-border-grey-75 u-container-style u-group u-radius-15 u-shape-round u-white u-group-10">
-                                        <div id="chatOutput" class="u-container-layout u-container-layout-18" style="height:700px; overflow-y: scroll;">
-                                            <p class="u-text u-text-31"></p>
-                                        </div>
-
-                                        <script th:src="@{//cdn.pubnub.com/sdk/javascript/pubnub.4.28.2.min.js}"></script>
-                                        <script> (function() {
-                                            var pubnub = new PubNub({
-                                                publishKey: 'demo',
-                                                subscribeKey: 'demo'
-                                            });
-                                            function $(id) {
-                                                return document.getElementById(id);
-                                            }
-                                            var box = $('chatOutput'),
-                                                input = $('chatInput'),
-                                                channel = '10chat-demo';
-                                            pubnub.addListener({
-                                                message: function(obj) {
-                                                    box.innerHTML = ('' + obj.message).replace(/[<>]/g, '') + '<br>' + box.innerHTML
-                                                }
-                                            });
-                                            pubnub.subscribe({
-                                                channels: [channel]
-                                            });
-                                            input.addEventListener('keyup', function(e) {
-                                                if ((e.keyCode || e.charCode) === 13) {
-                                                    pubnub.publish({
-                                                        channel: channel,
-                                                        message: input.value,
-                                                        x: (input.value = '')
-                                                    });
-                                                }
-                                            });
-                                        })();
-                                        </script>
-
-                                    </div>-->
-
                                     <div class="u-border-2 u-border-grey-75 u-container-style u-group u-radius-15 u-shape-round u-white u-group-9">
                                         <div class="u-container-layout u-container-layout-17">
-
                                             <form action="#" th:action="@{${#httpServletRequest.requestURI}}" object="${newMessaga}" newMessaga="message" method="post">
                                                 <input type="text" field="*{name}" name="messageText" class="form-control" id="name" required="" pattern="^\S.*$">
-                                                <!--<a href="javascript:;" onclick="parentNode.submit();" class="u-btn u-btn-round u-button-style u-radius-15 u-btn-7">Send</a>
-                                                <input type="hidden" name="mess2" th:value="Send">-->
                                             </form>
-
                                         </div>
                                     </div>
-
                                     <div class="u-border-2 u-border-grey-75 u-container-style u-group u-radius-15 u-shape-round u-white u-group-10">
                                         <div id="chatOutput" class="u-container-layout u-container-layout-18" style="height:700px; overflow-y: scroll;">
                                             <span th:each="message : ${messages}">
-                                            <p class="u-text u-text-31" th:text="${message.messageText}"></p>
+                                                <p class="u-text u-text-31" th:text="${message.messageText}"></p>
                                             </span>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -322,10 +250,10 @@
         </div>
     </div>
 </section>
-
 <span style="height: 64px; width: 64px; margin-left: 0px; margin-right: auto; margin-top: 0px; background-image: none; right: 20px; bottom: 20px" class="u-back-to-top u-icon u-icon-circle u-opacity u-opacity-85 u-palette-1-base u-spacing-15" data-href="#">
         <svg class="u-svg-link" preserveAspectRatio="xMidYMin slice" viewBox="0 0 551.13 551.13"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#svg-1d98"></use></svg>
         <svg class="u-svg-content" enable-background="new 0 0 551.13 551.13" viewBox="0 0 551.13 551.13" xmlns="http://www.w3.org/2000/svg" id="svg-1d98"><path d="m275.565 189.451 223.897 223.897h51.668l-275.565-275.565-275.565 275.565h51.668z"></path></svg>
 </span>
 </body>
+
 </html>

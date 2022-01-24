@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html style="font-size: 16px;"
       xmlns:th="http://www.thymeleaf.org" lang="en">
+
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <meta name="keywords" content="Munchkin Game">
-    <meta name="description" content="">
-    <meta name="page_type" content="np-template-header-footer-from-plugin">
+    <meta name="description" content="Dungeon, ein auf Munchkin basierendes Spiel">
     <title>AddUser</title>
     <link th:href="@{/css/common.css}" rel="stylesheet" />
     <link th:href="@{/css/adduser.css}" rel="stylesheet" />
@@ -14,7 +14,6 @@
     <script th:src="@{/js/animate.js}" ></script>
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i">
     <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster:400">
-
     <script type="application/ld+json">{
         "@context": "http://schema.org",
         "@type": "Organization",
@@ -24,6 +23,7 @@
     <meta property="og:title" content="AddUser">
     <meta property="og:type" content="website">
 </head>
+
 <body class="u-body">
 <section class="u-clearfix u-image u-section-1" id="sec-40a0" data-image-width="1280" data-image-height="720">
     <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
@@ -40,16 +40,14 @@
                             <h5 class="u-text u-text-2"><input class="input-text-middle" type="text" field="*{name}" name="name" id="name" placeholder="Name"></h5>
                         </div>
                     </div>
-
                     <a href="javascript:;" onclick="parentNode.submit();" class="u-border-none u-btn u-btn-round u-button-style u-hover-palette-1-light-2 u-palette-1-light-1 u-radius-25 u-text-body-alt-color u-text-hover-white u-btn-1">EINLOGGEN</a>
                     <input type="hidden" name="mess" th:value="EINLOGGEN">
                 </form>
-
                 <h4 class="u-custom-font u-font-lobster u-text u-text-default u-text-3">© CAS OOP 21.12, Theofanis Tsiantas, Thomas Buriez</h4>
             </div>
         </div>
     </div>
 </section>
-
 </body>
+
 </html>

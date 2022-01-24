@@ -1,3 +1,10 @@
+var times = 10;
+var duration = 200;
+for (var i = 0; i < times; i++)
+    $('div#divMove').animate({
+        left: (i % 2 === 0 ? "-" : "+") + "=50"
+    }, duration);
+
 var shakingElements = [];
 
 var animate = function (element, magnitude = 16, angular = false) {
