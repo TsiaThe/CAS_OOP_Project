@@ -407,7 +407,7 @@ public class GameSetup {
                     }
                     public String monsterWinsFight(Monster m, Player p) {
                         if(p.getPlayerRace() instanceof Wizard){
-                            spielerTod(p);
+                            playerDeath(p);
                             return standardMessage+"Du bist leider ein Zauberer, deshalb du stirbst!";
                         }
                         else{
@@ -432,7 +432,7 @@ public class GameSetup {
                             p.setLevel(p.getLevel()-1);
                         }
                         else{
-                            spielerTod(p);
+                            playerDeath(p);
                             return standardMessage+"Weil du kein Zauberer bist, stirbst du!";
                         }
 
@@ -448,7 +448,7 @@ public class GameSetup {
                         // No special power on this card.
                     }
                     public String monsterWinsFight(Monster m, Player p) {
-                        spielerTod(p);
+                        playerDeath(p);
                         return standardMessage+"Du bist gestorben!";
                     }
                 }));
@@ -783,7 +783,7 @@ public class GameSetup {
     }
 
     // Method which resets the attributes of a player after it dies.
-    public void spielerTod(Player p){
+    public void playerDeath(Player p){
         p.setLevel(1);
         p.setBoots(null);
         p.setArmour(null);
