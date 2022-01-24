@@ -1,5 +1,5 @@
 .u-section-1 {
-    background-image: url("../images/munchkinbg.jpg");
+    background-image: url("../images/Background.jpg");
     background-position: 50% 50%;
 }
 
@@ -140,4 +140,15 @@
     .u-section-1 .u-text-3 {
         margin-top: -102px;
     }
+}
+
+.input-text-middle {
+    padding-bottom: 12px;
+    text-align: center;
+}
+.input-text-middle::-webkit-input-placeholder {
+    text-align: center;
+}
+.input-text-middle:-moz-placeholder {
+    text-align: center;
 }
