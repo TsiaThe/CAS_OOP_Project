@@ -1,5 +1,5 @@
 .u-section-1 {
-  background-image: linear-gradient(0deg, rgba(41,46,51,0.4), rgba(41,46,51,0.4)), url("../images/munchkinbg.jpg");
+  background-image: linear-gradient(0deg, rgba(41,46,51,0.4), rgba(41,46,51,0.4)), url("../images/Background.jpg");
   background-position: 50% 50%;
 }
 
@@ -340,7 +340,7 @@
 
 .u-section-1 .u-group-8 {
   width: 252px;
-  min-height: 240px;
+  min-height: 180px;
   height: auto;
   margin: 11px auto 0 0;
 }
