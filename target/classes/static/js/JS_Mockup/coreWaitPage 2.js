@@ -1,3 +1,11 @@
+// ------------------------------------------------------------------
+// Author: Theofanis Tsiantas
+// Developemt span: 27.12.2021 - 05.01.2022
+// Description:
+// The following js-functions were used at the HTML_Mockup webpages
+// of the same name during testing of the backend and the communication.
+// ------------------------------------------------------------------
+
 // Function to move place images to the end positions of
 // AddUser page.
 function imageLocation(){
