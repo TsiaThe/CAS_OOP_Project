@@ -1,3 +1,11 @@
+<!-- -----------------------------------------------------------------
+// Author: Thomas Buriez
+// Development span: 05.01.2022 - 24.01.2022
+// Description:
+// ActionPage in its final version
+// The game takes place here!
+// ------------------------------------------------------------------ -->
+
 <!DOCTYPE html>
 <html style="font-size: 16px;"
       xmlns:th="http://www.thymeleaf.org" lang="en">
@@ -112,7 +120,7 @@
                                                     <a href="javascript:;" onclick="parentNode.submit();" class="u-active-palette-2-light-1 u-border-none u-btn u-btn-round u-button-style u-custom-color-4 u-hover-palette-2-light-1 u-radius-6 u-btn-1" style="width: 190px;">Kämpfen</a>
                                                     <input type="hidden" name="mess" value="Kämpfen">
                                                 </form>
-                                                <form action="#" th:action="@{${#httpServletRequest.requestURI+'/newRound'}}" method="post">
+                                                <form action="#" th:action="@{${#httpServletRequest.requestURI+'/run'}}" method="post">
                                                     <a href="javascript:;" onclick="parentNode.submit();" class="u-active-custom-color-1 u-border-none u-btn u-btn-round u-button-style u-custom-color-2 u-hover-custom-color-1 u-radius-6 u-btn-2" style="width: 190px;">Weglaufen</a>
                                                     <input type="hidden" name="mess" value="Weglaufen">
                                                 </form>
