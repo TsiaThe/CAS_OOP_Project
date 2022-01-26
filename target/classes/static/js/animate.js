@@ -1,3 +1,10 @@
+// ------------------------------------------------------------------
+// Author: Thomas Buriez
+// Development span: 05.01.2022 - 24.01.2022
+// Description:
+// Script page responsible for animation effects
+// ------------------------------------------------------------------
+
 var times = 10;
 var duration = 200;
 for (var i = 0; i < times; i++)
